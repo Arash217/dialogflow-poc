@@ -1,0 +1,29 @@
+{
+  "name": "dialogflow-poc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "tunnel": "ngrok http 3000",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arash217/dialogflow-poc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Arash217/dialogflow-poc/issues"
+  },
+  "homepage": "https://github.com/Arash217/dialogflow-poc#readme",
+  "devDependencies": {
+    "ngrok": "^3.1.1"
+  },
+  "dependencies": {
+    "actions-on-google": "^2.7.0",
+    "dialogflow-fulfillment": "^0.6.1",
+    "express": "^4.17.1",
+    "express-autoroute": "^2.1.1"
+  }
+}
