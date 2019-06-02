@@ -1,5 +1,7 @@
 const questions = require('../questions');
 
+// TODO: refactor
+
 module.exports.question = agent => {
     const context = agent.context.get('oefening-followup');
     const parameters = context.parameters ? context.parameters : undefined;
