@@ -1,38 +1,79 @@
-const { WebhookClient } = require('dialogflow-fulfillment');
+const {WebhookClient} = require('dialogflow-fulfillment');
 
-const mathQuestions = require('../mathQuestions');
-
-let currentQuestion = 0;
-let correctAnswers = 0;
+const questions = require('../questions');
 
 module.exports.post = (req, res) => {
-    const agent = new WebhookClient({ request: req, response: res });
-    agent.setContext({ name: 'oefening-followup', lifespan: mathQuestions.length });
+    const agent = new WebhookClient({request: req, response: res});
 
-    console.log(agent.session);
+    function exercise() {
+        const context = agent.context.get('oefening-followup');
+        const parameters = context.parameters ? context.parameters : undefined;
+        const currentQuestion = parameters.currentQuestion ? parameters.currentQuestion : 0;
+        let VakType = agent.parameters ? agent.parameters.VakType : undefined;
 
-    function exercise () {
-        const { question } = mathQuestions[currentQuestion];
-        agent.add(`Vraag ${currentQuestion + 1}. Wat is ${question}?\n `);
+        if (!VakType) {
+            VakType = parameters.VakType;
+        }
+
+        const questionsList = questions[VakType.toLowerCase()];
+
+        if (VakType) {
+            agent.context.set({
+                name: 'oefening-followup',
+                lifespan: questionsList.length,
+                parameters: {
+                    ...parameters,
+                    VakType
+                }
+            });
+        }
+
+        const {question} = questionsList[currentQuestion];
+        agent.add(`Vraag ${currentQuestion + 1}. ${question} `);
     }
 
-    function answer (agent) {
+    function answer() {
         const context = agent.context.get('oefening-followup');
-        const antwoord = context.parameters ? context.parameters.antwoord : undefined;
+        const parameters = context.parameters ? context.parameters : undefined;
+        const antwoord = parameters.antwoord ? parameters.antwoord : undefined;
+        const currentQuestion = parameters.currentQuestion ? parameters.currentQuestion : 0;
+        let correctAnswers = parameters.correctAnswers ? parameters.correctAnswers : 0;
+        const VakType = parameters.VakType;
 
-        const { answer } = mathQuestions[currentQuestion];
+        const questionsList = questions[VakType.toLowerCase()];
+
+        const {answer} = questionsList[currentQuestion];
 
         if (answer !== antwoord) {
-            agent.add(`Dat is incorrect. Het juiste antwoord is ${answer} `);
+            agent.add(`${antwoord} is incorrect. Het juiste antwoord is ${answer}. `);
         } else {
             agent.add(`${answer} is correct! `);
             correctAnswers++;
         }
 
-        if (mathQuestions.length === ++currentQuestion){
-            agent.add(`Je hebt ${correctAnswers} van de ${mathQuestions.length} vragen goed.`);
+        if (questionsList.length - 1 === currentQuestion) {
+            agent.add(`Je hebt ${correctAnswers} van de ${questionsList.length} vragen goed. `);
+
+            agent.context.set({
+                name: 'oefening-followup',
+                parameters: {
+                    currentQuestion: 0,
+                    correctAnswers: 0
+                }
+            });
+
             return;
         }
+
+        agent.context.set({
+            name: 'oefening-followup',
+            lifespan: questionsList.length,
+            parameters: {
+                ...parameters,
+                currentQuestion: currentQuestion + 1,
+                correctAnswers
+            }
+        });
 
         exercise();
     }
