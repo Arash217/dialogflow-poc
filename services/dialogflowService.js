@@ -1,3 +1,4 @@
+const Exercise = require('../models/exercise');
 const questions = require('../questions');
 
 // TODO: refactor

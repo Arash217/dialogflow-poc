@@ -1,6 +1,9 @@
+require('dotenv').config();
 const http = require('http');
 const express = require('express');
 const autoroute = require('express-autoroute');
+
+require('./db/mongoose');
 
 const app = express();
 const server = http.createServer(app);
