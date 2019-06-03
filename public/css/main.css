@@ -1,0 +1,12 @@
+.exercises {
+    margin: auto;
+    width: 800px;
+}
+
+.exercise {
+
+}
+
+.exercise ul li {
+    list-style-type: none;
+}

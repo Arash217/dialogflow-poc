@@ -26,6 +26,9 @@
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "express-autoroute": "^2.1.1",
-    "mongoose": "^5.5.12"
+    "express-handlebars": "^3.1.0",
+    "i": "^0.3.6",
+    "mongoose": "^5.5.12",
+    "npm": "^6.9.0"
   }
 }

@@ -1,0 +1,21 @@
+<main>
+    <section class="exercises">
+        {{#each this.exercises}}
+            <div class="exercise">
+                <span>{{this.subject}}</span>
+                <ul>
+                    {{#each this.questions}}
+                        <li>
+                            <span>
+                                <input type="text" value="{{this.question}}">
+                            </span>
+                            <span>
+                                <input type="text" value="{{this.answer}}">
+                            </span>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        {{/each}}
+    </section>
+</main>
