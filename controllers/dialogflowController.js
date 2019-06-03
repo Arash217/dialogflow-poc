@@ -1,8 +1,7 @@
 const {WebhookClient} = require('dialogflow-fulfillment');
-
 const dialogflowService = require('../services/dialogflowService');
 
-module.exports.post = (req, res) => {
+const post = (req, res) => {
     const agent = new WebhookClient({request: req, response: res});
     const intentMap = new Map();
 
@@ -11,4 +10,8 @@ module.exports.post = (req, res) => {
     // dialogflowService.answer method handles the answer intent
     intentMap.set('Oefening - antwoord', dialogflowService.answer);
     agent.handleRequest(intentMap)
+};
+
+module.exports = {
+    post
 };

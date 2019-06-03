@@ -3,7 +3,7 @@ const Exercise = require('../models/exercise');
 // TODO: refactor
 
 // question intent
-module.exports.question = async agent => {
+const question = async agent => {
     // get parameters from oefening-followup context
     const context = agent.context.get('oefening-followup');
     const parameters = context.parameters ? context.parameters : undefined;
@@ -38,7 +38,7 @@ module.exports.question = async agent => {
 };
 
 // answer intent
-module.exports.answer = async agent => {
+const answer = async agent => {
     // get parameters from oefening-followup context
     const context = agent.context.get('oefening-followup');
     const parameters = context.parameters ? context.parameters : undefined;
@@ -91,5 +91,10 @@ module.exports.answer = async agent => {
     });
 
     // ask the next question
-    await this.question(agent);
+    await question(agent);
+};
+
+module.exports = {
+    question,
+    answer
 };
