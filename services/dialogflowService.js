@@ -1,9 +1,8 @@
 const Exercise = require('../models/exercise');
-const questions = require('../questions');
 
 // TODO: refactor
 
-module.exports.question = agent => {
+module.exports.question = async agent => {
     const context = agent.context.get('oefening-followup');
     const parameters = context.parameters ? context.parameters : undefined;
     const currentQuestion = parameters.currentQuestion ? parameters.currentQuestion : 0;
@@ -13,7 +12,8 @@ module.exports.question = agent => {
         VakType = parameters.VakType;
     }
 
-    const questionsList = questions[VakType.toLowerCase()];
+    const exercise = await Exercise.findOne({subject: VakType.toLowerCase()});
+    const questionsList = exercise.questions;
 
     if (VakType) {
         agent.context.set({
@@ -30,7 +30,7 @@ module.exports.question = agent => {
     agent.add(`Vraag ${currentQuestion + 1}. ${question} `);
 };
 
-module.exports.answer = agent => {
+module.exports.answer = async agent => {
     const context = agent.context.get('oefening-followup');
     const parameters = context.parameters ? context.parameters : undefined;
     const antwoord = parameters.antwoord ? parameters.antwoord : undefined;
@@ -38,7 +38,8 @@ module.exports.answer = agent => {
     let correctAnswers = parameters.correctAnswers ? parameters.correctAnswers : 0;
     const VakType = parameters.VakType;
 
-    const questionsList = questions[VakType.toLowerCase()];
+    const exercise = await Exercise.findOne({subject: VakType.toLowerCase()});
+    const questionsList = exercise.questions;
 
     const {answer} = questionsList[currentQuestion];
 
@@ -73,5 +74,5 @@ module.exports.answer = agent => {
         }
     });
 
-    this.question(agent);
+    await this.question(agent);
 };

@@ -15,7 +15,15 @@ const questionSchema = new Schema({
 });
 
 const exerciseSchema = new Schema({
-    exercises: [questionSchema]
+    subject: {
+        type: String,
+        required: true
+    },
+
+    questions: {
+        type: [questionSchema],
+        required: true
+    }
 });
 
 module.exports = model('Exercises', exerciseSchema);
