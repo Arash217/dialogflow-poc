@@ -8,9 +8,11 @@ const session = require('express-session');
 const passport = require('passport');
 
 require('./db/mongoose');
+require('./auth');
 
 const app = express();
 const server = http.createServer(app);
+
 
 app.use(express.urlencoded({ extended: true }));
 

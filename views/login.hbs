@@ -11,6 +11,10 @@
                 <input type="password" placeholder="Password" name="password" required class="input">
             </div>
 
+            {{#if error.message}}
+                <p class="error-message">{{error.message}}</p>
+            {{/if}}
+
             <button type="submit" class="btn registerbtn">Login</button>
         </div>
 

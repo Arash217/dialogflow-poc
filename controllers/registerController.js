@@ -12,7 +12,7 @@ const post = async (req, res) => {
         await userValidator.validate(body);
         const user = new User(body);
         await user.save();
-        req.login(user, (err) => {
+        req.login(user, () => {
             return res.redirect('/exercises');
         });
     } catch (error) {
