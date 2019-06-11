@@ -1,21 +1,21 @@
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('../models/user');
+const Account = require('../models/account');
 
-passport.serializeUser((user, done) => done(null, user.id));
+passport.serializeUser((account, done) => done(null, account.id));
 
 passport.deserializeUser(async (id, done) => {
     try {
-        const user = await User.findById(id);
-        done(null, user);
+        const account = await Account.findById(id);
+        done(null, account);
     } catch (e) {
         done(e);
     }
 });
 
-const comparePass = (userPassword, databasePassword) => (
-    bcrypt.compareSync(userPassword, databasePassword)
+const comparePass = (accountPassword, databasePassword) => (
+    bcrypt.compareSync(accountPassword, databasePassword)
 );
 
 const invalidCredentialsError = {
@@ -24,10 +24,10 @@ const invalidCredentialsError = {
 
 passport.use(new LocalStrategy(async (username, password, done) => {
     try {
-        const user = await User.findOne({ username });
-        if (!user) return done(invalidCredentialsError, false);
-        if (!comparePass(password, user.password)) return done(invalidCredentialsError, false);
-        return done(null, user);
+        const account = await Account.findOne({ username });
+        if (!account) return done(invalidCredentialsError, false);
+        if (!comparePass(password, account.password)) return done(invalidCredentialsError, false);
+        return done(null, account);
     } catch (e) {
         return done(e);
     }

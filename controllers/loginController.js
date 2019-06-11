@@ -5,9 +5,9 @@ const get = async (req, res) => {
 };
 
 const post = async (req, res, next) => {
-    return passport.authenticate('local', async (error, user) => {
-        if (user) {
-            req.login(user, () => {
+    return passport.authenticate('local', async (error, account) => {
+        if (account) {
+            req.login(account, () => {
                 return res.redirect('/exercises');
             });
             return;
