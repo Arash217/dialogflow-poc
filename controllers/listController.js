@@ -2,7 +2,7 @@ const Exercise = require('../models/exercise');
 
 const get = async (req, res) => {
     const exercises = await Exercise.find();
-    res.render('exercises', {
+    res.render('lists', {
         exercises
     });
 };
@@ -10,7 +10,7 @@ const get = async (req, res) => {
 const update = async (req, res) => {
     const {subject, questions} = req.body;
     await Exercise.findByIdAndUpdate(subject, {questions});
-    res.redirect('/exercises');
+    res.redirect('/lists');
 };
 
 module.exports = {

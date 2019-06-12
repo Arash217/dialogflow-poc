@@ -1,11 +1,11 @@
-const exerciseController = require('../controllers/exerciseController');
+const listController = require('../controllers/listController');
 
 module.exports.autoroute = {
     get: {
-        '/exercises': exerciseController.get
+        '/lijsten': listController.get
     },
 
     post: {
-        '/exercises': exerciseController.update
+        '/lijsten': listController.update
     }
 };
