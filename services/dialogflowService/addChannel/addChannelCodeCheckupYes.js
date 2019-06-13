@@ -9,6 +9,8 @@ const addChannelCodeCheckupYes = async agent => {
         const subject = context.subject
         const user = await Users.findOne({userId: agent.id}) // check if agent.id is valid
 
+        //if (user.channelIds contains channelId dan kan hij niet toegevoegd worden)
+        
         user.channelIds = user.channelIds + channelId // kan dit uberhoupt
 
         user.save()
