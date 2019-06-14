@@ -1,23 +1,37 @@
-const Users = require('../models/users'); // need to make
+const Users = require('../../../models/user');
+const Channel = require('../../../models/channel');
 
 const addChannelCodeCheckupYes = async agent => {
+
     const context = agent.context.get('context-channel-code');
-    const channelId = context.channelId
-    if (channelId){
-        const channelName = context.channelName
-        const listAmount = context.listAmount
-        const subject = context.subject
-        const user = await Users.findOne({userId: agent.id}) // check if agent.id is valid
+    console.log("context:", context)
+    const channelId = context && context.parameters.channelId ? context.parameters.channelId : undefined
 
-        //if (user.channelIds contains channelId dan kan hij niet toegevoegd worden)
-        
-        user.channelIds = user.channelIds + channelId // kan dit uberhoupt
+    if (channelId) {
+        const channelName = context.parameters.channelName
+        const subject = context.parameters.subject
+        const channel = await Channel.findOne({
+            channelCode: channelcode.toLowerCase()
+        })
+        const listAmount = channel.lists.length
+        const user = await Users.findOne({
+            userId: agent.originalRequest.payload.user.userId
+        })
 
-        user.save()
 
-        agent.add(`oke Top. ik heb kanaal ${channelName}, vak ${subject} toegevoegd. Er zijn nu ${listAmount} nieuwe lijsten beschikbaar.`);
-    
-    }else{ // true when someone says yes to a failed atampt. 
+        if (!user.channelIds.includes(channelId)) {
+            user.channelIds.push(channelId)
+            user.save()
+            //console.log(user)
+            agent.add(`Oke Top. ik heb kanaal ${channelName}, vak ${subject} toegevoegd. Er zijn nu ${listAmount} nieuwe lijsten beschikbaar.`);
+            agent.add(`Wat wil je nu doen?`);
+        } else {
+            agent.add(`Deze lijst is al toegevoegd.`);
+            agent.add(`Wat wil je nu doen?`);
+        }
+
+
+    } else { // true when someone says yes to a failed atampt. 
         agent.add(`Wat is de kanaalcode?`);
     }
 }

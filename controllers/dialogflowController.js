@@ -1,12 +1,12 @@
 const {
     WebhookClient
 } = require('dialogflow-fulfillment');
-const question = require('../services/dialogflowService/quiz/question');
-const answer = require('../services/dialogflowService/quiz/answer');
+const {question} = require('../services/dialogflowService/quiz/question');
+const {answer} = require('../services/dialogflowService/quiz/answer');
 
-const addChannel = require('../services/dialogflowService/addChannel/addChannel');
-const addChannelCode = require('../services/dialogflowService/addChannel/addChannelCode');
-const addChannelCodeCheckupYes = require('../services/dialogflowService/addChannel/addChannelCodeChekupYes');
+const {addChannel} = require('../services/dialogflowService/addChannel/addChannel');
+const {addChannelCode} = require('../services/dialogflowService/addChannel/addChannelCode');
+const {addChannelCodeCheckupYes} = require('../services/dialogflowService/addChannel/addChannelCodeCheckupYes');
 
 const post = (req, res) => {
     const agent = new WebhookClient({
