@@ -16,54 +16,39 @@ time, mark, audio, video {
   border: 0;
   font-size: 100%;
   font: inherit;
-  vertical-align: baseline; }
+  vertical-align: baseline;
+}
 
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
-  display: block; }
+  display: block;
+}
 
 body {
   line-height: 1;
   height: 100%;
-  overflow: hidden;
-  /*makes the body non-scrollable (we will add scrolling to the sidebar and main content containers)*/
-  margin: 0px;
-  /*removes default style*/
-  display: flex;
-  /*enables flex content for its children*/
-  box-sizing: border-box; }
+  overflow: hidden;  /*makes the body non-scrollable (we will add scrolling to the sidebar and main content containers)*/
+  margin: 0px;  /*removes default style*/
+  display: flex;  /*enables flex content for its children*/
+  box-sizing: border-box;
+}
 
 ol, ul {
-  list-style: none; }
+  list-style: none;
+}
 
 blockquote, q {
-  quotes: none; }
+  quotes: none;
+}
 
 blockquote:before, blockquote:after,
 q:before, q:after {
   content: '';
-  content: none; }
+  content: none;
+}
 
 table {
   border-collapse: collapse;
-  border-spacing: 0; }
-
-.column {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0; }
-
-.logo {
-  background-image: url("/images/logo.svg");
-  width: 100%;
-  height: 100%;
-  background-size: 100%;
-  background-repeat: no-repeat; }
-
-.sidebar {
-  background-color: #383D48;
-  padding: 15px; }
-  .sidebar__logo {
-    max-width: 200px; }
+  border-spacing: 0;
+}

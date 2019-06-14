@@ -1,6 +1,6 @@
 const {WebhookClient} = require('dialogflow-fulfillment');
-const question = require('../services/dialogflowService/quiz/question');
-const answer = require('../services/dialogflowService/quiz/answer');
+const {question} = require('../services/dialogflowService/quiz/question');
+const {answer} = require('../services/dialogflowService/quiz/answer');
 
 const post = (req, res) => {
     const agent = new WebhookClient({request: req, response: res});

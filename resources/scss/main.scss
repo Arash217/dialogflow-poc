@@ -1,6 +1,11 @@
-$badass: #bada55;
+// Base
+@import 'base/reset';
+@import 'base/colors';
 
-body {
-  margin: 0;
-  background-color: $badass;
-}
+// Layout
+@import 'layout/column';
+
+// Components
+@import 'components/logo';
+@import 'components/sidebar';
+@import 'components/nav';
