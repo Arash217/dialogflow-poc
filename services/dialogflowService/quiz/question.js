@@ -6,17 +6,17 @@ const question = async agent => {
     const context = agent.context.get('oefening-followup');
     const parameters = context.parameters ? context.parameters : undefined;
     const currentQuestion = parameters.currentQuestion ? parameters.currentQuestion : 0;
-    let VakType = agent.parameters ? agent.parameters.VakType : undefined;
+    let listId = agent.parameters ? agent.parameters.listId : undefined;
 
-    if (!VakType) {
-        VakType = parameters.VakType;
+    if (!listId) {
+        listId = parameters.listId;
     }
 
-    // get questions from database by subject
-    const exercise = await Exercise.findOne({subject: VakType.toLowerCase()});
+    // get questions from database by listId
+    const exercise = await List.findOne({_id: listId}); // moet worden uit lijst met lijst id
     const questionsList = exercise.questions;
 
-    if (VakType) {
+    if (listId) {
         // lifespan (amount of conversations) is set to a custom length, because the default is 2
         // save parameters to oefening-followup context. The context is tied to the user session.
         agent.context.set({
@@ -24,7 +24,7 @@ const question = async agent => {
             lifespan: questionsList.length,
             parameters: {
                 ...parameters,
-                VakType
+                listId
             }
         });
     }
