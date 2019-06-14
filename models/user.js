@@ -21,8 +21,4 @@ const userSchema = new Schema({
     }
 });
 
-<<<<<<< HEAD
 module.exports = model('User', userSchema);
-=======
-module.exports = model('User', userSchema);
->>>>>>> dev
