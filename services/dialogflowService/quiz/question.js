@@ -1,4 +1,4 @@
-const Exercise = require('../models/exercise');
+const Exercise = require('../../../models/exercise');
 
 // question intent
 const question = async agent => {
@@ -15,7 +15,7 @@ const question = async agent => {
     // get questions from database by subject
     const exercise = await Exercise.findOne({subject: VakType.toLowerCase()});
     const questionsList = exercise.questions;
-
+    
     if (VakType) {
         // lifespan (amount of conversations) is set to a custom length, because the default is 2
         // save parameters to oefening-followup context. The context is tied to the user session.
