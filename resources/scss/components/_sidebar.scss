@@ -1,12 +1,18 @@
 .sidebar {
   background-color: $black;
-  padding: 15px;
+  color: white;
+
+  &__top {
+    margin: 20px;
+  }
 
   &__logo {
-    max-width: 200px;
+    max-width: 160px;
   }
 
   &__divider {
-
+    width: 100%;
+    border-top: none;
+    margin: 20px 0;
   }
 }

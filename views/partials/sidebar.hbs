@@ -1,9 +1,20 @@
 <div class="sidebar column">
-    <div class="sidebar__logo">
-        {{> logo}}
-    </div>
 
-    <hr class="sidebar_divider">
+   <section class="sidebar__top">
+
+       <div class="sidebar__logo">
+           {{> logo}}
+       </div>
+
+       <hr class="sidebar__divider">
+
+       {{> user_info}}
+
+       <hr class="sidebar__divider">
+
+   </section>
 
     {{> nav}}
+
+
 </div>

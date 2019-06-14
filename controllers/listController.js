@@ -3,7 +3,11 @@ const Exercise = require('../models/exercise');
 const get = async (req, res) => {
     const exercises = await Exercise.find();
     res.render('lists', {
-        exercises
+        exercises,
+        username: req.user ? req.user.username : '',
+        active: {
+            lists: true
+        }
     });
 };
 

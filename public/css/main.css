@@ -23,9 +23,11 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block; }
 
+html, body {
+  height: 100%; }
+
 body {
   line-height: 1;
-  height: 100%;
   overflow: hidden;
   /*makes the body non-scrollable (we will add scrolling to the sidebar and main content containers)*/
   margin: 0px;
@@ -49,6 +51,13 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+@font-face {
+  font-family: "Avenir Regular";
+  src: url("/fonts/Avenir-Regular.ttf"); }
+
+body {
+  font-family: "Avenir Regular", Verdana, sans-serif; }
+
 .column {
   height: 100%;
   display: flex;
@@ -64,6 +73,28 @@ table {
 
 .sidebar {
   background-color: #383D48;
-  padding: 15px; }
+  color: white; }
+  .sidebar__top {
+    margin: 20px; }
   .sidebar__logo {
-    max-width: 200px; }
+    max-width: 160px; }
+  .sidebar__divider {
+    width: 100%;
+    border-top: none;
+    margin: 20px 0; }
+
+.nav {
+  width: 100%;
+  text-align: center; }
+  .nav__item {
+    width: 100%; }
+  .nav__link {
+    display: inline-block;
+    color: inherit;
+    text-decoration: none;
+    width: 100%;
+    padding: 20px 0;
+    font-size: 20px; }
+  .nav__link--active {
+    background-color: #F8D84F;
+    color: #383D48; }
