@@ -2,7 +2,6 @@ const Users = require('../../../models/user');
 const Channel = require('../../../models/channel');
 
 const addChannelCodeCheckupYes = async agent => {
-
     const context = agent.context.get('context-channel-code');
     console.log("context:", context)
     const channelId = context && context.parameters.channelId ? context.parameters.channelId : undefined
@@ -18,7 +17,6 @@ const addChannelCodeCheckupYes = async agent => {
             userId: agent.originalRequest.payload.user.userId
         })
 
-
         if (!user.channelIds.includes(channelId)) {
             user.channelIds.push(channelId)
             user.save()
@@ -29,7 +27,6 @@ const addChannelCodeCheckupYes = async agent => {
             agent.add(`Deze lijst is al toegevoegd.`);
             agent.add(`Wat wil je nu doen?`);
         }
-
 
     } else { // true when someone says yes to a failed atampt. 
         agent.add(`Wat is de kanaalcode?`);

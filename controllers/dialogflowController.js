@@ -1,6 +1,4 @@
-const {
-    WebhookClient
-} = require('dialogflow-fulfillment');
+const {WebhookClient} = require('dialogflow-fulfillment');
 const {question} = require('../services/dialogflowService/quiz/question');
 const {answer} = require('../services/dialogflowService/quiz/answer');
 
@@ -24,9 +22,7 @@ const post = (req, res) => {
     intentMap.set('add channel', addChannel);
     intentMap.set('add channel - code', addChannelCode);
     intentMap.set('add channel - code - checkup - yes', addChannelCodeCheckupYes);
-
     
-
     agent.handleRequest(intentMap)
 };
 
