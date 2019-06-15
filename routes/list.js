@@ -7,5 +7,5 @@ module.exports.autoroute = {
 
     post: {
         '/lijsten': listController.update
-    }
+    },
 };

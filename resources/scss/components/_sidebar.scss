@@ -2,6 +2,7 @@
   background-color: $black;
   color: white;
   box-shadow: 5px 0 5px rgba(0, 0, 0, 0.2);
+  z-index: 999;
 
   &__top {
     margin: 20px;
