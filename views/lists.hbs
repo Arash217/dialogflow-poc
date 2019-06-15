@@ -1,29 +1,28 @@
-<main>
-    <section class="exercises">
-        {{#each this.exercises}}
-            <form action="/exercises" method="post">
-                <div class="exercise">
-                    <span>{{this.subject}}</span>
-                    <input type="hidden" name="subject" value="{{this._id}}">
-                    <ul id="{{this.subject}}-questions-list">
-                        {{#each this.questions}}
-                            <li id="{{../this.subject}}-question-{{@index}}">
+<section class="exercises">
+    {{#each this.exercises}}
+        <form action="/exercises" method="post">
+            <div class="exercise">
+                <span>{{this.subject}}</span>
+                <input type="hidden" name="subject" value="{{this._id}}">
+                <ul id="{{this.subject}}-questions-list">
+                    {{#each this.questions}}
+                        <li id="{{../this.subject}}-question-{{@index}}">
                                 <span>
                                     <input type="text" name="questions[{{@index}}][question]" value="{{this.question}}">
                                 </span>
-                                <span>
+                            <span>
                                     <input type="text" name="questions[{{@index}}][answer]" value="{{this.answer}}">
                                 </span>
-                                <span>
+                            <span>
                                     <button onclick="event.preventDefault(); deleteQuestion('{{../this.subject}}-question-{{@index}}')">Delete</button>
                                 </span>
-                            </li>
-                        {{/each}}
-                    </ul>
-                    <button onclick="event.preventDefault(); addQuestion('{{this.subject}}-questions-list')">Add question</button>
-                </div>
-                <input type="submit" value="save">
-            </form>
-        {{/each}}
-    </section>
-</main>
+                        </li>
+                    {{/each}}
+                </ul>
+                <button onclick="event.preventDefault(); addQuestion('{{this.subject}}-questions-list')">Add question
+                </button>
+            </div>
+            <input type="submit" value="save">
+        </form>
+    {{/each}}
+</section>
