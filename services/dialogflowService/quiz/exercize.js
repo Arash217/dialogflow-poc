@@ -1,4 +1,6 @@
 const Users = require('../../../models/user');
+const Channel = require('../../../models/channel');
+const List = require('../../../models/list');
 
 const exercize = async agent => {
     const _userId = agent.originalRequest.payload.user.userId
@@ -7,9 +9,11 @@ const exercize = async agent => {
     })
     const _subject = agent.parameters.subject
     const gotList = gotList()
-    const matchingLists = getSubject(_subject)
+    
 
     if (gotLists()) {
+        const matchingLists = getSubject(_subject)
+
         agent.add(`Oke, welke lijst wil je oefenen?`);
         agent.context.set({
             name: 'context-list',
@@ -17,12 +21,12 @@ const exercize = async agent => {
             parameters: {
                 subject,
                 gotList,
-                matchingLists
+                matchingLists // _id's matching subject
             }
         })
     } else {
-        agent.add(`Oke, dan zul je eerst een lijst moeten toevoegen`);
-        agent.add(`Wil je een losse lijst of een kanaal toevoegen`);
+        agent.add(`Sorry, je zult eerst een lijst moeten toevoegen`);
+        agent.add(`Wil je een losse lijst of een kanaal met lijsten toevoegen`);
     }
 
     function gotLists() {
@@ -35,7 +39,7 @@ const exercize = async agent => {
 
     function getSubject(subject) {
         const ChannelsMatchingSubject = []
-        const listsMatchingSubject = []
+        const listsMatchingSubject = [] // _list._id matching subject
 
         if (user.channelIds.length() !== 0) {
             user.channelIds.forEach(channel => {
@@ -49,7 +53,7 @@ const exercize = async agent => {
 
         if (user.seperateLists.length() !== 0) {
             user.seperateLists.forEach(list => {
-                const _list = await list.findOne({
+                const _list = await List.findOne({
                     _id: list,
                     subject: _subject
                 })

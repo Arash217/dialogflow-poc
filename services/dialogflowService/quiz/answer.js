@@ -1,4 +1,5 @@
 const Exercise = require('../../../models/exercise');
+const List = require('../../../models/list');
 
 // answer intent
 const answer = async agent => {
@@ -8,10 +9,10 @@ const answer = async agent => {
     const antwoord = parameters.antwoord ? parameters.antwoord : undefined;
     const currentQuestion = parameters.currentQuestion ? parameters.currentQuestion : 0;
     let correctAnswers = parameters.correctAnswers ? parameters.correctAnswers : 0;
-    const VakType = parameters.VakType;
+    let listId = agent.parameters ? agent.parameters.listId : undefined;
 
     // get questions from database by subject
-    const exercise = await Exercise.findOne({subject: VakType.toLowerCase()});
+    const exercise = await List.findOne({_id: listId});
     const questionsList = exercise.questions;
 
     // get the correct answer for the current questions

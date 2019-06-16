@@ -1,4 +1,4 @@
-const Exercise = require('../../../models/exercise');
+const List = require('../../../models/list');
 
 // question intent
 const question = async agent => {
