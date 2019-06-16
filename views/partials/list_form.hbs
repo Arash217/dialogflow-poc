@@ -1,17 +1,44 @@
-<article>
-    <header class="content__row">
-        <h1>
-            Lijst invoeren
-        </h1>
-    </header>
-    <section class="content__row">
-        <form action="">
-            <p>
-                <label for="list_name">
-                    Lijstnaam
-                </label>
-                <input type="text" id="list_name">
-            </p>
-        </form>
-    </section>
-</article>
+<form action="" class="form">
+    <div class="form__row">
+        <div class="form__input-group">
+            <label for="" class="form__label">Lijstnaam</label>
+            <input type="text" class="form__input">
+        </div>
+    </div>
+    <div id="form_questions">
+        <div id="question_0" class="form__row">
+            <div class="form__column form__input-group">
+                <label for="" class="form__label">Vraag</label>
+                <input type="text" class="form__input">
+            </div>
+            <div class="form__column form__input-group">
+                <label for="" class="form__label">Antwoord</label>
+                <input type="text" class="form__input">
+            </div>
+            <div class="form__column form__input-group">
+                <button class="button button--no-padding-left-right form__button-delete" value="0">
+                    <img src="/images/remove.svg" alt="remove" class="button__image">
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="form__row">
+        <div class="form__column">
+            <hr class="divider divider--dark">
+        </div>
+        <button id="form_add_question" class="button button--gold button--round">
+            <img src="/images/plus.svg" alt="add question" class="button__image button__image--smaller">
+        </button>
+        <div class="form__column form__column--margin-left">
+            <hr class="divider divider--dark">
+        </div>
+    </div>
+    <div class="form__row form__input-group">
+        <label for="" class="form__label">Kanalen</label>
+        <select id="form_channels" class="form__input" multiple></select>
+    </div>
+    <div class="form__row">
+        <button class="button button--gold form__button">Lijst opslaan</button>
+        <button class="button button--gray" data-micromodal-close aria-label="Close this dialog window">Sluiten</button>
+    </div>
+</form>

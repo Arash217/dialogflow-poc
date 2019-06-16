@@ -8,8 +8,8 @@
     </section>
 
     <section class="content__row">
-        <button id="add_list_btn" class="button content__row" href="lijsten/toevoegen">
-            <img class="button__image" src="/images/plus.svg" alt="lijst toevoegen">
+        <button id="add_list_btn" class="button button--gold content__row" href="lijsten/toevoegen">
+            <img class="button__image button__image--margin-right" src="/images/plus.svg" alt="lijst toevoegen">
             Lijst toevoegen
         </button>
     </section>
@@ -20,19 +20,13 @@
                 <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
                     <header class="modal__header">
                         <h2 class="modal__title" id="modal-1-title">
-                            Micromodal
+                            Lijst invoeren
                         </h2>
                         <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
                     </header>
-                    <main class="modal__content" id="modal-1-content">
-                        <p>
-                            Try hitting the <code>tab</code> key and notice how the focus stays within the modal itself. Also, <code>esc</code> to close modal.
-                        </p>
+                    <main class="modal__content">
+                        {{> list_form}}
                     </main>
-                    <footer class="modal__footer">
-                        <button class="modal__btn modal__btn-primary">Continue</button>
-                        <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
-                    </footer>
                 </div>
             </div>
         </div>
@@ -41,4 +35,5 @@
 </article>
 
 <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 <script src="/js/lists.js"></script>
