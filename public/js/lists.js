@@ -1,6 +1,5 @@
 "use strict";
 
-var addListBtn = document.getElementById('add_list_btn');
 var addQuestionBtn = document.getElementById('form_add_question');
 var formQuestions = document.getElementById('form_questions');
 
@@ -26,26 +25,10 @@ var deleteQuestion = function deleteQuestion(e) {
   }
 };
 
-addListBtn.addEventListener('click', function () {
-  MicroModal.show('modal-1');
-});
 addQuestionBtn.addEventListener('click', addQuestion);
 formQuestions.addEventListener('click', deleteQuestion);
 var choices = new Choices('#form_channels', {
   removeItemButton: true,
-  choices: [{
-    value: 'Option 1',
-    label: 'Option 1'
-  }, {
-    value: 'Option 2',
-    label: 'Option 2'
-  }, {
-    value: 'Option 2',
-    label: 'Option 2'
-  }, {
-    value: 'Option 2',
-    label: 'Option 2'
-  }],
   placeholderValue: 'Kies een kanaal...',
   loadingText: 'Laden...',
   noResultsText: 'Geen resultaten gevonden',

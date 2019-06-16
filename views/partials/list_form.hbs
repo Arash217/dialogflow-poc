@@ -1,4 +1,4 @@
-<form action="" class="form">
+<form action="" class="form form--width-800">
     <div class="form__row">
         <div class="form__input-group">
             <label for="" class="form__label">Lijstnaam</label>
@@ -35,10 +35,15 @@
     </div>
     <div class="form__row form__input-group">
         <label for="" class="form__label">Kanalen</label>
-        <select id="form_channels" class="form__input" multiple></select>
+        <select id="form_channels" class="form__input" multiple>
+            <option value="volvo" selected>Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+        </select>
     </div>
     <div class="form__row">
         <button class="button button--gold form__button">Lijst opslaan</button>
-        <button class="button button--gray" data-micromodal-close aria-label="Close this dialog window">Sluiten</button>
+        <a class="button button--gray" href="/lijsten">Terug</a>
     </div>
 </form>

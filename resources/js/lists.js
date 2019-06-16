@@ -1,4 +1,3 @@
-const addListBtn = document.getElementById('add_list_btn');
 const addQuestionBtn = document.getElementById('form_add_question');
 const formQuestions = document.getElementById('form_questions');
 
@@ -37,32 +36,11 @@ const deleteQuestion = e => {
     }
 };
 
-addListBtn.addEventListener('click', () => {
-    MicroModal.show('modal-1')
-});
 addQuestionBtn.addEventListener('click', addQuestion);
 formQuestions.addEventListener('click', deleteQuestion);
 
 const choices = new Choices('#form_channels', {
     removeItemButton: true,
-    choices: [
-        {
-            value: 'Option 1',
-            label: 'Option 1'
-        },
-        {
-            value: 'Option 2',
-            label: 'Option 2'
-        },
-        {
-            value: 'Option 2',
-            label: 'Option 2'
-        },
-        {
-            value: 'Option 2',
-            label: 'Option 2'
-        }
-    ],
     placeholderValue: 'Kies een kanaal...',
     loadingText: 'Laden...',
     noResultsText: 'Geen resultaten gevonden',

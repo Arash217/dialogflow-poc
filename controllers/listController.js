@@ -11,6 +11,14 @@ const get = async (req, res) => {
     });
 };
 
+const add = async (req, res) => {
+    res.render('add_list', {
+        active: {
+            lists: true
+        }
+    });
+};
+
 const update = async (req, res) => {
     const {subject, questions} = req.body;
     await Exercise.findByIdAndUpdate(subject, {questions});
@@ -19,5 +27,6 @@ const update = async (req, res) => {
 
 module.exports = {
     get,
-    update
+    update,
+    add
 };

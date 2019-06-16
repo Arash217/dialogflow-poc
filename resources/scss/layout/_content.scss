@@ -1,8 +1,10 @@
 .content {
   padding: 25px 60px;
+  margin-bottom: 25px;
   background-color: $light-gray;
   width: 100%;
   display: flex;
+  overflow-y: scroll;
 
   &__row {
     margin-bottom: 20px;
