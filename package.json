@@ -6,9 +6,10 @@
   "scripts": {
     "tunnel": "ngrok http 3000",
     "dev": "nodemon -e hbs,js server.js",
-    "build-css": "node-sass --include-path scss resources/scss/main.scss public/css/main.css",
-    "watch-css": "nodemon -e scss -x \"npm run build-css\"",
-    "watch-all": "npm-run-all -p dev watch-css"
+    "build:css": "node-sass -r --output-style compressed resources/scss/main.scss -o public/css",
+    "watch:css": "npm run build:css && npm run build:css -- -w",
+    "watch:js": "babel resources/js --watch --out-dir public/js",
+    "watch": "npm-run-all -p dev watch:*s"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,9 @@
   },
   "homepage": "https://github.com/Arash217/dialogflow-poc#readme",
   "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
     "ngrok": "^3.1.1",
     "node-sass": "^4.12.0",
     "nodemon": "^1.19.1",
@@ -35,6 +39,7 @@
     "express-autoroute": "^2.1.1",
     "express-handlebars": "^3.1.0",
     "express-session": "^1.16.1",
+    "micromodal": "^0.4.0",
     "mongoose": "^5.5.12",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
