@@ -10,6 +10,11 @@
   text-decoration: none;
   background-color: transparent;
   justify-content: center;
+  
+  &--large {
+    padding: .5rem 4rem;
+    border-radius: 5px;
+  }
 
   &__image {
     float: left;
@@ -40,6 +45,11 @@
     background-color: $gray;
   }
 
+  &--large {
+    padding: .5rem 4rem;
+    border-radius: 5px;
+  }
+  
   &--round {
     border-radius: 50%;
     height: 35px;
