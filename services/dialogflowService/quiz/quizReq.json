@@ -1,0 +1,177 @@
+{
+    "contexts": {
+        "vraag-context": {
+            "name": "vraag-context",
+            "lifespan": 3,
+            "parameters": {
+                "givenListName": "hoofdstuk 3 boek 2",
+                "listId": "5d023efd1942e9b32c77ac56"
+            }
+        },
+        "intent_oefenen": {
+            "name": "intent_oefenen",
+            "parameters": {
+                "givenListName": "hoofdstuk 3 boek 2",
+                "listId": "5d023efd1942e9b32c77ac56"
+            }
+        },
+        "context-list": {
+            "name": "context-list",
+            "lifespan": 2,
+            "parameters": {
+                "_subject": "engels",
+                "matchingLists": ["5d023efd1942e9b32c77ac56", "5d023efd1942e9b32c77ac56", "5d023efd1942e9b32c77ac56"],
+                "list": "hoofdstuk 3 boek 2",
+                "list.original": "hoofdstuk 3 boek 2"
+            }
+        },
+        "exercize-followup": {
+            "name": "exercize-followup",
+            "parameters": {
+                "subject": "engels",
+                "subject.original": "engels",
+                "list": "hoofdstuk 3 boek 2",
+                "list.original": "hoofdstuk 3 boek 2"
+            }
+        },
+        "exersize-followup": {
+            "name": "exersize-followup",
+            "parameters": {
+                "subject": "engels",
+                "subject.original": "engels",
+                "list": "hoofdstuk 3 boek 2",
+                "list.original": "hoofdstuk 3 boek 2"
+            }
+        }
+    },
+    "session": "projects/math-dwaagi/agent/sessions/ABwppHHDbvVmtTdStQ5DZAttY__Tr3_n1w4W9-FtWoVk3kj4IGrieaAIbqJzW_yYKG9v-uVjk1Njj64",
+    "inputContexts": {
+        "vraag-context": {
+            "name": "vraag-context",
+            "lifespan": 1
+        },
+        "intent_oefenen": {
+            "name": "intent_oefenen",
+            "parameters": {
+                "givenListName": "hoofdstuk 3 boek 2",
+                "listId": "5d023efd1942e9b32c77ac56"
+            }
+        },
+        "context-list": {
+            "name": "context-list",
+            "lifespan": 2,
+            "parameters": {
+                "_subject": "engels",
+                "matchingLists": ["5d023efd1942e9b32c77ac56", "5d023efd1942e9b32c77ac56", "5d023efd1942e9b32c77ac56"],
+                "list": "hoofdstuk 3 boek 2",
+                "list.original": "hoofdstuk 3 boek 2"
+            }
+        },
+        "exercize-followup": {
+            "name": "exercize-followup",
+            "parameters": {
+                "subject": "engels",
+                "subject.original": "engels",
+                "list": "hoofdstuk 3 boek 2",
+                "list.original": "hoofdstuk 3 boek 2"
+            }
+        },
+        "exersize-followup": {
+            "name": "exersize-followup",
+            "parameters": {
+                "subject": "engels",
+                "subject.original": "engels",
+                "list": "hoofdstuk 3 boek 2",
+                "list.original": "hoofdstuk 3 boek 2"
+            }
+        }
+    }
+}
+
+contexts: {
+        actions_capability_audio_output: {
+            name: 'actions_capability_audio_output',
+            lifespan: undefined,
+            parameters: [Object]
+        },
+        actions_capability_web_browser: {
+            name: 'actions_capability_web_browser',
+            lifespan: undefined,
+            parameters: [Object]
+        },
+        actions_capability_screen_output: {
+            name: 'actions_capability_screen_output',
+            lifespan: undefined,
+            parameters: [Object]
+        },
+        actions_capability_media_response_audio: {
+            name: 'actions_capability_media_response_audio',
+            lifespan: undefined,
+            parameters: [Object]
+        },
+        actions_capability_account_linking: {
+            name: 'actions_capability_account_linking',
+            lifespan: undefined,
+            parameters: [Object]
+        },
+        google_assistant_input_type_keyboard: {
+            name: 'google_assistant_input_type_keyboard',
+            lifespan: undefined,
+            parameters: [Object]
+        },
+        'context-list': {
+            name: 'context-list',
+            lifespan: 1,
+            parameters: [Object]
+        },
+        'vraag-context': {
+            name: 'vraag-context',
+            lifespan: 2,
+            parameters: [Object]
+        }
+    },
+    session:
+    'projects/math-dwaagi/agent/sessions/ABwppHHDbvVmtTdStQ5DZAttY__Tr3_n1w4W9-FtWoVk3kj4IGrieaAIbqJzW_yYKG9v-uVjk1Njj64',
+    inputContexts: {
+        actions_capability_audio_output: {
+            name: 'actions_capability_audio_output',
+            lifespan: undefined,
+            parameters: [Object]
+        },
+        actions_capability_web_browser: {
+            name: 'actions_capability_web_browser',
+            lifespan: undefined,
+            parameters: [Object]
+        },
+        actions_capability_screen_output: {
+            name: 'actions_capability_screen_output',
+            lifespan: undefined,
+            parameters: [Object]
+        },
+        actions_capability_media_response_audio: {
+            name: 'actions_capability_media_response_audio',
+            lifespan: undefined,
+            parameters: [Object]
+        },
+        actions_capability_account_linking: {
+            name: 'actions_capability_account_linking',
+            lifespan: undefined,
+            parameters: [Object]
+        },
+        google_assistant_input_type_keyboard: {
+            name: 'google_assistant_input_type_keyboard',
+            lifespan: undefined,
+            parameters: [Object]
+        },
+        'context-list': {
+            name: 'context-list',
+            lifespan: 1,
+            parameters: [Object]
+        },
+        'vraag-context': {
+            name: 'vraag-context',
+            lifespan: 2,
+            parameters: [Object]
+        }
+    }
+}

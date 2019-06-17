@@ -1,54 +1,58 @@
-const Users = require('../../../models/user');
 const List = require('../../../models/list');
+const {question} = require("./question")
 
 const exercizeWhatList = async agent => {
-    const _userId = agent.originalRequest.payload.user.userId
-    const user = await Users.findOne({
-        userId: _userId
-    })
-    const context = agent.context.get('context-list');
-    const givenListName = agent.parameters.any
+    //console.log(agent)
 
-    if (context.parameters.gotList) {
-        const listId = getList(givenListName)
+    const context = agent.context.get('context-list');
+    const givenListName = agent.parameters.list
+    //console.log(agent.parameters)
+
+    if (context.parameters._subject) {
+        const listId = await getList(context, givenListName)
         if (listId) {
-            agent.add(`Oke, gaan we ${listName} doen`);
+            
             agent.context.set({
                 name: 'context-excercise',
-                lifespan: 4,
+                lifespan: 0,
                 parameters: {
+                    givenListName,
                     listId
                 }
             })
+            console.log("event trigger")
+            agent.add(`dummy text else followup event wont work`);
+            agent.setFollowupEvent({ "name": "intent_Oefenen","lifespan": "3", "parameters": {
+                givenListName,
+                listId
+            }});
+            
 
-           await question(agent)
 
         } else {
             agent.add(`Ik heb ${givenListName} niet kunnen vinden`);
             agent.add(`Welke lijst wil je doen?`);
         }
     } else {
-        agent.add(`got list bestaat niet`);
-        agent.add(`even geen idee wat heir moet staan`);
-    }
-
-    function getList(givenListName) {
-        const listIds = context.parameters.gotList // maybe make temp database met alle lijsten met subject om daarna findeone met naam te doen
-
-        const listsByName = await List.find({
-            name: givenListName
-        })
-
-        listsByName.forEach(listObj => {
-            listIds.forEach(id => {
-                if (listObj._id === id)
-                    return id
-            });
-        });
+        agent.add(`ik heb geen lijsten gevonden`);
+        agent.add(`er is iets mis gegaan`);
     }
 
 }
 
+async function getList(context, givenListName) {
+    const listIds = context.parameters.matchingLists // maybe make temp database met alle lijsten met subject om daarna findeone met naam te doen
+
+    const listIdByName = await List.findOne({
+        _id: {
+            $in: listIds
+        },
+        name: givenListName
+    })
+    const id = listIdByName ? listIdByName._id : undefined
+    //console.log(listIdByName)
+    return id
+}
 
 module.exports = {
     exercizeWhatList

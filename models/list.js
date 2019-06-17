@@ -2,6 +2,18 @@ const mongoose = require('mongoose');
 
 const {Schema, model} = mongoose;
 
+const questionSchema = new Schema({
+    question: {
+        type: String,
+        required: true
+    },
+
+    answer: {
+        type: String,
+        required: true
+    }
+});
+
 const listSchema = new Schema({
     name: {
         type: String,
@@ -25,16 +37,6 @@ const listSchema = new Schema({
     }
 });
 
-const questionSchema = new Schema({
-    question: {
-        type: String,
-        required: true
-    },
 
-    answer: {
-        type: String,
-        required: true
-    }
-});
 
 module.exports = model('List', listSchema);
