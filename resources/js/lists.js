@@ -28,8 +28,8 @@ const addQuestion = e => {
 };
 
 const deleteQuestion = e => {
-    e.preventDefault();
     if (e.target.classList.contains('form__button-delete')) {
+        e.preventDefault();
         if (questionsInput.childElementCount > 1) {
             const question = document.getElementById(`question_${e.target.value}`);
             questionsInput.removeChild(question);
@@ -49,8 +49,19 @@ const choices = new Choices('#form_channels', {
     itemSelectText: '',
 });
 
+const submitForm = async formData => {
+    const res = await fetch('/lijsten', {
+        method: 'POST',
+        body: JSON.stringify(formData)
+    });
+
+    const content = await res.json();
+
+    console.log(content);
+};
+
 saveListBtn.addEventListener('click', e => {
     e.preventDefault();
     const formData = formToObject(formQuestions);
-    console.log(formData);
+    submitForm(formData)
 });
