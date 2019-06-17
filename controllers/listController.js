@@ -1,4 +1,5 @@
 const Exercise = require('../models/exercise');
+const Channel = require('../models/channel');
 
 const get = async (req, res) => {
     const exercises = await Exercise.find();
@@ -12,7 +13,11 @@ const get = async (req, res) => {
 };
 
 const add = async (req, res) => {
+    const username = req.user ? req.user.username : '';
+    const userChannels = await Channel.find({owner: username});
+
     res.render('add_list', {
+        userChannels,
         active: {
             lists: true
         }

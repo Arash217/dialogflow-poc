@@ -2,11 +2,14 @@
   padding: 25px 60px;
   margin-bottom: 25px;
   background-color: $light-gray;
-  width: 100%;
-  display: flex;
-  overflow-y: scroll;
+  flex-grow: 1;  /*ensures that the container will take up the full height of the parent container*/
+  overflow-y: auto;  /*adds scroll to this container*/
 
   &__row {
     margin-bottom: 20px;
+  }
+
+  &__article {
+    padding-bottom: 25px;
   }
 }
