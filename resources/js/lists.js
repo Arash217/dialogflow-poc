@@ -1,15 +1,17 @@
 const addQuestionBtn = document.getElementById('form_add_question');
+const questionsInput = document.getElementById('questions_input');
 const formQuestions = document.getElementById('form_questions');
+const saveListBtn = document.getElementById('button_save_list');
 
 const createQuestionNode = index => {
     return `<div id="question_${index}" class="form__row">
                 <div class="form__column form__input-group">
                     <label for="" class="form__label">Vraag</label>
-                    <input type="text" class="form__input">
+                    <input name="questions[${index}][question]" type="text" class="form__input">
                 </div>
                 <div class="form__column form__input-group">
                     <label for="" class="form__label">Antwoord</label>
-                    <input type="text" class="form__input">
+                    <input name="questions[${index}][answer]" type="text" class="form__input">
                 </div>
                 <div class="form__column form__input-group">
                     <button class="button button--no-padding-left-right form__button-delete" value="${index}">
@@ -21,17 +23,16 @@ const createQuestionNode = index => {
 
 const addQuestion = e => {
     e.preventDefault();
-    const questionsList = document.getElementById('form_questions');
-    const questionNode = createQuestionNode(questionsList.childElementCount);
-    questionsList.insertAdjacentHTML('beforeend', questionNode);
+    const questionNode = createQuestionNode(questionsInput.childElementCount);
+    questionsInput.insertAdjacentHTML('beforeend', questionNode);
 };
 
 const deleteQuestion = e => {
     e.preventDefault();
     if (e.target.classList.contains('form__button-delete')) {
-        if (formQuestions.childElementCount > 1) {
+        if (questionsInput.childElementCount > 1) {
             const question = document.getElementById(`question_${e.target.value}`);
-            formQuestions.removeChild(question);
+            questionsInput.removeChild(question);
         }
     }
 };
@@ -46,4 +47,10 @@ const choices = new Choices('#form_channels', {
     noResultsText: 'Geen resultaten gevonden',
     noChoicesText: 'Geen kanalen',
     itemSelectText: '',
+});
+
+saveListBtn.addEventListener('click', e => {
+    e.preventDefault();
+    const formData = formToObject(formQuestions);
+    console.log(formData);
 });
