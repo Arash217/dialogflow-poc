@@ -1,0 +1,48 @@
+.button {
+  color: black;
+  border: none;
+  font-size: 16px;
+  padding: 6px 15px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  background-color: transparent;
+  justify-content: center;
+
+  &__image {
+    float: left;
+    width: 20px;
+    height: 20px;
+    pointer-events: none
+  }
+
+  &__image--smaller {
+    width: 15px;
+    height: 15px;
+  }
+
+  &__image--margin-right {
+    margin-right: 10px;
+  }
+
+  &--no-padding-left-right {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  &--gold {
+    background-color: $gold;
+  }
+
+  &--gray {
+    background-color: $gray;
+  }
+
+  &--round {
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+  }
+}

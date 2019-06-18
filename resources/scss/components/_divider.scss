@@ -1,0 +1,9 @@
+.divider {
+  width: 100%;
+  border-top: none;
+  margin: 20px 0;
+
+  &--dark {
+    border-color: $dark-gray;
+  }
+}

@@ -13,7 +13,6 @@ require('./auth');
 const app = express();
 const server = http.createServer(app);
 
-
 app.use(express.urlencoded({ extended: true }));
 
 // TODO: helpers in seperate file
