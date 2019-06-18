@@ -1,19 +1,25 @@
-<form action="" class="form form--width-800">
+<form id="form_questions" class="form form--width-800">
     <div class="form__row">
         <div class="form__input-group">
-            <label for="" class="form__label">Lijstnaam</label>
-            <input type="text" class="form__input">
+            <label class="form__label" for="list_name">Lijstnaam</label>
+            <input id="list_name" type="text" class="form__input" name="list_name">
         </div>
     </div>
-    <div id="form_questions">
+    <div class="form__row">
+        <div class="form__input-group">
+            <label class="form__label" for="list_subject">Onderwerp</label>
+            <input id="list_subject" type="text" class="form__input" name="list_subject">
+        </div>
+    </div>
+    <div id="questions_input">
         <div id="question_0" class="form__row">
             <div class="form__column form__input-group">
                 <label for="" class="form__label">Vraag</label>
-                <input type="text" class="form__input">
+                <input name="questions[0][question]" type="text" class="form__input">
             </div>
             <div class="form__column form__input-group">
                 <label for="" class="form__label">Antwoord</label>
-                <input type="text" class="form__input">
+                <input name="questions[0][answer]" type="text" class="form__input">
             </div>
             <div class="form__column form__input-group">
                 <button class="button button--no-padding-left-right form__button-delete" value="0">
@@ -23,27 +29,21 @@
         </div>
     </div>
     <div class="form__row">
-        <div class="form__column">
-            <hr class="divider divider--dark">
-        </div>
-        <button id="form_add_question" class="button button--gold button--round">
-            <img src="/images/plus.svg" alt="add question" class="button__image button__image--smaller">
+        <button id="form_add_question" class="button button--gold">
+            <img src="/images/plus.svg" alt="add question" class="button__image button__image--smaller button__image--margin-right">
+            Vraag toevoegen
         </button>
-        <div class="form__column form__column--margin-left">
-            <hr class="divider divider--dark">
-        </div>
     </div>
     <div class="form__row form__input-group">
         <label for="" class="form__label">Kanalen</label>
-        <select id="form_channels" class="form__input" multiple>
-            <option value="volvo" selected>Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
+        <select id="form_channels" class="form__input" name="channels" multiple>
+            {{#each this.userChannels}}
+                <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
         </select>
     </div>
     <div class="form__row">
-        <button class="button button--gold form__button">Lijst opslaan</button>
+        <button id="button_save_list" class="button button--gold form__button">Lijst opslaan</button>
         <a class="button button--gray" href="/lijsten">Terug</a>
     </div>
 </form>

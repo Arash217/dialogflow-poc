@@ -1,29 +1,28 @@
-<main>
+<section class="auth__container">
     <form class="register-form" action="/register" method="post">
         <div class="container">
-            <h1 class="title">Register</h1>
+            <h1 class="form--content-margin title">Register</h1>
 
-            <div class="input-container">
-                <input type="text" placeholder="Username" name="username" required value="{{body.username}}" class="input">
+            <div class="form--content-margin input-container">
+                <input class="form__input" type="text" placeholder="Username" name="username" required value="{{body.username}}" class="input">
             </div>
 
             {{#if (equals error.path 'username')}}
                 <p class="error-message">{{error.message}}</p>
             {{/if}}
 
-            <div class="input-container">
-                <input type="password" placeholder="Password" name="password" required class="input">
+            <div class="form--content-margin input-container">
+                <input class="form__input" type="password" placeholder="Password" name="password" required class="input">
             </div>
 
             {{#if (equals error.path 'password')}}
                 <p class="error-message">{{error.message}}</p>
             {{/if}}
-
-            <button type="submit" class="registerbtn btn">Register</button>
+            <div class="form--content-margin">
+                <p>Already have an account? <a href="/login">Sign in</a>.</p>
+            </div>
+            <button type="submit" class="button button--gold">Register</button>
         </div>
 
-        <div class="container signin">
-            <p>Already have an account? <a href="/login">Sign in</a>.</p>
-        </div>
     </form>
-</main>
+</section>

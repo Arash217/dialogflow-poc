@@ -1,3 +1,4 @@
+const express = require('express');
 const listController = require('../controllers/listController');
 
 module.exports.autoroute = {
@@ -7,6 +8,6 @@ module.exports.autoroute = {
     },
 
     post: {
-        '/lijsten': listController.update
+        '/lijsten': [express.json(), listController.create]
     },
 };

@@ -1,4 +1,8 @@
 const {WebhookClient} = require('dialogflow-fulfillment');
+
+const {exercize} = require('../services/dialogflowService/quiz/exercize');
+const {exercizeWhatList} = require('../services/dialogflowService/quiz/exercizeWhatList');
+
 const {question} = require('../services/dialogflowService/quiz/question');
 const {answer} = require('../services/dialogflowService/quiz/answer');
 
@@ -16,7 +20,10 @@ const post = (req, res) => {
     });
     const intentMap = new Map();
 
-    // dialogflowService.question method handles the question intent
+    // dialogflowService.exercize method handles the quiz intent and what list handles what list
+    intentMap.set('exercize', exercize);
+    intentMap.set('exercize - whatList', exercizeWhatList);
+
     intentMap.set('Oefening', question);
     // dialogflowService.answer method handles the answer intent
     intentMap.set('Oefening - antwoord', answer);
