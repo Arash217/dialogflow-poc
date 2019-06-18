@@ -12,7 +12,8 @@
   justify-content: center;
   
   &--large {
-    padding: .5rem 4rem;
+    padding-right: 4rem;
+    padding-left: 4rem;
     border-radius: 5px;
   }
 
@@ -44,12 +45,6 @@
   &--gray {
     background-color: $gray;
   }
-
-  &--large {
-    padding: .5rem 3.5rem;
-    border-radius: 5px;
-  }
-
   
   &--round {
     border-radius: 50%;
