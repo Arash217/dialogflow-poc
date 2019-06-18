@@ -1,3 +1,5 @@
+const serialize = require('form-serialize');
+
 const addQuestionBtn = document.getElementById('form_add_question');
 const questionsInput = document.getElementById('questions_input');
 const formQuestions = document.getElementById('form_questions');
@@ -28,8 +30,8 @@ const addQuestion = e => {
 };
 
 const deleteQuestion = e => {
-    e.preventDefault();
     if (e.target.classList.contains('form__button-delete')) {
+        e.preventDefault();
         if (questionsInput.childElementCount > 1) {
             const question = document.getElementById(`question_${e.target.value}`);
             questionsInput.removeChild(question);
@@ -49,8 +51,20 @@ const choices = new Choices('#form_channels', {
     itemSelectText: '',
 });
 
+const submitForm = async formData => {
+    const res = await fetch('/lijsten', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: {"Content-Type": "application/json"}
+    });
+
+    const content = await res.json();
+
+    console.log(content)
+};
+
 saveListBtn.addEventListener('click', e => {
     e.preventDefault();
-    const formData = formToObject(formQuestions);
-    console.log(formData);
+    const formData = serialize(formQuestions,{ hash: true });
+    submitForm(formData)
 });
