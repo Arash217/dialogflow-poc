@@ -5,7 +5,7 @@ const {exercizeWhatList} = require('../services/dialogflowService/quiz/exercizeW
 
 const {question} = require('../services/dialogflowService/quiz/question');
 const {answer} = require('../services/dialogflowService/quiz/answer');
-console.log('test')
+
 const {addChannel} = require('../services/dialogflowService/addChannel/addChannel');
 const {addChannelCode} = require('../services/dialogflowService/addChannel/addChannelCode');
 const {addChannelCodeCheckupYes} = require('../services/dialogflowService/addChannel/addChannelCodeCheckupYes');

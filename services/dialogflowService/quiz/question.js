@@ -2,14 +2,16 @@ const List = require('../../../models/list');
 
 // question intent
 const question = async agent => {
-    console.log("triggerd")
-   // console.log(agent.context.get('intent_oefenen'))
+    console.log("inetent triggerd: question")
+    // console.log(agent.context.get('intent_oefenen'))
     // get parameters from oefening-followup context
     const listIdContext = agent.context.get('intent_oefenen');
     const vraagContext = agent.context.get("vraag-context") ? agent.context.get("vraag-context") : undefined
-    const vraagParameters = vraagContext.parameters ? vraagContext.parameters : undefined;
-    const currentQuestion = vraagParameters.currentQuestion ? vraagParameters.currentQuestion : 0;
-    let listId = listIdContext ? listIdContext.parameters.listId : vraagParameters.listId
+    const correctAnswers = vraagContext.parameters ? vraagContext.parameters.correctAnswers : 0;
+    let currentQuestion= vraagContext.parameters ? vraagContext.parameters.currentQuestion : 0;
+    console.log(currentQuestion)
+
+    let listId = listIdContext ? listIdContext.parameters.listId : vraagContext.parameters.listId
 
     if (currentQuestion === 0) {
         agent.add(`Oke, gaan we ${listIdContext.parameters.givenListName} doen`);
@@ -29,12 +31,13 @@ const question = async agent => {
             name: 'vraag-context',
             lifespan: questionsList.length,
             parameters: {
-                ...vraagParameters,
-                listId
+                listId,
+                currentQuestion,
+                correctAnswers
             }
         });
     }
-    console.log(JSON.stringify(agent.context))
+   // console.log(JSON.stringify(agent.context))
     // get the current question from the list of questions that was returned by the database
     const {question} = questionsList[currentQuestion];
     // ask the user the question

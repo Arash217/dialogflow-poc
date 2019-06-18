@@ -3,6 +3,8 @@ const Channel = require('../../../models/channel');
 const List = require('../../../models/list');
 
 const exercize = async agent => {
+    console.log("inetent triggerd: exercise")
+
     const _userId = agent.originalRequest.payload.user.userId
     const user = await Users.findOne({
         userId: _userId
@@ -113,7 +115,7 @@ async function getListsFromChannels(CmatchingS, LmatchingS, _subject) {
             })
         });
     }
-    console.log(LmatchingS)
+    //console.log(LmatchingS)
     return LmatchingS
 }
 

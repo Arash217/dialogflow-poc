@@ -2,11 +2,17 @@ const List = require('../../../models/list');
 const {question} = require("./question")
 
 const exercizeWhatList = async agent => {
-    //console.log(agent)
+    console.log("inetent triggerd: exercise what list")
 
     const context = agent.context.get('context-list');
     const givenListName = agent.parameters.list
     //console.log(agent.parameters)
+
+    if(!context){
+        agent.add(`er is iets mis gegaan`);
+        agent.add(`begin met "ik wil oefenen" om te oefenen`);
+        return
+    }
 
     if (context.parameters._subject) {
         const listId = await getList(context, givenListName)
@@ -20,9 +26,15 @@ const exercizeWhatList = async agent => {
                     listId
                 }
             })
-            console.log("event trigger")
+            agent.context.set({
+                name: 'context-list',
+                lifespan: 0,
+                parameters: {
+                }
+            })
+           // console.log("event trigger")
             agent.add(`dummy text else followup event wont work`);
-            agent.setFollowupEvent({ "name": "intent_Oefenen","lifespan": "3", "parameters": {
+            agent.setFollowupEvent({ "name": "intent_Oefenen", "parameters": {
                 givenListName,
                 listId
             }});
