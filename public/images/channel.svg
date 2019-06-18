@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="28px" height="25px" viewBox="0 0 28 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Channels" transform="translate(-27.000000, -401.000000)" stroke="#FFFFFF" stroke-width="2">
+            <g id="Group-5" transform="translate(28.000000, 402.000000)">
+                <path d="M25.094931,23 L0.905068966,23 C0.404793103,23 0,22.6011765 0,22.1088235 L0,8 L26,8 L26,22.1088235 C26,22.6011765 25.5943103,23 25.094931,23 Z" id="Stroke-1"></path>
+                <path d="M11.6636897,3.76470588 L11.6636897,0.950117647 C11.6636897,0.425411765 11.2584483,0 10.7586207,0 L0.905068966,0 C0.405241379,0 0,0.425411765 0,0.950117647 L0,3.29411765 L0,8 L26,8 L26,4.71482353 C26,4.19011765 25.5947586,3.76470588 25.094931,3.76470588 L11.6636897,3.76470588 Z" id="Stroke-3"></path>
+            </g>
+        </g>
+    </g>
+</svg>
