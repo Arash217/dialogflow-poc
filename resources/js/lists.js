@@ -1,3 +1,5 @@
+const serialize = require('form-serialize');
+
 const addQuestionBtn = document.getElementById('form_add_question');
 const questionsInput = document.getElementById('questions_input');
 const formQuestions = document.getElementById('form_questions');
@@ -52,16 +54,17 @@ const choices = new Choices('#form_channels', {
 const submitForm = async formData => {
     const res = await fetch('/lijsten', {
         method: 'POST',
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
+        headers: {"Content-Type": "application/json"}
     });
 
     const content = await res.json();
 
-    console.log(content);
+    console.log(content)
 };
 
 saveListBtn.addEventListener('click', e => {
     e.preventDefault();
-    const formData = formToObject(formQuestions);
+    const formData = serialize(formQuestions,{ hash: true });
     submitForm(formData)
 });
