@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const {Schema, model} = mongoose;
 
@@ -37,4 +37,4 @@ const listSchema = new Schema({
     }
 });
 
-module.exports = model('List', listSchema);
+module.exports = model("List", listSchema);

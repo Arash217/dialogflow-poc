@@ -1,11 +1,12 @@
-const List = require('../models/list');
-const Channel = require('../models/channel');
+const List = require("../models/list");
+const Channel = require("../models/channel");
 
 const get = async (req, res) => {
-    const lists = await List.find();
-    res.render('lists', {
+    const username = req.user ? req.user.username : "";
+    const lists = await List.find({owner: username});
+    res.render("lists", {
         lists,
-        username: req.user ? req.user.username : '',
+        username: req.user ? req.user.username : "",
         active: {
             lists: true
         }
@@ -13,10 +14,10 @@ const get = async (req, res) => {
 };
 
 const add = async (req, res) => {
-    const username = req.user ? req.user.username : '';
+    const username = req.user ? req.user.username : "";
     const userChannels = await Channel.find({owner: username});
 
-    res.render('add_list', {
+    res.render("add_list", {
         userChannels,
         active: {
             lists: true
