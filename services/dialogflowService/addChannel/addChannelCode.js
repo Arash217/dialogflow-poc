@@ -19,7 +19,8 @@ const addChannelCode = async agent => {
             parameters: {
                 channelId,
                 channelName,
-                subject
+                subject,
+                channelcode
             }
         });
     } else {

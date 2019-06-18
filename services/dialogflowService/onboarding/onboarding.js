@@ -1,15 +1,14 @@
 const User = require('../../../models/user');
 
-
 const onboarding = async agent => {
 
     const user = await User.findOne({
         userId: agent.originalRequest.payload.user.userId
     })
 
-
     const userId = agent.originalRequest.payload.user.userId;
     const lastLogin = agent.originalRequest.payload.user.lastSeen;
+  
     if(!user) {
         let newUser = new User()
         newUser.userId = userId

@@ -1,34 +1,37 @@
-const Exercise = require('../../../models/exercise');
+const List = require('../../../models/list');
 
 // question intent
 const question = async agent => {
-    // get parameters from oefening-followup context
-    const context = agent.context.get('oefening-followup');
-    const parameters = context.parameters ? context.parameters : undefined;
-    const currentQuestion = parameters.currentQuestion ? parameters.currentQuestion : 0;
-    let VakType = agent.parameters ? agent.parameters.VakType : undefined;
+    console.log("inetent triggerd: question")
+    const listIdContext = agent.context.get('intent_oefenen');
+    const vraagContext = agent.context.get("vraag-context") ? agent.context.get("vraag-context") : undefined
+    const correctAnswers = vraagContext.parameters ? vraagContext.parameters.correctAnswers : 0;
+    let currentQuestion= vraagContext.parameters ? vraagContext.parameters.currentQuestion : 0;
+    console.log(currentQuestion)
 
-    if (!VakType) {
-        VakType = parameters.VakType;
+    let listId = listIdContext ? listIdContext.parameters.listId : vraagContext.parameters.listId
+
+    if (currentQuestion === 0) {
+        agent.add(`Oke, gaan we ${listIdContext.parameters.givenListName} doen`);
     }
 
-    // get questions from database by subject
-    const exercise = await Exercise.findOne({subject: VakType.toLowerCase()});
+    // get questions from database by listId
+    const exercise = await List.findOne({_id: listId}); // moet worden uit lijst met lijst id
     const questionsList = exercise.questions;
-    
-    if (VakType) {
+  
+    if (listId) {
         // lifespan (amount of conversations) is set to a custom length, because the default is 2
         // save parameters to oefening-followup context. The context is tied to the user session.
         agent.context.set({
-            name: 'oefening-followup',
+            name: 'vraag-context',
             lifespan: questionsList.length,
             parameters: {
-                ...parameters,
-                VakType
+                listId,
+                currentQuestion,
+                correctAnswers
             }
         });
     }
-
     // get the current question from the list of questions that was returned by the database
     const {question} = questionsList[currentQuestion];
     // ask the user the question
