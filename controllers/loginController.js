@@ -8,7 +8,7 @@ const post = async (req, res, next) => {
     return passport.authenticate('local', async (error, account) => {
         if (account) {
             req.login(account, () => {
-                return res.redirect('/exercises');
+                return res.redirect('/lijsten');
             });
             return;
         }

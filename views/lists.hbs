@@ -1,29 +1,17 @@
-<main>
-    <section class="exercises">
-        {{#each this.exercises}}
-            <form action="/exercises" method="post">
-                <div class="exercise">
-                    <span>{{this.subject}}</span>
-                    <input type="hidden" name="subject" value="{{this._id}}">
-                    <ul id="{{this.subject}}-questions-list">
-                        {{#each this.questions}}
-                            <li id="{{../this.subject}}-question-{{@index}}">
-                                <span>
-                                    <input type="text" name="questions[{{@index}}][question]" value="{{this.question}}">
-                                </span>
-                                <span>
-                                    <input type="text" name="questions[{{@index}}][answer]" value="{{this.answer}}">
-                                </span>
-                                <span>
-                                    <button onclick="event.preventDefault(); deleteQuestion('{{../this.subject}}-question-{{@index}}')">Delete</button>
-                                </span>
-                            </li>
-                        {{/each}}
-                    </ul>
-                    <button onclick="event.preventDefault(); addQuestion('{{this.subject}}-questions-list')">Add question</button>
-                </div>
-                <input type="submit" value="save">
-            </form>
-        {{/each}}
+<article class="lists">
+    <section class="content__row">
+        <header>
+            <h1>
+                Jouw overhoorlijsten
+            </h1>
+        </header>
     </section>
-</main>
+
+    <section class="content__row">
+        <a id="add_list_btn" class="button button--gold content__row" href="lijsten/toevoegen">
+            <img class="button__image button__image--margin-right" src="/images/plus.svg" alt="lijst toevoegen">
+            Lijst toevoegen
+        </a>
+    </section>
+
+</article>

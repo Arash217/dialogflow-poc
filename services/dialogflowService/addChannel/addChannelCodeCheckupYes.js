@@ -8,6 +8,7 @@ const addChannelCodeCheckupYes = async agent => {
 
     if (channelId) {
         const channelName = context.parameters.channelName
+        const channelcode = context.parameters.channelcode
         const subject = context.parameters.subject
         const channel = await Channel.findOne({
             channelCode: channelcode.toLowerCase()

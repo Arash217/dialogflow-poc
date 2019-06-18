@@ -18,8 +18,7 @@ const question = async agent => {
     // get questions from database by listId
     const exercise = await List.findOne({_id: listId}); // moet worden uit lijst met lijst id
     const questionsList = exercise.questions;
-    //console.log(exercise.questions.length)
-
+  
     if (listId) {
         // lifespan (amount of conversations) is set to a custom length, because the default is 2
         // save parameters to oefening-followup context. The context is tied to the user session.
