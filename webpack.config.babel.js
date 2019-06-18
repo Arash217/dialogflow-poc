@@ -3,6 +3,7 @@ const path = require('path');
 export default {
     entry: {
         lists: path.join(__dirname, 'resources/js/lists.js'),
+        channels: path.join(__dirname, 'resources/js/channels.js')
     },
     output: {
         path: path.join(__dirname, 'public/js'),
