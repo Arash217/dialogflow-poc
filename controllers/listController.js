@@ -59,12 +59,7 @@ const create = async (req, res) => {
 };
 
 module.exports = {
-    get,
-<<<<<<< HEAD
-    update,
-    add
-=======
-    add,
-    create
->>>>>>> dev
+  get,
+  add,
+  create
 };
