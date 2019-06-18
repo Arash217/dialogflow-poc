@@ -13,11 +13,9 @@ const exercize = async agent => {
     // //console.log(_subject)
     const gotList = gotLists(user)
 
-
     if (gotList) {
         const matchingLists = await getSubject(user, _subject)
         if (matchingLists.length !== 0) {
-
 
             // console.log("2----------------------------------------------------------",matchingLists, matchingLists.length)
             agent.add(`Oke ik heb ${matchingLists.length} lijsten ${_subject} gevonden, welke wil je oefenen?`);
@@ -38,7 +36,6 @@ const exercize = async agent => {
         agent.add(`Wil je een losse lijst of een kanaal met lijsten toevoegen`);
     }
 
-
 }
 
 function gotLists(user) {
@@ -55,9 +52,6 @@ async function getSubject(user, _subject) {
     const CmatchingS = await getChannels(user, _subject)
     const LmatchingS = await getSeperateLists(user, _subject)
     const _LmatchingS = await getListsFromChannels(CmatchingS, LmatchingS, _subject)
-
-
-    //console.log("1--------------------------------------------------------------------------------",_LmatchingS)
     return _LmatchingS
 
 }
@@ -79,7 +73,6 @@ async function getChannels(user, _subject) {
 
     }
     return CmatchingS
-
 }
 
 async function getSeperateLists(user, _subject) {
@@ -97,7 +90,6 @@ async function getSeperateLists(user, _subject) {
         });
     }
     return LmatchingS
-
 }
 
 async function getListsFromChannels(CmatchingS, LmatchingS, _subject) {

@@ -3,8 +3,6 @@ const List = require('../../../models/list');
 // question intent
 const question = async agent => {
     console.log("inetent triggerd: question")
-    // console.log(agent.context.get('intent_oefenen'))
-    // get parameters from oefening-followup context
     const listIdContext = agent.context.get('intent_oefenen');
     const vraagContext = agent.context.get("vraag-context") ? agent.context.get("vraag-context") : undefined
     const correctAnswers = vraagContext.parameters ? vraagContext.parameters.correctAnswers : 0;
@@ -16,8 +14,6 @@ const question = async agent => {
     if (currentQuestion === 0) {
         agent.add(`Oke, gaan we ${listIdContext.parameters.givenListName} doen`);
     }
-
-    //console.log(listId)
 
     // get questions from database by listId
     const exercise = await List.findOne({_id: listId}); // moet worden uit lijst met lijst id
@@ -37,11 +33,9 @@ const question = async agent => {
             }
         });
     }
-   // console.log(JSON.stringify(agent.context))
     // get the current question from the list of questions that was returned by the database
     const {question} = questionsList[currentQuestion];
     // ask the user the question
-    
     agent.add(`Vraag ${currentQuestion + 1}. ${question} `);
 };
 

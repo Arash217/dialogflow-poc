@@ -32,14 +32,11 @@ const exercizeWhatList = async agent => {
                 parameters: {
                 }
             })
-           // console.log("event trigger")
             agent.add(`dummy text else followup event wont work`);
             agent.setFollowupEvent({ "name": "intent_Oefenen", "parameters": {
                 givenListName,
                 listId
             }});
-            
-
 
         } else {
             agent.add(`Ik heb ${givenListName} niet kunnen vinden`);
@@ -49,12 +46,10 @@ const exercizeWhatList = async agent => {
         agent.add(`ik heb geen lijsten gevonden`);
         agent.add(`er is iets mis gegaan`);
     }
-
 }
 
 async function getList(context, givenListName) {
     const listIds = context.parameters.matchingLists // maybe make temp database met alle lijsten met subject om daarna findeone met naam te doen
-
     const listIdByName = await List.findOne({
         _id: {
             $in: listIds
@@ -62,7 +57,6 @@ async function getList(context, givenListName) {
         name: givenListName
     })
     const id = listIdByName ? listIdByName._id : undefined
-    //console.log(listIdByName)
     return id
 }
 
