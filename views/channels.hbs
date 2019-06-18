@@ -26,8 +26,11 @@
           </ul>
     </section>
 
-    <section>
+    <section class="table">
+      {{#each this.channels}}
+      <h2>{{this.channelCode}} - {{this.name}}</h2>
       <p>overzicht van lijsten in kanalen</p>
+      {{/each}}
     </section>
 
 </article>
