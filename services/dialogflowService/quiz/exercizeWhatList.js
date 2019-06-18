@@ -9,8 +9,8 @@ const exercizeWhatList = async agent => {
     //console.log(agent.parameters)
 
     if(!context){
-        agent.add(`er is iets mis gegaan`);
-        agent.add(`begin met "ik wil oefenen" om te oefenen`);
+        agent.add(`Ik begrijp het niet`);
+        agent.add(`Begin met "ik wil oefenen" om te oefenen`);
         return
     }
 
