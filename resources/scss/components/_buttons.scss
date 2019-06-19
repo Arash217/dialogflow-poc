@@ -11,6 +11,12 @@
   background-color: transparent;
   justify-content: center;
 
+  &__delete {
+    img {
+      pointer-events: none;
+    }
+  }
+
   &__image {
     float: left;
     width: 15px;

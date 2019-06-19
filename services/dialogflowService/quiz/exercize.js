@@ -18,7 +18,7 @@ const exercize = async agent => {
         if (matchingLists.length !== 0) {
 
             // console.log("2----------------------------------------------------------",matchingLists, matchingLists.length)
-            agent.add(`Oke ik heb ${matchingLists.length} lijsten ${_subject} gevonden, welke wil je oefenen?`);
+            agent.add(`Oke ik heb ${matchingLists.length} lijsten ${_subject} gevonden, wat is de naam van de lijst die je wilt oefenen?`);
             agent.context.set({
                 name: 'context-list',
                 lifespan: 4,
@@ -28,7 +28,7 @@ const exercize = async agent => {
                 }
             })
         }else{
-            agent.add(`Sorry, ik heb geen vakken voor ${_subject}`)
+            agent.add(`Sorry, ik heb geen lijsten met vak ${_subject} kunnen vinden. Je kunt een lijst of een kanaal toevoegen. Weet je niet hoe vraag dan om hulp.`)
             agent.add(`Wat wil je nu doen?`)
         }
     } else {
