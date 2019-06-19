@@ -45,10 +45,10 @@
     "express-handlebars": "^3.1.0",
     "express-session": "^1.16.1",
     "form-serialize": "^0.7.2",
-    "micromodal": "^0.4.0",
     "mongoose": "^5.5.12",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
+    "tingle.js": "^0.15.1",
     "yup": "^0.27.0"
   }
 }
