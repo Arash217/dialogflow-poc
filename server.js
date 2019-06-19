@@ -35,7 +35,7 @@ app.use(
         secret: "12345",
         resave: false,
         saveUninitialized: false,
-        store: new FileStore(),
+        store: new FileStore({logFn: function(){}}),
     })
 );
 
