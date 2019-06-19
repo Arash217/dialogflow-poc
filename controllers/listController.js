@@ -1,5 +1,6 @@
 const List = require("../models/list");
 const Channel = require("../models/channel");
+const listValidator = require("../services/validations/list");
 
 const get = async (req, res) => {
     const username = req.user ? req.user.username : "";
@@ -26,18 +27,22 @@ const add = async (req, res) => {
 };
 
 const create = async (req, res) => {
+    const { body } = req;
     try {
-        // validate first
-        const username = req.user ? req.user.username : 'arash217';
+        await listValidator.validate(body, {abortEarly: false});
+        const {username} = req.user;
         const newestList = await List.findOne().sort('-listCode').exec();
         let code = null;
 
         if (!newestList) {
-            code = 999;
+            code = 1000;
+        } else {
+            code = parseInt(newestList.listCode.split(' ')[1]);
+            code += 1;
         }
 
-        const {list_name: name, list_subject: subject, questions, channels} = req.body;
-        const list = new List({name, subject, questions, owner: username, listCode: code + 1});
+        const {list_name: name, list_subject: subject, questions, channels} = body;
+        const list = new List({name, subject, questions, owner: username, listCode: `lijst ${code}`});
         const createdList = await list.save();
 
         await Channel.update(
@@ -53,8 +58,10 @@ const create = async (req, res) => {
                 multi: true
             }
         );
+
+        res.json({code});
     } catch (e) {
-        console.log(e);
+        res.status(400).json(e);
     }
 };
 
