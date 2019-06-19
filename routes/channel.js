@@ -1,3 +1,4 @@
+const express = require('express')
 const channelController = require('../controllers/channelController');
 
 module.exports.autoroute = {
@@ -5,4 +6,8 @@ module.exports.autoroute = {
         '/kanalen': channelController.get,
         '/kanalen/toevoegen': channelController.add
     },
-}
+
+    post:{
+      '/kanalen': [express.json(), channelController.create]
+    },
+};

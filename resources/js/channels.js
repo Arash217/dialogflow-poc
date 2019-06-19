@@ -1,5 +1,7 @@
 const serialize = require('form-serialize');
-const saveListBtn = document.getElementById('button_save_channel');
+
+const saveChannelBtn = document.getElementById('button_save_channel');
+const formChannel = document.getElementById('form_channel');
 
 const choices = new Choices('#form_lists', {
     removeItemButton: true,
@@ -22,7 +24,7 @@ const submitForm = async formData => {
     console.log(content)
 };
 
-saveListBtn.addEventListener('click', e => {
+saveChannelBtn.addEventListener('click', e => {
     e.preventDefault();
     const formData = serialize(formChannel,{ hash: true });
     submitForm(formData)
