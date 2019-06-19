@@ -1,5 +1,9 @@
 {
   "verbose": false,
-  "ignore": ["public/js/*.js", "resources/js/*.js"],
+  "ignore": [
+    "public/js/*.js",
+    "resources/js/*.js",
+    "sessions/"
+  ],
   "ext": "js,hbs"
 }
