@@ -34,14 +34,15 @@
         width: 70%;
         line-height: 1.5rem;
         font-weight: 100;
-        font-family: Avenir;
+        font-family: Avenir, sans-serif;
         margin-bottom: 1.9rem;
     }
 
     &__slogan {
         width: auto;
         display: block;
-        font-family: Avenir-Heavy;
+        font-weight: 400;
+        font-family: Avenir-Heavy, sans-serif;
         font-size: 1.4rem;
         margin-bottom: 2rem;
     }
