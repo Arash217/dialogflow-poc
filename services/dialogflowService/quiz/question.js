@@ -34,6 +34,7 @@ const question = async agent => {
             }
         });
     }
+    
     // get the current question from the list of questions that was returned by the database
     const {question} = questionsList[currentQuestion];
     // ask the user the question
