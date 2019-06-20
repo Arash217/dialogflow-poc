@@ -3,6 +3,8 @@ const Channel = require('../../../models/channel');
 
 const addChannelCodeCheckupYes = async agent => {
     console.log("inetent triggerd: add channel code checkup")
+    console.log(agent.parameters)
+    
     const context = agent.context.get('context-channel-code');
     console.log("context:", context)
     const channelId = context && context.parameters.channelId ? context.parameters.channelId : undefined
