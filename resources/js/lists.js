@@ -1,3 +1,4 @@
+const tingle = require("tingle.js");
 const serialize = require('form-serialize');
 
 const addQuestionBtn = document.getElementById('form_add_question');
@@ -8,12 +9,12 @@ const saveListBtn = document.getElementById('button_save_list');
 const createQuestionNode = index => {
     return `<div id="question_${index}" class="form__row">
                 <div class="form__column form__input-group">
-                    <label for="" class="form__label">Vraag</label>
-                    <input name="questions[${index}][question]" type="text" class="form__input">
+                    <label for="questions[${index}][question]" class="form__label">Vraag</label>
+                    <input id="questions[${index}][question]" name="questions[${index}][question]" type="text" class="form__input" placeholder="Bijv. Wat is 5 + 5">
                 </div>
                 <div class="form__column form__input-group">
-                    <label for="" class="form__label">Antwoord</label>
-                    <input name="questions[${index}][answer]" type="text" class="form__input">
+                    <label for="questions[${index}][answer]" class="form__label">Antwoord</label>
+                    <input id="questions[${index}][answer]" name="questions[${index}][answer]" type="text" class="form__input" placeholder="Bijv. 10">
                 </div>
                 <div class="form__column form__input-group">
                     <button class="button button--no-padding-left-right form__button-delete" value="${index}">
@@ -89,7 +90,7 @@ const renderErrors = errors => {
     removeErrors();
     errors.forEach(error => {
         let {path} = error;
-        path = path.includes('.') ?  path.split('.')[1] : path;
+        path = path.includes('.') ? path.split('.')[1] : path;
         const {input} = formInputsPathMap.find(input => input.path === path);
         const element = document.getElementById(input);
         element.insertAdjacentHTML('afterend', getErrorElement(error.message))
@@ -103,14 +104,44 @@ export const request = async (url, options) => {
     return data;
 };
 
+const modal = new tingle.modal({
+    closeMethods: [],
+});
+
+const setModalContent = (code, counter) => {
+    const modalMessage = `<div>
+        <p class="modal__text">Lijst is aangemaakt. De code voor de lijst is: 
+            <span class="modal__bold-text">lijst ${code}</span>
+        </p>
+        <p class="modal__text">Je wordt automatisch doorgestuurd naar lijsten overzicht pagina in 
+            <span class="modal__bold-text">${counter}</span> 
+        seconden</p>
+    </div>`;
+    modal.setContent(modalMessage);
+};
+
+const startModalCountdown = code => {
+    let counter = 10;
+    setModalContent(code, counter);
+    modal.open();
+    const countDownInterval = setInterval(() => {
+        setModalContent(code, counter);
+        if (counter-- === 0) {
+            clearInterval(countDownInterval);
+            modal.close();
+            window.location.href = "/lijsten";
+        }
+    }, 1000);
+};
+
 const submitForm = async formData => {
     try {
-        const data = await request('/lijsten', {
+        const {code} = await request('/lijsten', {
             method: 'POST',
             body: JSON.stringify(formData),
             headers: {"Content-Type": "application/json"}
         });
-        console.log(data);
+        startModalCountdown(code);
     } catch (e) {
         if (e.inner) {
             renderErrors(e.inner)
