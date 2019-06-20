@@ -27,7 +27,7 @@ const add = async (req, res) => {
 };
 
 const create = async (req, res) => {
-    const { body } = req;
+    const {body} = req;
     try {
         await listValidator.validate(body, {abortEarly: false});
         const {username} = req.user;
@@ -65,8 +65,25 @@ const create = async (req, res) => {
     }
 };
 
+const update = async (req, res) => {
+    const {username} = req.user;
+    const {id} = req.params;
+    const list = await List.findOne({owner: username, _id: id});
+    const userChannels = await Channel.find({owner: username});
+
+    res.render("add_list", {
+        list,
+        username,
+        userChannels,
+        active: {
+            lists: true
+        }
+    });
+};
+
 module.exports = {
-  get,
-  add,
-  create
+    get,
+    add,
+    create,
+    update
 };

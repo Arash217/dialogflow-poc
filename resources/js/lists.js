@@ -110,10 +110,10 @@ const modal = new tingle.modal({
 
 const setModalContent = (code, counter) => {
     const modalMessage = `<div>
-        <p class="modal__text">Lijst is aangemaakt. De code voor de lijst is: 
-            <span class="modal__bold-text">lijst ${code}</span>
+        <p class="modal__text">Lijst is aangemaakt. De lijstcode is: 
+            <span class="modal__bold-text modal__bold-text--highlighted">lijst ${code}</span>
         </p>
-        <p class="modal__text">Je wordt automatisch doorgestuurd naar lijsten overzicht pagina in 
+        <p class="modal__text modal__text--small">Je wordt automatisch doorgestuurd naar lijsten overzicht pagina in 
             <span class="modal__bold-text">${counter}</span> 
         seconden</p>
     </div>`;
@@ -121,7 +121,7 @@ const setModalContent = (code, counter) => {
 };
 
 const startModalCountdown = code => {
-    let counter = 10;
+    let counter = 5;
     setModalContent(code, counter);
     modal.open();
     const countDownInterval = setInterval(() => {
