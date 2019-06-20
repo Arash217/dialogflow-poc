@@ -66,7 +66,7 @@ const create = async (req, res) => {
 };
 
 module.exports = {
-    get,
-    add,
-    create
+  get,
+  add,
+  create
 };

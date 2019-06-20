@@ -3,7 +3,8 @@ const path = require("path");
 export default {
   entry: {
     lists: path.join(__dirname, "resources/js/lists.js"),
-    list_delete: path.join(__dirname, "resources/js/list-delete.js")
+    list_delete: path.join(__dirname, "resources/js/list-delete.js"),
+    channels: path.join(__dirname, 'resources/js/channels.js')
   },
   output: {
     path: path.join(__dirname, "public/js"),
