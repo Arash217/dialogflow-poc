@@ -1,4 +1,4 @@
-<article class="channels">
+<article class="lists">
     <section class="content__row">
         <header>
             <h1>
@@ -8,29 +8,34 @@
     </section>
 
     <section class="content__row">
-        <a id="add_list_btn" class="button button--gold content__row" href="kanalen/toevoegen">
+        <a id="add_channel_btn" class="button button--gold content__row" href="kanalen/toevoegen">
             <img class="button__image button__image--margin-right" src="/images/plus.svg" alt="kanaal toevoegen">
-            Kanaal toevoegen
+            kanaal toevoegen
         </a>
-    </section>
-
-    <section class="content__row">
-        <h2>Channels</h2>
-          <ul class="list">
+        <table class="table" id="table">
+            <tr class="table__heading">
+                <th class="table__item">Kanaalnaam</th>
+                <th class="table__item">Kanaal-code</th>
+                <!-- <th class="table__item">Channel</th> -->
+                <th class="table__item">Vakterm</th>
+                <th class="table__item">Instellingen</th>
+            </tr>
             {{#each this.channels}}
-            <li class="list__item list__item--odd">{{this.channelCode}} - {{this.name}}</li>
-            <li class="list__item list__item--even">Channelcode - Naam channel</li>
-            <li class="list__item list__item--odd">Channelcode - Naam channel </li>
-            <li class="list__item list__item--even">Channelcode - Naam channel</li>
+                <tr id="row_{{this._id}}">
+                    <td class="table__item">{{this.name}}</td>
+                    <td class="table__item">{{this.channelCode}}</td>
+                    <td class="table__item">{{this.subject}}</td>
+                    <td class="table__item table__item--last">
+                        <button class="button__delete" value="{{this._id}}" data-dataname="{{this.name}}" type="button"
+                                name="button">
+                            <img class="table__icon" src="./images/remove.svg" alt="">
+                        </button>
+                        <a href="/kanalen/{{this._id}}">
+                            <img class="table__icon" src="./images/pencil.svg" alt="">
+                        </a>
+                    </td>
+                </tr>
             {{/each}}
-          </ul>
+        </table>
     </section>
-
-    <section class="table">
-      {{#each this.channels}}
-      <h2>{{this.channelCode}} - {{this.name}}</h2>
-      <p>overzicht van lijsten in kanalen</p>
-      {{/each}}
-    </section>
-
 </article>
