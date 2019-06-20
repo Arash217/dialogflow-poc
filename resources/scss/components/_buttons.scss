@@ -10,6 +10,20 @@
   text-decoration: none;
   background-color: transparent;
   justify-content: center;
+  
+  &--large {
+    padding-right: 3.5rem;
+    padding-left: 3.5rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    border-radius: 10px;
+  }
+
+  &__delete {
+    img {
+      pointer-events: none;
+    }
+  }
 
   &__image {
     float: left;
@@ -39,7 +53,7 @@
   &--gray {
     background-color: $gray;
   }
-
+  
   &--round {
     border-radius: 50%;
     height: 35px;
