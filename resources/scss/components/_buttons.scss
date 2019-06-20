@@ -19,6 +19,12 @@
     border-radius: 10px;
   }
 
+  &__delete {
+    img {
+      pointer-events: none;
+    }
+  }
+
   &__image {
     float: left;
     width: 15px;

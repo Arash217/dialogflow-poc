@@ -61,6 +61,12 @@
   &--width-800 {
     max-width: 800px;
   }
+
+  &__error {
+    width: 100%;
+    color: red;
+    margin-top: 5px;
+  }
 }
 
 .auth__container {
