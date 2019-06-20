@@ -1,11 +1,11 @@
 .lp-nav {
   display: flex;
-  // justify-content: baseline;
   position: fixed;
   top: 1rem;
   right: 1rem;
   z-index: 2;
   width: 100%;
+
   flex-direction: row;
   justify-content: flex-end;
 
@@ -15,8 +15,8 @@
     padding-bottom: 0.5rem;
     display: flex;
     align-items: center;
-    font-weight: 600;
-    font-family: Avenir-Heavy;
+    font-weight: 400;
+    font-family: Avenir-Heavy, sans-serif;
   }
 
   &__link {

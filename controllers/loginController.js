@@ -13,6 +13,7 @@ const post = async (req, res, next) => {
       return;
     }
     res.status(400).render("login", {
+      layout: 'authentication',
       body: req.body,
       error
     });
