@@ -1,6 +1,7 @@
 const User = require('../../../models/user');
 
 const onboarding = async agent => {
+    console.log(agent.parameters)
 
     const user = await User.findOne({
         userId: agent.originalRequest.payload.user.userId

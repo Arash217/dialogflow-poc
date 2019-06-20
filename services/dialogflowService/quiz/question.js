@@ -3,6 +3,8 @@ const List = require('../../../models/list');
 // question intent
 const question = async agent => {
     console.log("inetent triggerd: question")
+    console.log(agent.parameters)
+    
     const listIdContext = agent.context.get('intent_oefenen');
     const vraagContext = agent.context.get("vraag-context") ? agent.context.get("vraag-context") : undefined
     const correctAnswers = vraagContext.parameters ? vraagContext.parameters.correctAnswers : 0;
@@ -12,7 +14,7 @@ const question = async agent => {
     let listId = listIdContext ? listIdContext.parameters.listId : vraagContext.parameters.listId
 
     if (currentQuestion === 0) {
-        agent.add(`Oke, gaan we ${listIdContext.parameters.givenListName} doen`);
+        agent.add(`<speak> Oke, gaan we ${listIdContext.parameters.givenListName} doen </speak>`);
     }
 
     // get questions from database by listId
@@ -32,10 +34,11 @@ const question = async agent => {
             }
         });
     }
+    
     // get the current question from the list of questions that was returned by the database
     const {question} = questionsList[currentQuestion];
     // ask the user the question
-    agent.add(`Vraag ${currentQuestion + 1}. ${question} `);
+    agent.add(`<speak> Vraag ${currentQuestion + 1}. ${question}  <audio src="https://raw.githubusercontent.com/stijn-aa/sound/master/go1.ogg">go</audio> </speak>`);
 };
 
 module.exports = {
