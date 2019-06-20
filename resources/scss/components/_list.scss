@@ -1,0 +1,16 @@
+.list{
+  background-color: white;
+  max-width: 25vw;
+  height: auto;
+
+  &__item {
+    padding: 7px;
+    &--odd {
+        background-color: #efefef;
+    }
+    &--even {
+        background-color:#fff;
+    }
+  }
+
+}

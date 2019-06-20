@@ -3,9 +3,10 @@ const {question} = require("./question")
 
 const exercizeWhatList = async agent => {
     console.log("inetent triggerd: exercise what list")
+    console.log(agent.parameters)
 
     const context = agent.context.get('context-list');
-    const givenListName = agent.parameters.list
+    const givenListName = agent.parameters.list.toLowerCase()
     //console.log(agent.parameters)
 
     if(!context){
@@ -54,7 +55,7 @@ async function getList(context, givenListName) {
         _id: {
             $in: listIds
         },
-        name: givenListName
+        name: { $regex: new RegExp("^" + givenListName.toLowerCase(), "i") } 
     })
     const id = listIdByName ? listIdByName._id : undefined
     return id

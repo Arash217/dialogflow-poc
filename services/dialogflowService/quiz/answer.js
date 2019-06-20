@@ -4,6 +4,7 @@ const {question} = require("./question")
 // answer intent
 const answer = async agent => {
     console.log("inetent triggerd: answer")
+    console.log(agent.parameters)
     
     const vraagContext = agent.context.get("vraag-context") ? agent.context.get("vraag-context") : undefined
     let currentQuestion= vraagContext.parameters && vraagContext.parameters.currentQuestion ? vraagContext.parameters.currentQuestion : 0 ;
@@ -23,10 +24,10 @@ const answer = async agent => {
     const {answer} = questionsList[currentQuestion];
 
     // check whether the answer is correct or not
-    if (answer !== givenAnswer) {
-        agent.add(`${givenAnswer} is incorrect. Het juiste antwoord is ${answer}. `);
+    if (answer.toLowerCase() !== givenAnswer.toLowerCase()) {
+        agent.add("<speak> <audio src='https://raw.githubusercontent.com/stijn-aa/sound/master/incorrect1.ogg'>incorrect</audio>"+` ${givenAnswer} is incorrect. Het juiste antwoord is ${answer}.</speak> `);
     } else {
-        agent.add(`${answer} is correct! `);
+        agent.add("<speak> <audio src='https://raw.githubusercontent.com/stijn-aa/sound/master/correct2.ogg'>correct</audio>"+` ${answer} is correct! </speak>`);
         // if answer is correct then increment
         correctAnswers++;
     }
