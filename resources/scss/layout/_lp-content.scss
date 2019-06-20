@@ -1,0 +1,70 @@
+.lp-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+
+    &__info {
+        flex: 1 0 50%;
+        color: white;
+    }
+        
+    &__content {
+        width: 77%;
+        justify-content: center;
+    }
+    &__title {
+        width: auto;
+        display: block;
+        margin-bottom: 1rem;
+
+        &--small {
+            font-size: 38px;
+        }
+        &--big {
+            font-size: 51px;
+        }
+    }
+    &__logo {
+        width: 2rem;
+    }
+    &__text {
+        font-size: 1.4rem;
+        width: auto;
+        display: block;
+        width: 70%;
+        line-height: 1.5rem;
+        font-weight: 100;
+        font-family: Avenir;
+        margin-bottom: 1.9rem;
+    }
+
+
+
+    &__slogan {
+        width: auto;
+        display: block;
+        font-family: Avenir-Heavy;
+        font-size: 1.4rem;
+        margin-bottom: 2rem;
+    }
+
+    &__preview {
+        color: black;
+    }
+
+    &--white-bg {
+        z-index: 1;
+        transform: translate(-200px);
+        border-bottom: 100vh solid white;
+        border-left: 25vw solid transparent;
+    }
+
+    &__img {
+        width: 65%;
+        margin-right: 2rem;
+        margin-top: 9rem;
+    }
+}
+
+
+    
