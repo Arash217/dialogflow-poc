@@ -19,7 +19,12 @@ const post = async (req, res, next) => {
   })(req, res, next);
 };
 
+const logout = async (req, res) => {
+  req.session.destroy(() => res.redirect('/login'));
+};
+
 module.exports = {
   get,
-  post
+  post,
+  logout
 };

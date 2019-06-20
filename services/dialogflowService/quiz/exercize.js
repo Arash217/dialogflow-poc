@@ -4,12 +4,13 @@ const List = require('../../../models/list');
 
 const exercize = async agent => {
     console.log("inetent triggerd: exercise")
+    console.log(agent.parameters)
 
     const _userId = agent.originalRequest.payload.user.userId
     const user = await Users.findOne({
         userId: _userId
     })
-    const _subject = agent.parameters.subject
+    const _subject = agent.parameters.subject.toLowerCase()
     // //console.log(_subject)
     const gotList = gotLists(user)
 
@@ -18,7 +19,7 @@ const exercize = async agent => {
         if (matchingLists.length !== 0) {
 
             // console.log("2----------------------------------------------------------",matchingLists, matchingLists.length)
-            agent.add(`Oke ik heb ${matchingLists.length} lijsten ${_subject} gevonden, welke wil je oefenen?`);
+            agent.add(`Oke ik heb ${matchingLists.length} lijsten ${_subject} gevonden, wat is de naam van de lijst die je wilt oefenen?`);
             agent.context.set({
                 name: 'context-list',
                 lifespan: 4,
@@ -28,11 +29,11 @@ const exercize = async agent => {
                 }
             })
         }else{
-            agent.add(`Sorry, ik heb geen vakken voor ${_subject}`)
+            agent.add(`Ik heb geen lijsten met vak ${_subject} kunnen vinden. Je kunt een lijst of een kanaal toevoegen. Weet je niet hoe, vraag dan om hulp.`)
             agent.add(`Wat wil je nu doen?`)
         }
     } else {
-        agent.add(`Sorry, je zult eerst een lijst moeten toevoegen`);
+        agent.add(`Ik zie dat je nog geen lijsten hebt. Je zult eerst een lijst moeten toevoegen`);
         agent.add(`Wil je een losse lijst of een kanaal met lijsten toevoegen`);
     }
 

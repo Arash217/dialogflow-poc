@@ -1,6 +1,8 @@
 const Channel = require('../../../models/channel');
 
 const addChannelCode = async agent => {
+    console.log("inetent triggerd: add channel code")
+    console.log(agent.parameters)
     const channelcode = agent.parameters.channelCode
     const channel = await Channel.findOne({
         channelCode: channelcode.toLowerCase()
@@ -15,7 +17,7 @@ const addChannelCode = async agent => {
         agent.add(`oke. ik heb het kanaal: ${channelName} van ${owner} gevonden, klopt dit?`);
         agent.context.set({
             name: 'context-channel-code',
-            lifespan: 4,
+            lifespan: 3,
             parameters: {
                 channelId,
                 channelName,
