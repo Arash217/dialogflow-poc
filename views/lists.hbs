@@ -13,37 +13,29 @@
             Lijst toevoegen
         </a>
         <table class="table" id="table">
-          <tr class="table__heading">
-            <th class="table__item">Lijstnaam</th>
-            <th class="table__item">Lijst-code</th>
-            <!-- <th class="table__item">Channel</th> -->
-            <th class="table__item">Vakterm</th>
-            <th class="table__item">Instellingen</th>
-          </tr>
-          {{#each this.lists}}
-            <tr id="row_{{this._id}}">
-              <td class="table__item">{{this.name}}</td>
-              <td class="table__item">{{this.listCode}}</td>
-              <td class="table__item">{{this.subject}}</td>
-              <td class="table__item table__item--last">
-<<<<<<< HEAD
-                <button class="button__delete" value="{{this._id}}" data-dataname="{{this.name}}" type="button" name="button">
-                  <img class="table__icon" src="./images/remove.svg" alt="">
-                </button>
-                 <a href="/edit/{{this._id}}">
-                   <img class="table__icon" src="./images/pencil.svg" alt="">
-                 </a>
-=======
-                  <button class="button__delete" value="{{this._id}}" data-dataname="{{this.name}}" type="button" name="button">
-                      <img class="table__icon" src="./images/remove.svg" alt="">
-                  </button>
-                  <a href="/lijsten/{{this._id}}">
-                    <img class="table__icon" src="./images/pencil.svg" alt="">
-                  </a>
->>>>>>> dev
-              </td>
+            <tr class="table__heading">
+                <th class="table__item">Lijstnaam</th>
+                <th class="table__item">Lijst-code</th>
+                <!-- <th class="table__item">Channel</th> -->
+                <th class="table__item">Vakterm</th>
+                <th class="table__item">Instellingen</th>
             </tr>
-          {{/each}}
+            {{#each this.lists}}
+                <tr id="row_{{this._id}}">
+                    <td class="table__item">{{this.name}}</td>
+                    <td class="table__item">{{this.listCode}}</td>
+                    <td class="table__item">{{this.subject}}</td>
+                    <td class="table__item table__item--last">
+                        <button class="button__delete" value="{{this._id}}" data-dataname="{{this.name}}" type="button"
+                                name="button">
+                            <img class="table__icon" src="./images/remove.svg" alt="">
+                        </button>
+                        <a href="/lijsten/{{this._id}}">
+                            <img class="table__icon" src="./images/pencil.svg" alt="">
+                        </a>
+                    </td>
+                </tr>
+            {{/each}}
         </table>
     </section>
 </article>
