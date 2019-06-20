@@ -1,6 +1,7 @@
 const tingle = require("tingle.js");
 const table = document.getElementById("table");
 let listName = "";
+let listId = "";
 
 table.addEventListener("click", function(e) {
   let currentButton = e.target;
@@ -9,6 +10,7 @@ table.addEventListener("click", function(e) {
     let buttonName = e.target.dataset.dataname;
 
     listName = buttonName;
+    listId = buttonId;
     modal.setContent(
       "<h2>Weet je zeker dat je lijst, " + listName + " wilt verwijderen?</h2>"
     );
@@ -30,8 +32,35 @@ var modal = new tingle.modal({
     return false; // nothing happens
   }
 });
+
+const request = async (url, options) => {
+  const res = await fetch(url, options);
+  const data = await res.json();
+  if (!res.ok) throw data;
+  return data;
+};
+
+function removeElement(id) {
+  var elem = document.getElementById(id);
+  return elem.parentNode.removeChild(elem);
+}
+
+const deleteList = async listId => {
+  try {
+    const data = await request("/lijsten", {
+      method: "DELETE",
+      body: JSON.stringify({ listId }),
+      headers: { "Content-Type": "application/json" }
+    });
+    console.log("test");
+    removeElement("row_" + listId);
+  } catch (e) {
+    console.log(e);
+  }
+};
 // add a button
 modal.addFooterBtn("Verwijderen", "button spacing button--gray", function() {
+  deleteList(listId);
   modal.close();
 });
 modal.addFooterBtn("Terug", "button spacing button--gold", function() {
