@@ -38,7 +38,7 @@
         <label for="" class="form__label">Kanalen</label>
         <select id="form_channels" class="form__input" name="channels" multiple>
             {{#each this.userChannels}}
-                <option value="{{this._id}}">{{this.name}}</option>
+                <option value="{{this._id}}">{{this.name}} - {{this.subject}}</option>
             {{/each}}
         </select>
     </div>
