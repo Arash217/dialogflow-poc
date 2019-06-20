@@ -113,8 +113,16 @@
   padding: 10px;
 }
 
+.modal__text--small {
+  font-size: 14px;
+}
+
 .modal__bold-text {
   font-weight: bold;
+}
+
+.modal__bold-text--highlighted {
+  border-bottom: 2px solid $gold;
 }
 
 /* state
