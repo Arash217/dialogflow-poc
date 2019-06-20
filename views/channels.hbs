@@ -1,0 +1,36 @@
+<article class="channels">
+    <section class="content__row">
+        <header>
+            <h1>
+                Jouw kanalen
+            </h1>
+        </header>
+    </section>
+
+    <section class="content__row">
+        <a id="add_list_btn" class="button button--gold content__row" href="kanalen/toevoegen">
+            <img class="button__image button__image--margin-right" src="/images/plus.svg" alt="kanaal toevoegen">
+            Kanaal toevoegen
+        </a>
+    </section>
+
+    <section class="content__row">
+        <h2>Channels</h2>
+          <ul class="list">
+            {{#each this.channels}}
+            <li class="list__item list__item--odd">{{this.channelCode}} - {{this.name}}</li>
+            <li class="list__item list__item--even">Channelcode - Naam channel</li>
+            <li class="list__item list__item--odd">Channelcode - Naam channel </li>
+            <li class="list__item list__item--even">Channelcode - Naam channel</li>
+            {{/each}}
+          </ul>
+    </section>
+
+    <section class="table">
+      {{#each this.channels}}
+      <h2>{{this.channelCode}} - {{this.name}}</h2>
+      <p>overzicht van lijsten in kanalen</p>
+      {{/each}}
+    </section>
+
+</article>

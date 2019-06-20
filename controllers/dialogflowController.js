@@ -13,10 +13,12 @@ const {addChannelCode} = require('../services/dialogflowService/addChannel/addCh
 const {addChannelCodeCheckupYes} = require('../services/dialogflowService/addChannel/addChannelCodeCheckupYes');
 
 const post = (req, res) => {
+
     const agent = new WebhookClient({
         request: req,
         response: res
     });
+
     const intentMap = new Map();
 
     // dialogflowService.exercize method handles the quiz intent and what list handles what list
