@@ -11,11 +11,17 @@
   background-color: transparent;
   justify-content: center;
 
+  &__delete {
+    img {
+      pointer-events: none;
+    }
+  }
+
   &__image {
     float: left;
-    width: 20px;
-    height: 20px;
-    pointer-events: none
+    width: 15px;
+    height: 15px;
+    pointer-events: none;
   }
 
   &__image--smaller {

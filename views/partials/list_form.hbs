@@ -2,18 +2,24 @@
     <div class="form__row">
         <div class="form__input-group">
             <label class="form__label" for="list_name">Lijstnaam</label>
-            <input id="list_name" type="text" class="form__input" name="list_name">
+            <input id="list_name" type="text" class="form__input" name="list_name" placeholder="Bijv. Rekenlijst">
+        </div>
+    </div>
+    <div class="form__row">
+        <div class="form__input-group">
+            <label class="form__label" for="list_subject">Onderwerp</label>
+            <input id="list_subject" type="text" class="form__input" name="list_subject" placeholder="Bijv. Rekenen">
         </div>
     </div>
     <div id="questions_input">
         <div id="question_0" class="form__row">
             <div class="form__column form__input-group">
-                <label for="" class="form__label">Vraag</label>
-                <input name="questions[0][question]" type="text" class="form__input">
+                <label for="questions[0][question]" class="form__label">Vraag</label>
+                <input id="questions[0][question]" name="questions[0][question]" type="text" class="form__input" placeholder="Bijv. Wat is 5 + 5">
             </div>
             <div class="form__column form__input-group">
-                <label for="" class="form__label">Antwoord</label>
-                <input name="questions[0][answer]" type="text" class="form__input">
+                <label for="questions[0][answer]" class="form__label">Antwoord</label>
+                <input id="questions[0][answer]" name="questions[0][answer]" type="text" class="form__input" placeholder="Bijv. 10">
             </div>
             <div class="form__column form__input-group">
                 <button class="button button--no-padding-left-right form__button-delete" value="0">

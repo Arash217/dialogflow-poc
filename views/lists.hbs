@@ -12,6 +12,24 @@
             <img class="button__image button__image--margin-right" src="/images/plus.svg" alt="lijst toevoegen">
             Lijst toevoegen
         </a>
+        <table class="table" id="table">
+          <tr class="table__heading">
+            <th class="table__item">Lijstnaam</th>
+            <th class="table__item">Lijst-code</th>
+            <!-- <th class="table__item">Channel</th> -->
+            <th class="table__item">Vakterm</th>
+            <th class="table__item">Instellingen</th>
+          </tr>
+          {{#each this.lists}}
+            <tr>
+              <td class="table__item">{{this.name}}</td>
+              <td class="table__item">{{this.listCode}}</td>
+              <td class="table__item">{{this.subject}}</td>
+              <td class="table__item table__item--last"><button class="button__delete" value="{{this._id}}" data-dataname="{{this.name}}" type="button" name="button"><img class="table__icon" src="./images/remove.svg" alt=""></button> <a href="/edit/{{this._id}}"><img class="table__icon" src="./images/pencil.svg" alt=""></a> </td>
+            </tr>
+          {{/each}}
+        </table>
     </section>
-
 </article>
+
+<script type="text/javascript" src="/js/list_delete.bundle.js"></script>

@@ -3,3 +3,5 @@ node_modules
 .env
 public/css
 public/js
+.DS_Store
+sessions/
