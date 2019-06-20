@@ -41,20 +41,6 @@ const add = async(req, res)=>{
         const {channel_name: name, channel_subject: subject, lists} = req.body;
         const channel = new Channel ({ name, subject, lists, owner: username, channelCode: code + 1});
         const createdChannel = await channel.save();
-
-        await List.update(
-          {
-            _id:{$in: lists},
-          },
-          {
-            "$push":{
-              "lists": createdChannel._id
-            }
-          },
-          {
-            multi: true
-          }
-        );
     } catch(e){
       console.log(e);
     }
