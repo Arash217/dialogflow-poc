@@ -1,18 +1,4 @@
-<<<<<<< HEAD
-require('dotenv').config();
-const http = require('http');
-const express = require('express');
-const autoroute = require('express-autoroute');
-const exphbs   = require('express-handlebars');
-const path = require('path');
-const session = require('express-session');
-const passport = require('passport');
 
-
-
-require('./db/mongoose');
-require('./auth');
-=======
 require("dotenv").config();
 const http = require("http");
 const express = require("express");
@@ -26,7 +12,6 @@ const passport = require("passport");
 require("./db/mongoose");
 require("./auth");
 require("./services/validations/locale");
->>>>>>> dev
 
 const app = express();
 const server = http.createServer(app);
