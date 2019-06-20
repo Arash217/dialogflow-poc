@@ -55,7 +55,7 @@ async function getList(context, givenListName) {
         _id: {
             $in: listIds
         },
-        name: givenListName
+        name: { $regex: new RegExp("^" + givenListName.toLowerCase(), "i") } 
     })
     const id = listIdByName ? listIdByName._id : undefined
     return id
