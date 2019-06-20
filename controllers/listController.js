@@ -64,7 +64,7 @@ const create = async (req, res) => {
             },
             {
                 $push: {
-                    lists: createdList._id
+                    lists: createdList._id.toString()
                 }
             },
             {
