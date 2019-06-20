@@ -18,7 +18,6 @@ table.addEventListener("click", function(e) {
   }
 });
 
-// instanciate new modal
 var modal = new tingle.modal({
   footer: true,
   stickyFooter: false,
@@ -26,10 +25,8 @@ var modal = new tingle.modal({
   closeLabel: "Close",
   cssClass: ["custom-class-1", "custom-class-2"],
   beforeClose: function() {
-    // here's goes some logic
-    // e.g. save content before closing the modal
     return true; // close the modal
-    return false; // nothing happens
+    return false;
   }
 });
 
@@ -52,7 +49,6 @@ const deleteList = async listId => {
       body: JSON.stringify({ listId }),
       headers: { "Content-Type": "application/json" }
     });
-    console.log("test");
     removeElement("row_" + listId);
   } catch (e) {
     console.log(e);

@@ -1,50 +1,48 @@
 .lp-nav {
+  display: flex;
+  // justify-content: baseline;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  &__item {
+    margin: 0 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     display: flex;
-    // justify-content: baseline;
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    z-index: 2;
-    width: 100%;
+    align-items: center;
+    font-weight: 600;
+    font-family: Avenir-Heavy;
+  }
 
-    flex-direction: row;
-    justify-content: flex-end;
+  &__link {
+    vertical-align: middle;
+    text-decoration: none;
+    color: $black;
+    position: relative;
+    padding: 0.25rem 0rem;
+    font-size: 1.15rem;
 
-    &__item {
-        margin: 0 1rem;
-        padding-top: .5rem;        
-        padding-bottom: .5rem; 
-        display: flex;  
-        align-items: center;
-        font-weight: 600;
-        font-family: Avenir-Heavy;
-        
+    &--hover-border-bottom::after {
+      content: " ";
+      width: 0;
+      transition: all 0.35s;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border-bottom: rgba(0, 0, 0, 0) 3px solid;
     }
-    
-    &__link {
-        vertical-align: middle;     
-        text-decoration: none;
-        color: $black;
-        position: relative;
-        padding: .25rem 0rem;
-        font-size: 1.15rem;
 
-        &--hover-border-bottom::after {
-            content: " ";
-            width: 0;
-            transition: all .35s;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            border-bottom: rgba(0,0,0,0) 3px solid;
-        }
-
-        &--hover-border-bottom:hover {
-            &::after {
-                width: 100%;
-                transition: .35s;
-                border-bottom: $gold 3px solid;
-            }
-        }
-    }    
+    &--hover-border-bottom:hover {
+      &::after {
+        width: 100%;
+        transition: 0.35s;
+        border-bottom: $gold 3px solid;
+      }
+    }
+  }
 }
