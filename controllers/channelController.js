@@ -1,5 +1,6 @@
 const List = require('../models/list');
 const Channel = require('../models/channel');
+const channelValidator = require("../services/validations/channel");
 
 const get = async (req, res) => {
     const username = req.user ? req.user.username : "";
@@ -14,7 +15,7 @@ const get = async (req, res) => {
     });
 };
 
-const add = async(req, res)=>{
+const add = async(req, res) => {
     const username = req.user ? req.user.username: "";
     const userLists = await List.find({owner: username});
     console.log(userLists);
@@ -28,21 +29,39 @@ const add = async(req, res)=>{
   }
 
   const create = async (req, res) => {
+    const { body } = req;
     try{
-
-        const username = req.user ? req.user.username : '';
-        const newestChannel = await Channel.findOne().sort('-channelCode').exec();
+        await channelValidator.validate(body, { abortEarly: false});
+        const { username } = req.user;
+        const newestChannel = await Channel.findOne()
+          .sort('-channelCode')
+          .exec();
         let code = null;
 
         if (!newestChannel){
-          code = 999;
+          code = 1000;
+        } else{
+          code = parseInt(newestChannel.channelCode.split(" ")[1]);
+          code += 1;
         }
 
-        const {channel_name: name, channel_subject: subject, lists} = req.body;
-        const channel = new Channel ({ name, subject, lists, owner: username, channelCode: code + 1});
+        const {
+          channel_name: name,
+          channel_subject: subject,
+          lists
+        } = body;
+        const channel = new Channel ({
+          name,
+          subject,
+          lists,
+          owner: username,
+          channelCode: `kanaal ${code}`
+        });
         const createdChannel = await channel.save();
+
+        res.json({ code });
     } catch(e){
-      console.log(e);
+      res.status(400).json(e);
     }
   };
 
