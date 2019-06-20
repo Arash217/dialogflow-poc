@@ -38,8 +38,6 @@
         margin-bottom: 1.9rem;
     }
 
-
-
     &__slogan {
         width: auto;
         display: block;
@@ -61,7 +59,7 @@
 
     &__img {
         width: 65%;
-        margin-right: 2rem;
+        transform: translate(-2rem);
         margin-top: 9rem;
     }
 }
