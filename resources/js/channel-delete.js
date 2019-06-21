@@ -49,7 +49,7 @@ function removeElement(id) {
 
 const deleteChannel = async channelId => {
     try {
-      const data = await request("/channel", {
+      const data = await request("/kanalen", {
         method: "DELETE",
         body: JSON.stringify({ channelId }),
         headers: { "Content-Type": "application/json" }
