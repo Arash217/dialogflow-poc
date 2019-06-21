@@ -14,5 +14,9 @@ module.exports.autoroute = {
 
     delete: {
         "/lijsten": [express.json(), listController.remove]
+    },
+
+    patch: {
+        '/lijsten/:id': [express.json(), listController.save]
     }
 };

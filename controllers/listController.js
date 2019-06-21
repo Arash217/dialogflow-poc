@@ -110,10 +110,43 @@ const update = async (req, res) => {
     });
 };
 
+const save = async (req, res) => {
+    const {body} = req;
+    try {
+        await listValidator.validate(body, {abortEarly: false});
+
+        const {username} = req.user;
+        const {id} = req.params;
+
+        const {
+            list_name: name,
+            list_subject: subject,
+            questions,
+            channels
+        } = body;
+
+        await List.findOneAndUpdate({
+            _id: id,
+            owner: username
+        }, {
+            $set: {
+                name,
+                subject,
+                questions
+            }
+        });
+
+        res.json({});
+    } catch (e) {
+        res.status(400).json(e);
+    }
+};
+
 module.exports = {
     get,
     add,
     create,
     update,
-    remove
+    remove,
+    save
 };
