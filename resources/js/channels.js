@@ -10,6 +10,7 @@ const choices = new Choices('#form_lists', {
     noResultsText: 'Geen resultaten gevonden',
     noChoicesText: 'Geen lijsten',
     itemSelectText: '',
+
 });
 
 const submitForm = async formData => {
