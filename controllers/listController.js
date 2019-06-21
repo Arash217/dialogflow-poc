@@ -143,6 +143,26 @@ const save = async (req, res) => {
             }
         });
 
+        await Channel.update(
+            {lists: id},
+            {$pullAll: {lists: [id]}},
+            {multi: true}
+        );
+
+        await Channel.update(
+            {
+                _id: {$in: channels}
+            },
+            {
+                $push: {
+                    lists: id
+                }
+            },
+            {
+                multi: true
+            }
+        );
+
         res.json({});
     } catch (e) {
         res.status(400).json(e);
