@@ -108,6 +108,7 @@ const add = async(req, res) => {
               $set: {
                   name,
                   subject,
+                  lists
               }
           });
 
