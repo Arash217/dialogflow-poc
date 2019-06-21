@@ -83,15 +83,19 @@ function removeChildren(node) {
 }
 
 const inputEventHandler = async e => {
-	const res = await fetch('/lijsten/search', {
-		method: "POST",
-		body: JSON.stringify({search: e.target.value}),
-		headers: { "Content-Type": "application/json" }
-	});
+	try {
+		const res = await fetch('/lijsten/search', {
+			method: "POST",
+			body: JSON.stringify({search: e.target.value}),
+			headers: { "Content-Type": "application/json" }
+		});
 
-	const filteredTable = await res.text();
-	removeChildren(tableContainer);
-	tableContainer.insertAdjacentHTML('afterbegin', filteredTable)
+		const filteredTable = await res.text();
+		removeChildren(tableContainer);
+		tableContainer.insertAdjacentHTML('afterbegin', filteredTable)
+	} catch (e) {
+		console.log(e)
+	}
 };
 
 searchInput.addEventListener('input', debounce(inputEventHandler, 300));
