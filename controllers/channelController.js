@@ -49,5 +49,6 @@ const add = async(req, res)=>{
 module.exports = {
     get,
     add,
-    create
+    create,
+    remove
 };

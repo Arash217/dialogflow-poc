@@ -10,4 +10,8 @@ module.exports.autoroute = {
     post:{
       '/kanalen': [express.json(), channelController.create]
     },
+
+    delete: {
+      "/kanalen": [express.json(), channelController.remove]
+    }
 };
