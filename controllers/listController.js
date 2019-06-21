@@ -121,6 +121,7 @@ const save = async (req, res) => {
     const {body} = req;
     try {
         await listValidator.validate(body, {abortEarly: false});
+        
 
         const {username} = req.user;
         const {id} = req.params;
@@ -165,6 +166,7 @@ const save = async (req, res) => {
 
         res.json({});
     } catch (e) {
+        console.log(e)
         res.status(400).json(e);
     }
 };
