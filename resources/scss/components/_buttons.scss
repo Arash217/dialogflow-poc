@@ -10,6 +10,8 @@
   text-decoration: none;
   background-color: transparent;
   justify-content: center;
+  transition: .3s;
+  border-bottom: 3px solid $darkgold;
 
   &--large {
     padding-right: 3.5rem;
@@ -28,6 +30,27 @@
       height: 20px;
       pointer-events: none;
     }
+  }
+
+  &__home {
+      top: 1rem;
+      left: 1rem;
+      padding: .5rem 1.4rem .5rem ;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+          img {
+              transform: translateX(-5px)
+          }
+      }
+
+      img {
+          margin-right: 5px;
+          filter: invert(100%);
+          transition: .4s;
+      }
   }
 
   &__image {
@@ -53,6 +76,14 @@
 
   &--gold {
     background-color: $gold;
+
+    &:hover {
+        background-color: $darkgold;
+    }
+  }
+
+  &--absolute {
+      position: absolute;
   }
 
   &--gray {
