@@ -1,7 +1,7 @@
 <section class="auth__container">
     <form class="register-form" action="/register" method="post">
         <div class="container">
-            <h1 class="form--content-margin title">Register</h1>
+            <h1 class="form--content-margin title">Registreren</h1>
 
             <div class="form--content-margin input-container">
                 <input class="form__input" type="text" placeholder="Username" name="username" required value="{{body.username}}" class="input">
@@ -19,9 +19,9 @@
                 <p class="error-message">{{error.message}}</p>
             {{/if}}
             <div class="form--content-margin">
-                <p>Already have an account? <a href="/login">Sign in</a>.</p>
+                <p>Heb je al een account? <a href="/login">Login</a>.</p>
             </div>
-            <button type="submit" class="button button--gold">Register</button>
+            <button type="submit" class="button button--gold">Registreer</button>
         </div>
 
     </form>
