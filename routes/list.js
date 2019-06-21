@@ -12,7 +12,8 @@ module.exports.autoroute = {
 
     post: {
         '/lijsten*': isAuthenticated,
-        "/lijsten": [express.json(), listController.create]
+        '/lijsten/search': [express.json(), listController.filter],
+        "/lijsten": [express.json(), listController.create],
     },
 
     delete: {

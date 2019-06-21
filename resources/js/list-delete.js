@@ -1,9 +1,10 @@
 const tingle = require("tingle.js");
-const table = document.getElementById("table");
+
+const tableContainer = document.getElementById("table_container");
 let listName = "";
 let listId = "";
 
-table.addEventListener("click", function(e) {
+tableContainer.addEventListener("click", function(e) {
 	let currentButton = e.target;
 	if (currentButton.classList.contains("button__delete")) {
 		let buttonId = e.target.value;
@@ -62,3 +63,39 @@ modal.addFooterBtn("Verwijderen", "button spacing button--gray", function() {
 modal.addFooterBtn("Terug", "button spacing button--gold", function() {
 	modal.close();
 });
+
+const searchInput = document.getElementById('filter_list');
+
+const debounce = (fn, wait) => {
+	let timeout;
+	return (...args) => {
+		clearTimeout(timeout);
+		timeout = setTimeout(() => {
+			fn.apply(this, args);
+		}, wait);
+	};
+};
+
+function removeChildren(node) {
+	while (node.firstChild) {
+		node.removeChild(node.firstChild);
+	}
+}
+
+const inputEventHandler = async e => {
+	try {
+		const res = await fetch('/lijsten/search', {
+			method: "POST",
+			body: JSON.stringify({search: e.target.value}),
+			headers: { "Content-Type": "application/json" }
+		});
+
+		const filteredTable = await res.text();
+		removeChildren(tableContainer);
+		tableContainer.insertAdjacentHTML('afterbegin', filteredTable)
+	} catch (e) {
+		console.log(e)
+	}
+};
+
+searchInput.addEventListener('input', debounce(inputEventHandler, 300));
