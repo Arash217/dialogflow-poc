@@ -14,8 +14,7 @@ const choices = new Choices('#form_lists', {
 
 });
 
-const formInputsPathMap = [
-    {
+const formInputsPathMap = [{
         input: 'channel_name',
         path: 'channel_name'
     },
@@ -36,12 +35,16 @@ const getErrorElement = error => {
 };
 
 const renderErrors = errors => {
-  console.log('test',errors);
+    console.log('test', errors);
     removeErrors();
     errors.forEach(error => {
-        let {path} = error;
+        let {
+            path
+        } = error;
         path = path.includes('.') ? path.split('.')[1] : path;
-        const {input} = formInputsPathMap.find(input => input.path === path);
+        const {
+            input
+        } = formInputsPathMap.find(input => input.path === path);
         const element = document.getElementById(input);
         element.insertAdjacentHTML('afterend', getErrorElement(error.message))
     })
@@ -85,22 +88,28 @@ const startModalCountdown = code => {
 };
 
 const submitForm = async formData => {
-  try{
-    const { code } = await request('/kanalen', {
-        method: 'POST',
-        body: JSON.stringify(formData),
-        headers: {"Content-Type": "application/json"}
-    });
-    startModalCountdown(code);
-  } catch (e){
-      if (e.inner) {
-        renderErrors(e.inner)
-      }
-  }
+    try {
+        const {
+            code
+        } = await request('/kanalen', {
+            method: 'POST',
+            body: JSON.stringify(formData),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        startModalCountdown(code);
+    } catch (e) {
+        if (e.inner) {
+            renderErrors(e.inner)
+        }
+    }
 };
 
 saveChannelBtn.addEventListener('click', e => {
     e.preventDefault();
-    const formData = serialize(formChannel,{ hash: true });
+    const formData = serialize(formChannel, {
+        hash: true
+    });
     submitForm(formData)
 });

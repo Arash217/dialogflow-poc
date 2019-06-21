@@ -1,6 +1,8 @@
 const express = require('express');
 const channelController = require('../controllers/channelController');
-const {isAuthenticated} = require('../middlewares/index');
+const {
+    isAuthenticated
+} = require('../middlewares/index');
 
 module.exports.autoroute = {
     get: {
@@ -15,6 +17,6 @@ module.exports.autoroute = {
     },
 
     delete: {
-      "/kanalen": [express.json(), channelController.remove]
+        "/kanalen": [express.json(), channelController.remove]
     }
 };

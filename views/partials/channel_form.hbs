@@ -16,13 +16,13 @@
         <label for="" class="form__label">Lijsten</label>
         <select id="form_lists" class="form__input" name="lists" multiple>
             {{#each this.userLists}}
-              <option value="{{this._id}}">{{this.name}}</option>
+            <option value="{{this._id}}">{{this.name}}</option>
             {{/each}}
         </select>
     </div>
 
     <div class="form__row">
-        <button  id="button_save_channel"class="button button--gold form__button">Kanaal opslaan</button>
+        <button id="button_save_channel" class="button button--gold form__button">Kanaal opslaan</button>
         <a class="button button--gray" href="/kanalen">Terug</a>
     </div>
 </form>
