@@ -12,6 +12,10 @@ const {onboarding} = require('../services/dialogflowService/onboarding/onboardin
 const {addChannelCode} = require('../services/dialogflowService/addChannel/addChannelCode');
 const {addChannelCodeCheckupYes} = require('../services/dialogflowService/addChannel/addChannelCodeCheckupYes');
 
+// Add list
+const {addListCode} = require('../services/dialogflowService/addList/addListCode');
+const {addListCodeCheckupYes} = require('../services/dialogflowService/addList/addListCodeCheckupYes');
+
 const post = (req, res) => {
 
     const agent = new WebhookClient({
@@ -35,7 +39,11 @@ const post = (req, res) => {
     // addChannel method handles the add channel intent flow
     intentMap.set('add channel', addChannelCode);
     intentMap.set('add channel - code - checkup - yes', addChannelCodeCheckupYes);
-    
+
+    // addList method handles the add list intent flow
+    intentMap.set('add list', addListCode);
+    intentMap.set('add list - code - checkup - yes', addListCodeCheckupYes);
+
     agent.handleRequest(intentMap)
 };
 

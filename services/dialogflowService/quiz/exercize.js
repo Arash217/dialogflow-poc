@@ -65,7 +65,7 @@ async function getChannels(user, _subject) {
             _id: {
                 $in: user.channelIds
             },
-            subject: _subject
+            subject: {$regex: new RegExp("^" + _subject, "i")}
         }).select("_id").exec()
         //console.log(_channel)
         _channel.forEach(element => {
@@ -78,16 +78,18 @@ async function getChannels(user, _subject) {
 
 async function getSeperateLists(user, _subject) {
     const LmatchingS = []
+    console.log(_subject);
     if (user.seperateLists.length !== 0) {
         const _lists = await List.find({
             _id: {
                 $in: user.seperateLists
             },
-            subject: _subject
+            subject: {$regex: new RegExp("^" + _subject, "i")}
         }).select("_id").exec()
+        console.log(_lists);
         //console.log(_lists)
         _lists.forEach(list => {
-            LmatchingS.push(list._id.toString())
+            LmatchingS.push(list._id)
         });
     }
     return LmatchingS
@@ -99,7 +101,7 @@ async function getListsFromChannels(CmatchingS, LmatchingS, _subject) {
             _id: {
                 $in: CmatchingS
             },
-            subject: _subject
+            subject: {$regex: new RegExp("^" + _subject, "i")}
         }, "-_id").select("lists").exec()
         // console.log(lists)
         lists.forEach(list => {
