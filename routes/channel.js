@@ -13,4 +13,8 @@ module.exports.autoroute = {
         '/kanalen*': isAuthenticated,
         '/kanalen': [express.json(), channelController.create]
     },
+
+    delete: {
+      "/kanalen": [express.json(), channelController.remove]
+    }
 };

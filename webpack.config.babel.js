@@ -6,6 +6,7 @@ export default {
     list_delete: path.join(__dirname, "resources/js/list-delete.js"),
     list_update: path.join(__dirname, "resources/js/list_update.js"),
     channels: path.join(__dirname, 'resources/js/channels.js'),
+    channel_delete: path.join(__dirname, 'resources/js/channel-delete.js'),
     animations: path.join(__dirname, 'resources/js/animations.js'),
   },
   output: {
