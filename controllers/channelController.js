@@ -28,7 +28,7 @@ const add = async(req, res) => {
     });
   }
 
-  const create = async (req, res) => {
+const create = async (req, res) => {
     const { body } = req;
     try{
         await channelValidator.validate(body, { abortEarly: false});
