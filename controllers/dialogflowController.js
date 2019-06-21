@@ -16,6 +16,10 @@ const {addChannelCodeCheckupYes} = require('../services/dialogflowService/addCha
 const {addListCode} = require('../services/dialogflowService/addList/addListCode');
 const {addListCodeCheckupYes} = require('../services/dialogflowService/addList/addListCodeCheckupYes');
 
+// Get lists
+const {getListCode} = require('../services/dialogflowService/getLists/getListsCode');
+
+
 const post = (req, res) => {
 
     const agent = new WebhookClient({
@@ -43,6 +47,9 @@ const post = (req, res) => {
     // addList method handles the add list intent flow
     intentMap.set('add list', addListCode);
     intentMap.set('add list - code - checkup - yes', addListCodeCheckupYes);
+
+    // addList method handles the add list intent flow
+    intentMap.set('get lists', getListCode);
 
     agent.handleRequest(intentMap)
 };
