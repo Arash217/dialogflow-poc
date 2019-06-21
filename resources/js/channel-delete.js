@@ -19,8 +19,7 @@ table.addEventListener("click", function(e) {
     }
 });
 
-
-var modal = new tingle.modal({
+const modal = new tingle.modal({
     footer: true,
     stickyFooter: false,
     closeMethods: ["overlay", "button", "escape"],

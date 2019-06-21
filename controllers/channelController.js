@@ -47,7 +47,6 @@ const create = async (req, res) => {
 const remove = async (req, res) => {
     const username = req.user.username;
     const channelId = req.body.channelId;
-	
     const removed = await Channel.findOneAndRemove({ owner: username, _id: channelId });
   
     if (removed) {

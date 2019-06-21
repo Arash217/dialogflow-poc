@@ -12,13 +12,13 @@ table.addEventListener("click", function(e) {
 		listName = buttonName;
 		listId = buttonId;
 		modal.setContent(
-		"<h2>Weet je zeker dat je lijst, " + listName + " wilt verwijderen?</h2>"
+			"<h2>Weet je zeker dat je lijst, " + listName + " wilt verwijderen?</h2>"
 		);
 		modal.open();
 	}
 });
 
-var modal = new tingle.modal({
+const modal = new tingle.modal({
 	footer: true,
 	stickyFooter: false,
 	closeMethods: ["overlay", "button", "escape"],
