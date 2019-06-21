@@ -64,7 +64,7 @@ const create = async (req, res) => {
       },
       {
         $push: {
-          lists: createdList._id
+          lists: createdList._id.toString()
         }
       },
       {
@@ -84,6 +84,11 @@ const remove = async (req, res) => {
   const removed = await List.findOneAndRemove({ owner: username, _id: listId });
 
   if (removed) {
+    const removed = await Channel.update(
+      { lists: listId },
+      { $pullAll: { lists: [listId] } },
+      { multi: true }
+    );
     res.json({});
   } else {
     res.status(400).json({});
