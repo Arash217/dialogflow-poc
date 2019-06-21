@@ -12,7 +12,6 @@ table.addEventListener("click", function(e) {
         channelName = buttonName;
         channelId = buttonId;
 
-        console.log(channelName)
         modal.setContent(
             "<h2>Weet je zeker dat je channel, " + channelName + " wilt verwijderen?</h2>"
         );
@@ -27,6 +26,7 @@ var modal = new tingle.modal({
     closeMethods: ["overlay", "button", "escape"],
     closeLabel: "Close",
     cssClass: ["custom-class-1", "custom-class-2"],
+
     beforeClose: function() {
       // here's goes some logic
       // e.g. save content before closing the modal
@@ -35,12 +35,34 @@ var modal = new tingle.modal({
     }
 });
 
+const request = async (url, options) => {
+    const res = await fetch(url, options);
+    const data = await res.json();
+    if (!res.ok) throw data;
+    return data;
+  };
+  
+function removeElement(id) {
+    var elem = document.getElementById(id);
+    return elem.parentNode.removeChild(elem);
+}
 
-// Hier mee bezit Sahbi!
+const deleteChannel = async channelId => {
+    try {
+      const data = await request("/channel", {
+        method: "DELETE",
+        body: JSON.stringify({ channelId }),
+        headers: { "Content-Type": "application/json" }
+      });
+      removeElement("row_" + channelId);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
 // add a button
 modal.addFooterBtn("Verwijderen", "button spacing button--gray", function() {
-    deleteList(listId);
+    deleteChannel(channelId);
     modal.close();
 });
 modal.addFooterBtn("Terug", "button spacing button--gold", function() {
