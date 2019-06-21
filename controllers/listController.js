@@ -169,11 +169,32 @@ const save = async (req, res) => {
     }
 };
 
+const filter = async (req, res) => {
+    const {username} = req.user;
+    const {search = ''} = req.body;
+
+    const lists = await List.find({
+            owner: username,
+            $or: [
+                {name: {"$regex": search, "$options": "i"}},
+                {subject: {"$regex": search, "$options": "i"}},
+                {listCode: {"$regex": search, "$options": "i"}},
+            ]
+        }
+    );
+
+    res.render("partials/list_table", {
+        layout: false,
+        lists
+    });
+};
+
 module.exports = {
     get,
     add,
     create,
     update,
     remove,
-    save
+    save,
+    filter
 };
