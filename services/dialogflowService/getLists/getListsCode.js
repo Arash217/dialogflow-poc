@@ -8,31 +8,6 @@ const getListCode = async agent => {
 	const userId = agent.originalRequest.payload.user.userId
 
 	const user = await Users.findOne({ userId: userId });
-	// const channelArr = user.channelIds
-
-
-	
-	
-	// async function krijgLijsten() {
-	// 	const lijsten = []
-	// 	channelArr.forEach(async channel => {
-	// 		await Channel.findOne({ _id: channel }, async function(err, res) {
-	// 			const listArr = res.lists;
-	// 			listArr.forEach(async list => {
-	// 				await List.findOne({_id: list}, async function(err, res) {
-	// 					lijsten.push(res.name)
-	// 				})
-	// 			})
-	// 		})
-
-	// 	})
-	// 	return lijsten
-	// }
-
-	// const a = await krijgLijsten()
-	
-	// console.log(a)
-	
 
 	const channels = await getChannels(user)
 	const listsArr = await getListsFromChannels(channels)
@@ -41,10 +16,7 @@ const getListCode = async agent => {
 
 	console.log(listNames)
 	
-
 	agent.add(`<speak>Jouw lijsten zijn:${speaking.toString().replace(/,/gm, ". <break time='0.5' /> ")} </speak>`)
-
-	// agent.add(`asdfasdf`)
 };
 
 async function getChannels(user) {
