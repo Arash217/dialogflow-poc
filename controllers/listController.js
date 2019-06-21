@@ -49,6 +49,7 @@ const create = async (req, res) => {
             questions,
             channels
         } = body;
+
         const list = new List({
             name,
             subject,
@@ -56,6 +57,7 @@ const create = async (req, res) => {
             owner: username,
             listCode: `lijst ${code}`
         });
+
         const createdList = await list.save();
 
         await Channel.update(
@@ -84,6 +86,11 @@ const remove = async (req, res) => {
     const removed = await List.findOneAndRemove({owner: username, _id: listId});
 
     if (removed) {
+        await Channel.update(
+            {lists: listId},
+            {$pullAll: {lists: [listId]}},
+            {multi: true}
+        );
         res.json({});
     } else {
         res.status(400).json({});
