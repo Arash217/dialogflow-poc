@@ -1,4 +1,3 @@
-const tingle = require("tingle.js");
 const serialize = require('form-serialize');
 
 const saveChannelBtn = document.getElementById('button_save_channel');
@@ -52,44 +51,15 @@ export const request = async (url, options) => {
     return data;
 };
 
-const modal = new tingle.modal({
-    closeMethods: [],
-});
-
-const setModalContent = (code, counter) => {
-    const modalMessage = `<div>
-        <p class="modal__text">Kanaal is aangemaakt. De kanaalcode is:
-            <span class="modal__bold-text modal__bold-text--highlighted">kanaal ${code}</span>
-        </p>
-        <p class="modal__text modal__text--small">Je wordt automatisch doorgestuurd naar kanalen overzicht pagina in
-            <span class="modal__bold-text">${counter}</span>
-        seconden</p>
-    </div>`;
-    modal.setContent(modalMessage);
-};
-
-const startModalCountdown = code => {
-    let counter = 5;
-    setModalContent(code, counter);
-    modal.open();
-    const countDownInterval = setInterval(() => {
-        setModalContent(code, counter);
-        if (counter-- === 0) {
-            clearInterval(countDownInterval);
-            modal.close();
-            window.location.href = "/kanalen";
-        }
-    }, 1000);
-};
-
 const submitForm = async formData => {
   try{
-    const { code } = await request('/kanalen', {
-        method: 'POST',
+    const channelId = window.location.href.split("/").pop();
+    await request(channelId, {
+        method: 'PATCH',
         body: JSON.stringify(formData),
         headers: {"Content-Type": "application/json"}
     });
-    startModalCountdown(code);
+    window.location.href = "/kanalen";
   } catch (e){
       if (e.inner) {
         renderErrors(e.inner)

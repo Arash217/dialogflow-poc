@@ -37,6 +37,7 @@ const create = async (req, res) => {
         let code = null;
 
         if (!newestList) {
+          
             code = 1000;
         } else {
             code = parseInt(newestList.listCode.split(" ")[1]);
