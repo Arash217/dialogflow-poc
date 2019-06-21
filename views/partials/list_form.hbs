@@ -2,35 +2,30 @@
     <div class="form__row">
         <div class="form__input-group">
             <label class="form__label" for="list_name">Lijstnaam</label>
-            <input id="list_name" type="text" class="form__input" name="list_name" placeholder="Bijv. Rekenlijst">
+            <input id="list_name" type="text" class="form__input" name="list_name" placeholder="Bijv. Rekenlijst"
+                {{#if this.list}} value="{{this.list.name}}" {{/if}}>
         </div>
     </div>
     <div class="form__row">
         <div class="form__input-group">
             <label class="form__label" for="list_subject">Onderwerp</label>
-            <input id="list_subject" type="text" class="form__input" name="list_subject" placeholder="Bijv. Rekenen">
+            <input id="list_subject" type="text" class="form__input" name="list_subject" placeholder="Bijv. Rekenen"
+                {{#if this.list}} value="{{this.list.subject}}" {{/if}}>
         </div>
     </div>
     <div id="questions_input">
-        <div id="question_0" class="form__row">
-            <div class="form__column form__input-group">
-                <label for="questions[0][question]" class="form__label">Vraag</label>
-                <input id="questions[0][question]" name="questions[0][question]" type="text" class="form__input" placeholder="Bijv. Wat is 5 + 5">
-            </div>
-            <div class="form__column form__input-group">
-                <label for="questions[0][answer]" class="form__label">Antwoord</label>
-                <input id="questions[0][answer]" name="questions[0][answer]" type="text" class="form__input" placeholder="Bijv. 10">
-            </div>
-            <div class="form__column form__input-group">
-                <button class="button button--no-padding-left-right form__button-delete" value="0">
-                    <img src="/images/remove.svg" alt="remove" class="button__image">
-                </button>
-            </div>
-        </div>
+        {{#if this.list}}
+            {{#each this.list.questions}}
+                {{> list_form_question parent=this questionIndex=@index }}
+            {{/each}}
+        {{else}}
+            {{> list_form_question questionIndex=0 }}
+        {{/if}}
     </div>
     <div class="form__row">
         <button id="form_add_question" class="button button--gold">
-            <img src="/images/plus.svg" alt="add question" class="button__image button__image--smaller button__image--margin-right">
+            <img src="/images/plus.svg" alt="add question"
+                 class="button__image button__image--smaller button__image--margin-right">
             Vraag toevoegen
         </button>
     </div>
@@ -38,7 +33,9 @@
         <label for="" class="form__label">Kanalen</label>
         <select id="form_channels" class="form__input" name="channels" multiple>
             {{#each this.userChannels}}
-                <option value="{{this._id}}">{{this.name}} - {{this.subject}}</option>
+                <option value="{{this._id}}" {{#if this.selected}}selected{{/if}}>
+                    {{this.name}} - {{this.subject}}
+                </option>
             {{/each}}
         </select>
     </div>
