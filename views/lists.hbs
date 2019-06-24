@@ -1,4 +1,4 @@
-<article class="lists">
+<article class="lists content__article">
     <section class="content__row">
         <header>
             <h1>
@@ -12,30 +12,14 @@
             <img class="button__image button__image--margin-right" src="/images/plus.svg" alt="lijst toevoegen">
             Lijst toevoegen
         </a>
-        <table class="table" id="table">
-            <tr class="table__heading">
-                <th class="table__item">Lijstnaam</th>
-                <th class="table__item">Lijst code</th>
-                <th class="table__item">Vakterm</th>
-                <th class="table__item">Instellingen</th>
-            </tr>
-            {{#each this.lists}}
-                <tr id="row_{{this._id}}">
-                    <td class="table__item">{{this.name}}</td>
-                    <td class="table__item">{{this.listCode}}</td>
-                    <td class="table__item">{{this.subject}}</td>
-                    <td class="table__item table__item--last">
-                        <button class="button__delete" value="{{this._id}}" data-dataname="{{this.name}}" type="button"
-                                name="button">
-                            <img class="button__image" src="./images/waste-bin.svg" alt="">
-                        </button>
-                        <a href="/lijsten/{{this._id}}">
-                            <img class="table__icon" src="./images/cog.svg" alt="">
-                        </a>
-                    </td>
-                </tr>
-            {{/each}}
-        </table>
+
+        <section class="content__row">
+            <input type="text" id="filter_list" class="form__input" placeholder="Zoeken...">
+        </section>
+
+        <section id="table_container">
+            {{> list_table lists=this.lists}}
+        </section>
     </section>
 </article>
 

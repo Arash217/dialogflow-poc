@@ -1,5 +1,5 @@
-const List = require("../models/list");
-const Channel = require("../models/channel");
+const List = require('../models/list');
+const Channel = require('../models/channel');
 const channelValidator = require("../services/validations/channel");
 
 const get = async (req, res) => {
@@ -147,6 +147,21 @@ const save = async (req, res) => {
     } catch (e) {
         res.status(400).json(e);
     }
+}
+
+const remove = async (req, res) => {
+    const username = req.user.username;
+    const channelId = req.body.channelId;
+    const removed = await Channel.findOneAndRemove({
+        owner: username,
+        _id: channelId
+    });
+
+    if (removed) {
+        res.json({});
+    } else {
+        res.status(400).json({});
+    }
 };
 
 module.exports = {
@@ -154,5 +169,6 @@ module.exports = {
     add,
     create,
     update,
-    save
+    save,
+    remove
 };

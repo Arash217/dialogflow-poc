@@ -178,10 +178,50 @@ const save = async (req, res) => {
             }
         });
 
+        await Channel.update(
+            {lists: id},
+            {$pullAll: {lists: [id]}},
+            {multi: true}
+        );
+
+        await Channel.update(
+            {
+                _id: {$in: channels}
+            },
+            {
+                $push: {
+                    lists: id
+                }
+            },
+            {
+                multi: true
+            }
+        );
+
         res.json({});
     } catch (e) {
         res.status(400).json(e);
     }
+};
+
+const filter = async (req, res) => {
+    const {username} = req.user;
+    const {search = ''} = req.body;
+
+    const lists = await List.find({
+            owner: username,
+            $or: [
+                {name: {"$regex": search, "$options": "i"}},
+                {subject: {"$regex": search, "$options": "i"}},
+                {listCode: {"$regex": search, "$options": "i"}},
+            ]
+        }
+    );
+
+    res.render("partials/list_table", {
+        layout: false,
+        lists
+    });
 };
 
 module.exports = {
@@ -190,5 +230,6 @@ module.exports = {
     create,
     update,
     remove,
-    save
+    save,
+    filter
 };
