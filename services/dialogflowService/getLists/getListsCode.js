@@ -10,13 +10,22 @@ const getListCode = async agent => {
 	const user = await Users.findOne({ userId: userId });
 
 	const channels = await getChannels(user)
+	console.log(channels)
 	const listsArr = await getListsFromChannels(channels)
-	const listNames = await getNamesFromLists(listsArr)
+	console.log(listsArr)
+	const listsArrfull = await getSeperateLists(listsArr,user)	
+	console.log(listsArrfull)
+	const listNames = await getNamesFromLists(listsArrfull)
+	console.log(listNames)
 	const speaking = speakingArray(listNames)
 
 	console.log(listNames)
-	
-	agent.add(`<speak>Jouw lijsten zijn:${speaking.toString().replace(/,/gm, ". <break time='0.5' /> ")} </speak>`)
+
+	if(listNames.length !== 0){
+		agent.add(`<speak>Jouw lijsten zijn:${speaking.toString().replace(/,/gm, ". <break time='0.5' /> ")} </speak>`)}
+	else{
+		agent.add(`Je hebt nog geen lijsten toegevoegd. Als je een lijst wilt toevoegen maar je weet niet hoe, vraag dan om hulp.`)
+	}
 };
 
 async function getChannels(user) {
@@ -52,6 +61,21 @@ async function getListsFromChannels(channels) {
 	return listArr
 }
 
+async function getSeperateLists(listArr,user) {
+	console.log(user.seperateLists)
+	if (user.seperateLists.length !== 0) {
+		const _lists = await List.find({
+			_id: {
+				$in: user.seperateLists
+			}
+		}).select("_id").exec()
+		_lists.forEach(element => {
+			listArr.push(element._id)
+		});
+	}
+	return listArr
+}
+
 async function getNamesFromLists(listArr) {
 	const namesArr = []
 	
@@ -60,7 +84,7 @@ async function getNamesFromLists(listArr) {
 			_id: {
 				$in: listArr
 			}
-		}).select("name").exec()
+		},"-_id").select("name").exec()
 
 		names.forEach(res => {
 			namesArr.push(res.name)
@@ -72,7 +96,7 @@ async function getNamesFromLists(listArr) {
 function speakingArray(listNames) {
 	for (a = 0; a < listNames.length; a++) {
 		listNames[a] = " " + listNames[a]
-		if (a === listNames.length - 1) {
+		if (a === listNames.length - 1 && listNames.length > 1) {
 			listNames[a] = "En" + listNames[a] + ". "
 		}
 	}
