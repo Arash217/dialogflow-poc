@@ -21,20 +21,20 @@
                 <th class="table__item">Instellingen</th>
             </tr>
             {{#each this.channels}}
-                <tr id="row_{{this._id}}">
-                    <td class="table__item">{{this.name}}</td>
-                    <td class="table__item">{{this.channelCode}}</td>
-                    <td class="table__item">{{this.subject}}</td>
-                    <td class="table__item table__item--last">
-                        <button class="button__delete" value="{{this._id}}" data-dataname="{{this.name}}" type="button"
-                                name="button">
-                            <img class="table__icon" src="./images/waste-bin.svg" alt="">
-                        </button>
-                        <a href="/kanalen/{{this._id}}">
-                            <img class="table__icon" src="./images/cog.svg" alt="">
-                        </a>
-                    </td>
-                </tr>
+            <tr id="row_{{this._id}}">
+                <td class="table__item">{{this.name}}</td>
+                <td class="table__item">{{this.channelCode}}</td>
+                <td class="table__item">{{this.subject}}</td>
+                <td class="table__item table__item--last">
+                    <button class="button__delete" value="{{this._id}}" data-dataname="{{this.name}}" type="button"
+                        name="button">
+                        <img class="table__icon" src="./images/waste-bin.svg" alt="">
+                    </button>
+                    <a href="/kanalen/{{this._id}}">
+                        <img class="table__icon" src="./images/cog.svg" alt="">
+                    </a>
+                </td>
+            </tr>
             {{/each}}
         </table>
     </section>

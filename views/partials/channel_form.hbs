@@ -1,23 +1,27 @@
 <form id="form_channel" action="" class="form form--width-800">
-        <div class="form__row">
-                <div class="form__input-group">
-                        <label class="form__label" for="channel_name">Kanaal naam</label>
-                        <input id="channel_name" type="text" class="form__input" name="channel_name" placeholder="Bijv. Kanaalnaam" {{#if this.channel}} value="{{this.channel.name}}" {{/if}}>
-                </div>
+    <div class="form__row">
+        <div class="form__input-group">
+            <label class="form__label" for="channel_name">Kanaal naam</label>
+            <input id="channel_name" type="text" class="form__input" name="channel_name" placeholder="Bijv. Kanaalnaam"
+                {{#if this.channel}} value="{{this.channel.name}}" {{/if}}>
         </div>
-        <div class="form__row">
-                <div class="form__input-group">
-                        <label class="form__label" for="channel_subject">Vak</label>
-                        <input id="channel_subject" type="text" class="form__input" name="channel_subject" placeholder="Bijv. Frans" {{#if this.channel}} value="{{this.channel.subject}}" {{/if}}>
-                </div>
+    </div>
+    <div class="form__row">
+        <div class="form__input-group">
+            <label class="form__label" for="channel_subject">Vak</label>
+            <input id="channel_subject" type="text" class="form__input" name="channel_subject" placeholder="Bijv. Frans"
+                {{#if this.channel}} value="{{this.channel.subject}}" {{/if}}>
         </div>
+    </div>
 
-        <div class="form__row form__input-group">
-                <label for="" class="form__label">Lijsten</label>
-                <select id="form_lists" class="form__input" name="lists" multiple>
-                        {{#each this.userLists}}
-                                <option value="{{this._id}}" {{#if this.selected}} selected{{/if}}> {{this.name}} </option> {{/each}} </select> </div> <div class="form__row">
-                                        <button id="button_save_channel" class="button button--gold form__button">Kanaal opslaan</button>
-                                        <a class="button button--gray" href="/kanalen">Terug</a>
-        </div>
+    <div class="form__row form__input-group">
+        <label for="" class="form__label">Lijsten</label>
+        <select id="form_lists" class="form__input" name="lists" multiple>
+            {{#each this.userLists}}
+            <option value="{{this._id}}" {{#if this.selected}} selected{{/if}}> {{this.name}} </option> {{/each}}
+        </select> </div>
+    <div class="form__row">
+        <button id="button_save_channel" class="button button--gold form__button">Kanaal opslaan</button>
+        <a class="button button--gray" href="/kanalen">Terug</a>
+    </div>
 </form>
