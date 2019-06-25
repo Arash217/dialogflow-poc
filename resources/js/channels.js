@@ -62,7 +62,7 @@ const modal = new tingle.modal({
 const setModalContent = (code, counter) => {
     const modalMessage = `<div>
         <p class="modal__text">Kanaal is aangemaakt. De kanaalcode is:
-            <span class="modal__bold-text modal__bold-text--highlighted">kanaal ${code}</span>
+            <span class="modal__bold-text modal__bold-text--highlighted">${code}</span>
         </p>
         <p class="modal__text modal__text--small">Je wordt automatisch doorgestuurd naar kanalen overzicht pagina in
             <span class="modal__bold-text">${counter}</span>

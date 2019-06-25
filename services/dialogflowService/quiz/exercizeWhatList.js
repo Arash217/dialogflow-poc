@@ -11,7 +11,7 @@ const exercizeWhatList = async agent => {
 
     if(!context){
         agent.add(`Ik begrijp het niet`);
-        agent.add(`Begin met "ik wil oefenen" om te oefenen`);
+        agent.add(`om te oefenen zeg:"ik wil oefenen"`);
         return
     }
 

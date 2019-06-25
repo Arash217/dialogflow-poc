@@ -66,7 +66,7 @@ const create = async (req, res) => {
             subject,
             questions,
             owner: username,
-            listCode: `lijst ${code}`
+            listCode: `${code}`
         });
 
         const createdList = await list.save();
