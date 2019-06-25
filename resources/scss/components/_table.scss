@@ -9,6 +9,14 @@
     padding: 10px;
   }
 
+  &__link {
+      &:hover {
+          .cog {
+              transform: rotate(180deg)
+          }
+      }
+  }
+
   &__heading {
     background-color: #6f798f;
     color: #fff;
@@ -27,4 +35,22 @@
       background-color: #efefef;
     }
   }
+}
+
+.cog {
+    transition: transform 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+#lid {
+    transition: .2s;
+}
+
+.bin-icon {
+    width: 15px;
+
+    &:hover {
+        #lid {
+            transform: translateY(-2px);
+        }
+    }
 }
