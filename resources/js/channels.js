@@ -1,50 +1,51 @@
 const tingle = require("tingle.js");
-const serialize = require('form-serialize');
+const serialize = require("form-serialize");
 
-const saveChannelBtn = document.getElementById('button_save_channel');
-const formChannel = document.getElementById('form_channel');
+const saveChannelBtn = document.getElementById("button_save_channel");
+const formChannel = document.getElementById("form_channel");
 
-const choices = new Choices('#form_lists', {
+const choices = new Choices("#form_lists", {
     removeItemButton: true,
-    placeholderValue: 'Kies een lijst...',
-    loadingText: 'Laden...',
-    noResultsText: 'Geen resultaten gevonden',
-    noChoicesText: 'Geen lijsten',
-    itemSelectText: '',
-
+    placeholderValue: "Kies een lijst...",
+    loadingText: "Laden...",
+    noResultsText: "Geen resultaten gevonden",
+    noChoicesText: "Geen lijsten",
+    itemSelectText: ""
 });
 
-const formInputsPathMap = [
-    {
-        input: 'channel_name',
-        path: 'channel_name'
+const formInputsPathMap = [{
+        input: "channel_name",
+        path: "channel_name"
     },
     {
-        input: 'channel_subject',
-        path: 'channel_subject'
+        input: "channel_subject",
+        path: "channel_subject"
     }
 ];
 const removeErrors = () => {
-    const elements = document.getElementsByClassName('form__error');
+    const elements = document.getElementsByClassName("form__error");
     while (elements.length > 0) {
         elements[0].parentNode.removeChild(elements[0]);
     }
 };
 
 const getErrorElement = error => {
-    return `<div class="form__error">${error}</div>`
+    return `<div class="form__error">${error}</div>`;
 };
 
 const renderErrors = errors => {
-  console.log('test',errors);
     removeErrors();
     errors.forEach(error => {
-        let {path} = error;
-        path = path.includes('.') ? path.split('.')[1] : path;
-        const {input} = formInputsPathMap.find(input => input.path === path);
+        let {
+            path
+        } = error;
+        path = path.includes(".") ? path.split(".")[1] : path;
+        const {
+            input
+        } = formInputsPathMap.find(input => input.path === path);
         const element = document.getElementById(input);
-        element.insertAdjacentHTML('afterend', getErrorElement(error.message))
-    })
+        element.insertAdjacentHTML("afterend", getErrorElement(error.message));
+    });
 };
 
 export const request = async (url, options) => {
@@ -55,7 +56,7 @@ export const request = async (url, options) => {
 };
 
 const modal = new tingle.modal({
-    closeMethods: [],
+    closeMethods: []
 });
 
 const setModalContent = (code, counter) => {
@@ -85,23 +86,28 @@ const startModalCountdown = code => {
 };
 
 const submitForm = async formData => {
-  try{
-    const { code } = await request('/kanalen', {
-        method: 'POST',
-        body: JSON.stringify(formData),
-        headers: {"Content-Type": "application/json"}
-    });
-    startModalCountdown(code);
-  } catch (e){
-      if (e.inner) {
-        renderErrors(e.inner)
-      }
-  }
+    try {
+        const {
+            code
+        } = await request("/kanalen", {
+            method: "POST",
+            body: JSON.stringify(formData),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        startModalCountdown(code);
+    } catch (e) {
+        if (e.inner) {
+            renderErrors(e.inner);
+        }
+    }
 };
 
-saveChannelBtn.addEventListener('click', e => {
+saveChannelBtn.addEventListener("click", e => {
     e.preventDefault();
-    const formData = serialize(formChannel,{ hash: true });
-    submitForm(formData)
+    const formData = serialize(formChannel, {
+        hash: true
+    });
+    submitForm(formData);
 });
-

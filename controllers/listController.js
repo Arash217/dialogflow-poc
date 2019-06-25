@@ -4,7 +4,9 @@ const listValidator = require("../services/validations/list");
 
 const get = async (req, res) => {
     const username = req.user ? req.user.username : "";
-    const lists = await List.find({owner: username});
+    const lists = await List.find({
+        owner: username
+    });
     res.render("lists", {
         lists,
         username: req.user ? req.user.username : "",
@@ -16,7 +18,9 @@ const get = async (req, res) => {
 
 const add = async (req, res) => {
     const username = req.user ? req.user.username : "";
-    const userChannels = await Channel.find({owner: username});
+    const userChannels = await Channel.find({
+        owner: username
+    });
 
     res.render("add_list", {
         userChannels,
@@ -27,16 +31,23 @@ const add = async (req, res) => {
 };
 
 const create = async (req, res) => {
-    const {body} = req;
+    const {
+        body
+    } = req;
     try {
-        await listValidator.validate(body, {abortEarly: false});
-        const {username} = req.user;
+        await listValidator.validate(body, {
+            abortEarly: false
+        });
+        const {
+            username
+        } = req.user;
         const newestList = await List.findOne()
             .sort("-listCode")
             .exec();
         let code = null;
 
         if (!newestList) {
+
             code = 1000;
         } else {
             code = parseInt(newestList.listCode.split(" ")[1]);
@@ -60,21 +71,21 @@ const create = async (req, res) => {
 
         const createdList = await list.save();
 
-        await Channel.update(
-            {
-                _id: {$in: channels}
-            },
-            {
-                $push: {
-                    lists: createdList._id.toString()
-                }
-            },
-            {
-                multi: true
+        await Channel.update({
+            _id: {
+                $in: channels
             }
-        );
+        }, {
+            $push: {
+                lists: createdList._id.toString()
+            }
+        }, {
+            multi: true
+        });
 
-        res.json({code});
+        res.json({
+            code
+        });
     } catch (e) {
         res.status(400).json(e);
     }
@@ -83,14 +94,21 @@ const create = async (req, res) => {
 const remove = async (req, res) => {
     const username = req.user.username;
     const listId = req.body.listId;
-    const removed = await List.findOneAndRemove({owner: username, _id: listId});
+    const removed = await List.findOneAndRemove({
+        owner: username,
+        _id: listId
+    });
 
     if (removed) {
-        await Channel.update(
-            {lists: listId},
-            {$pullAll: {lists: [listId]}},
-            {multi: true}
-        );
+        await Channel.update({
+            lists: listId
+        }, {
+            $pullAll: {
+                lists: [listId]
+            }
+        }, {
+            multi: true
+        });
         res.json({});
     } else {
         res.status(400).json({});
@@ -98,10 +116,19 @@ const remove = async (req, res) => {
 };
 
 const update = async (req, res) => {
-    const {username} = req.user;
-    const {id} = req.params;
-    const list = await List.findOne({owner: username, _id: id});
-    const userChannels = await Channel.find({owner: username}).lean().exec();
+    const {
+        username
+    } = req.user;
+    const {
+        id
+    } = req.params;
+    const list = await List.findOne({
+        owner: username,
+        _id: id
+    });
+    const userChannels = await Channel.find({
+        owner: username
+    }).lean().exec();
 
     userChannels.forEach(userChannel => {
         if (userChannel.lists.includes(id)) userChannel.selected = true;
@@ -118,12 +145,20 @@ const update = async (req, res) => {
 };
 
 const save = async (req, res) => {
-    const {body} = req;
+    const {
+        body
+    } = req;
     try {
-        await listValidator.validate(body, {abortEarly: false});
+        await listValidator.validate(body, {
+            abortEarly: false
+        });
 
-        const {username} = req.user;
-        const {id} = req.params;
+        const {
+            username
+        } = req.user;
+        const {
+            id
+        } = req.params;
 
         const {
             list_name: name,
