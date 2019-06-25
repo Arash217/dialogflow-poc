@@ -65,7 +65,7 @@ const create = async (req, res) => {
             subject,
             lists,
             owner: username,
-            channelCode: `kanaal ${code}`
+            channelCode: `${code}`
         });
         const createdChannel = await channel.save();
 

@@ -29,7 +29,7 @@ const answer = async agent => {
     // check whether the answer is correct or not
     if (answer.toLowerCase() !== givenAnswer.toLowerCase()) {
 
-        agent.add("<speak> <audio src='https://raw.githubusercontent.com/stijn-aa/sound/master/incorrect1.ogg'>incorrect</audio>"+` ${givenAnswer} is incorrect. Het juiste antwoord is ${answer}.</speak> `);
+        agent.add(`<speak> <audio src='https://raw.githubusercontent.com/stijn-aa/sound/master/incorrect1.ogg'>incorrect</audio>" ${givenAnswer} is incorrect. Het juiste antwoord is ${answer}.</speak> `);
         
  
         if(vragen[0].status === 0){
@@ -44,7 +44,7 @@ const answer = async agent => {
 
 
     } else {
-        agent.add("<speak> <audio src='https://raw.githubusercontent.com/stijn-aa/sound/master/correct2.ogg'>correct</audio>"+` ${answer} is correct! </speak>`);
+        agent.add(`<speak> <audio src='https://raw.githubusercontent.com/stijn-aa/sound/master/correct2.ogg'>correct</audio>" ${answer} is correct! </speak>`);
         // if answer is correct then increment
 
         if(vragen[0].status === 0){
