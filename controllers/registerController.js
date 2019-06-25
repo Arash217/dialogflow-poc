@@ -13,7 +13,7 @@ const post = async (req, res) => {
     const account = new Account(body);
     await account.save();
     req.login(account, () => {
-      return res.redirect("/exercises");
+      return res.redirect("/lijsten");
     });
   } catch (error) {
     res.status(400).render("register", {
