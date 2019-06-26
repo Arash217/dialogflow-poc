@@ -25,6 +25,7 @@
   &__icon {
     width: 20px;
     margin-right: 5px;
+    pointer-events: none;
   }
 
   &__row {
@@ -37,20 +38,6 @@
   }
 }
 
-.cog {
-    transition: transform 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86);
-}
-
-#lid {
-    transition: .2s;
-}
-
 .bin-icon {
-    width: 15px;
-
-    &:hover {
-        #lid {
-            transform: translateY(-2px);
-        }
-    }
+  width: 15px;
 }
