@@ -32,6 +32,14 @@
     }
   }
 
+  &__trash {
+    &:hover {
+      #lid {
+          transform: translateY(-2px);
+      }
+  }
+  }
+
   &__home {
       top: 1rem;
       left: 1rem;
@@ -101,4 +109,12 @@
     height: 35px;
     width: 35px;
   }
+}
+
+.cog {
+  transition: transform 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+#lid {
+  transition: .2s;
 }

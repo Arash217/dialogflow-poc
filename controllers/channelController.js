@@ -51,7 +51,7 @@ const create = async (req, res) => {
         if (!newestChannel) {
             code = 1000;
         } else {
-            code = parseInt(newestChannel.channelCode.split(" ")[1]);
+            code = parseInt(newestChannel.channelCode);
             code += 1;
         }
 

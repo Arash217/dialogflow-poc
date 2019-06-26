@@ -50,7 +50,7 @@ const create = async (req, res) => {
 
             code = 1000;
         } else {
-            code = parseInt(newestList.listCode.split(" ")[1]);
+            code = parseInt(newestList.listCode);
             code += 1;
         }
 
