@@ -8,6 +8,7 @@ const path = require("path");
 const session = require("express-session");
 const FileStore = require('session-file-store')(session);
 const passport = require("passport");
+const forceSsl = require('express-force-ssl');
 
 require("./db/mongoose");
 require("./auth");
@@ -18,6 +19,10 @@ const app = express();
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(certificate, app);
 
+const httpPort = process.env.PORT || 3000;
+const httpsPort = process.env.HTTPS_PORT || 3001;
+
+app.use(forceSsl);
 app.use(express.urlencoded({extended: true}));
 
 // TODO: helpers in seperate file
@@ -49,9 +54,6 @@ autoroute(app, {
     throwErrors: false,
     logger: null
 });
-
-const httpPort = process.env.PORT || 3000;
-const httpsPort = process.env.HTTPS_PORT || 3001;
 
 httpServer.listen(httpPort, () => console.log(`HTTP started on port ${httpPort}`));
 httpsServer.listen(httpsPort,() => console.log(`HTTPS started on port ${httpsPort}`));
