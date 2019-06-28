@@ -9,7 +9,8 @@
     "build:css": "node-sass -r --output-style compressed resources/scss/main.scss -o public/css",
     "watch:css": "npm run build:css && npm run build:css -- -w",
     "watch:js": "webpack --watch",
-    "watch": "npm-run-all -p dev watch:*s"
+    "watch": "npm-run-all -p dev watch:*s",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
