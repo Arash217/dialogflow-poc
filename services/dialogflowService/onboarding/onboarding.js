@@ -18,8 +18,9 @@ const onboarding = async agent => {
         userId: userId
     })
 
-    const date = new Date()
-    const lastLogin = conv.originalRequest.payload.user && conv.originalRequest.payload.user.lastSeen ? conv.originalRequest.payload.user.lastSeen : date.toISOString()
+    const date = new Date();
+    console.log(conv.user)
+    const lastLogin = conv.user && conv.user.lastSeen ? conv.user.lastSeen : date.toISOString();
 
     if(!user) {
         let newUser = new User()
