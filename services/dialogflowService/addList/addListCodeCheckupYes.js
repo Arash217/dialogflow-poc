@@ -18,6 +18,7 @@ const addListCodeCheckupYes = async agent => {
         })
         // const listAmount = list.lists.length
         const conv = agent.conv();
+        console.log(conv.user.storage.userId)
         const user = await Users.findOne({
             userId: conv.user.storage.userId
         })
