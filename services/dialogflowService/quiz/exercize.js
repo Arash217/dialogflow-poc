@@ -5,8 +5,8 @@ const List = require('../../../models/list');
 const exercize = async agent => {
     console.log("inetent triggerd: exercise")
     console.log(agent.parameters)
-
-    const _userId = agent.originalRequest.payload.user.storage.userId
+    const conv = agent.conv();
+    const _userId = conv.user.storage.userId;
     const user = await Users.findOne({
         userId: _userId
     })

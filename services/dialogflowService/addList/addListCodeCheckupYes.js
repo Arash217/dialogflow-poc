@@ -17,8 +17,9 @@ const addListCodeCheckupYes = async agent => {
             listCode: listcode.toLowerCase()
         })
         // const listAmount = list.lists.length
+        const conv = agent.conv();
         const user = await Users.findOne({
-            userId: agent.originalRequest.payload.user.storage.userId
+            userId: conv.user.storage.userId
         })
 
         if (!user.seperateLists.includes(listId)) {
