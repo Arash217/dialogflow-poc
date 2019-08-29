@@ -4,7 +4,7 @@ const onboarding = async agent => {
     console.log(agent.parameters)
     let userId
 
-    if ('userId' in conv.user.storage) {
+    if ('userId' in agent.originalRequest.payload.user.storage) {
         userId = agent.originalRequest.payload.user.storage.userId;
     } else {
         // generateUUID is your function to generate ids.
