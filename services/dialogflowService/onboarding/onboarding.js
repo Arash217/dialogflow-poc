@@ -3,13 +3,14 @@ const User = require('../../../models/user');
 const onboarding = async agent => {
     console.log(agent.parameters)
     let userId
+    const conv = agent.conv();
 
-    if ('userId' in agent.originalRequest.payload.user.storage) {
-        userId = agent.originalRequest.payload.user.storage.userId;
+    if ('userId' in conv.originalRequest.payload.user.storage) {
+        userId = conv.originalRequest.payload.user.storage.userId;
     } else {
         // generateUUID is your function to generate ids.
         userId = generateUUID();
-        agent.originalRequest.payload.user.storage.userId = userId
+        conv.originalRequest.payload.user.storage.userId = userId
     }
 
     const user = await User.findOne({
@@ -17,7 +18,7 @@ const onboarding = async agent => {
     })
 
     const date = new Date()
-    const lastLogin = agent.originalRequest.payload.user && agent.originalRequest.payload.user.lastSeen ?agent.originalRequest.payload.user.lastSeen : date.toISOString()
+    const lastLogin = conv.originalRequest.payload.user && conv.originalRequest.payload.user.lastSeen ? conv.originalRequest.payload.user.lastSeen : date.toISOString()
 
     if(!user) {
         let newUser = new User()
