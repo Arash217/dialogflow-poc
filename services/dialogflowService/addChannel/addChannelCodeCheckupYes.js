@@ -18,7 +18,7 @@ const addChannelCodeCheckupYes = async agent => {
         })
         const listAmount = channel.lists.length
         const user = await Users.findOne({
-            userId: conv.user.storage.userId
+            userId: agent.originalRequest.payload.user.storage.userId
         })
 
         if (!user.channelIds.includes(channelId)) {

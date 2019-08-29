@@ -5,11 +5,11 @@ const onboarding = async agent => {
     let userId
 
     if ('userId' in conv.user.storage) {
-        userId = conv.user.storage.userId;
+        userId = agent.originalRequest.payload.user.storage.userId;
     } else {
         // generateUUID is your function to generate ids.
         userId = generateUUID();
-        conv.user.storage.userId = userId
+        agent.originalRequest.payload.user.storage.userId = userId
     }
 
     const user = await User.findOne({
