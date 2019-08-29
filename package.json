@@ -9,7 +9,8 @@
     "build:css": "node-sass -r --output-style compressed resources/scss/main.scss -o public/css",
     "watch:css": "npm run build:css && npm run build:css -- -w",
     "watch:js": "webpack --watch",
-    "watch": "npm-run-all -p dev watch:*s"
+    "watch": "npm-run-all -p dev watch:*s",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -37,11 +38,12 @@
   "dependencies": {
     "@babel/runtime": "^7.4.5",
     "actions-on-google": "^2.7.0",
-    "bcrypt": "^3.0.6",
+    "bcryptjs": "^2.4.3",
     "dialogflow-fulfillment": "^0.6.1",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "express-autoroute": "^2.1.1",
+    "express-force-ssl": "^0.3.2",
     "express-handlebars": "^3.1.0",
     "express-session": "^1.16.1",
     "form-serialize": "^0.7.2",

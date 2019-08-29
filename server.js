@@ -1,5 +1,6 @@
 require("dotenv").config();
 const http = require("http");
+const https = require('https');
 const express = require("express");
 const autoroute = require("express-autoroute");
 const exphbs = require("express-handlebars");
@@ -7,14 +8,21 @@ const path = require("path");
 const session = require("express-session");
 const FileStore = require('session-file-store')(session);
 const passport = require("passport");
+const forceSsl = require('express-force-ssl');
 
 require("./db/mongoose");
 require("./auth");
 require("./services/validations/locale");
+const certificate = require('./encryption');
 
 const app = express();
-const server = http.createServer(app);
+const httpServer = http.createServer(app);
+const httpsServer = https.createServer(certificate, app);
 
+const httpPort = process.env.PORT || 3000;
+const httpsPort = process.env.HTTPS_PORT || 3001;
+
+app.use(forceSsl);
 app.use(express.urlencoded({extended: true}));
 
 // TODO: helpers in seperate file
@@ -47,5 +55,5 @@ autoroute(app, {
     logger: null
 });
 
-const port = process.env.PORT || 3000;
-server.listen(port, () => console.log(`Server running on port ${port}`));
+httpServer.listen(httpPort, () => console.log(`HTTP started on port ${httpPort}`));
+httpsServer.listen(httpsPort,() => console.log(`HTTPS started on port ${httpsPort}`));
