@@ -5,7 +5,7 @@ const List = require('../../../models/list');
 const getListCode = async agent => {
 	console.log("intent triggerd: get list code");
 	
-	const userId = agent.originalRequest.payload.user.userId
+	const userId = conv.user.storage.userId
 
 	const user = await Users.findOne({ userId: userId });
 
