@@ -1,16 +1,17 @@
 const User = require('../../../models/user');
+const uuid = require('uuid/v4');
 
 const onboarding = async agent => {
     console.log(agent.parameters)
     let userId
     const conv = agent.conv();
 
-    if ('userId' in conv.originalRequest.payload.user.storage) {
-        userId = conv.originalRequest.payload.user.storage.userId;
+    if (userId in conv.user.storage) {
+        userId = conv.user.storage.userId;
     } else {
         // generateUUID is your function to generate ids.
-        userId = generateUUID();
-        conv.originalRequest.payload.user.storage.userId = userId
+        userId = uuid();
+        conv.user.storage.userId = userId
     }
 
     const user = await User.findOne({
