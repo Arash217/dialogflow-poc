@@ -1,0 +1,44 @@
+<article class="lists">
+    <section class="content__row">
+        <header>
+            <h1>
+                Jouw kanalen
+            </h1>
+        </header>
+    </section>
+
+    <section class="content__row">
+        <a id="add_channel_btn" class="button button--gold content__row" href="kanalen/toevoegen">
+            <img class="button__image button__image--margin-right" src="/images/plus.svg" alt="kanaal toevoegen">
+            kanaal toevoegen
+        </a>
+        <table class="table" id="table">
+            <tr class="table__heading">
+                <th class="table__item">Kanaalnaam</th>
+                <th class="table__item">Kanaal-code</th>
+                <!-- <th class="table__item">Channel</th> -->
+                <th class="table__item">Vakterm</th>
+                <th class="table__item">Instellingen</th>
+            </tr>
+            {{#each this.channels}}
+            <tr class="{{#if @odd}}odd{{else}}even{{/if}}" id="row_{{this._id}}">
+                <td class="table__item">{{this.name}}</td>
+                <td class="table__item">{{this.channelCode}}</td>
+                <td class="table__item">{{this.subject}}</td>
+                <td class="table__item table__item--last">
+                    <button class="button__delete" value="{{this._id}}" data-dataname="{{this.name}}" type="button"
+                        name="button">
+                        <!-- <img class="table__icon" src="./images/waste-bin.svg" alt=""> -->
+                        <svg class="table__icon bin-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 14"><defs><style>.cls-1{fill:#f44336;}</style></defs><title>waste-bin</title><g id="Laag_1" data-name="Laag 1"><path class="cls-1" d="M.45,3.73l.94,9.32A1.25,1.25,0,0,0,2.64,14H7.36a1.25,1.25,0,0,0,1.25-.95l.94-9.32ZM3.18,12.6a.46.46,0,0,1-.45-.47l-.46-7a.47.47,0,0,1,.46-.46.46.46,0,0,1,.45.46l.46,7A.47.47,0,0,1,3.18,12.6Zm2.27-.47a.45.45,0,1,1-.9,0v-7a.45.45,0,1,1,.9,0Zm1.82,0a.46.46,0,0,1-.45.47.47.47,0,0,1-.46-.47l.46-7a.46.46,0,0,1,.45-.46.47.47,0,0,1,.46.46Z"/></g><g id="lid"><path class="cls-1" d="M9.27,1.87h-2V.93c0-.7-.22-.93-.91-.93H3.64C3,0,2.73.31,2.73.93v.94h-2a.72.72,0,0,0-.73.7.72.72,0,0,0,.73.7H9.27a.72.72,0,0,0,.73-.7A.72.72,0,0,0,9.27,1.87Zm-2.91,0H3.64V.93H6.36Z"/></g></svg>
+                    </button>
+                    <a class="table__link" href="/kanalen/{{this._id}}">
+                        <img class="table__icon cog" src="./images/cog.svg" alt="">
+                    </a>
+                </td>
+            </tr>
+            {{/each}}
+        </table>
+    </section>
+</article>
+
+<script type="text/javascript" src="/js/channel_delete.bundle.js"></script>

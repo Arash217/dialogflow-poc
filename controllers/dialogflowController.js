@@ -1,14 +1,56 @@
 const {WebhookClient} = require('dialogflow-fulfillment');
-const dialogflowService = require('../services/dialogflowService');
+
+const {exercize} = require('../services/dialogflowService/quiz/exercize');
+const {exercizeWhatList} = require('../services/dialogflowService/quiz/exercizeWhatList');
+
+const {question} = require('../services/dialogflowService/quiz/question');
+const {answer} = require('../services/dialogflowService/quiz/answer');
+
+const {onboarding} = require('../services/dialogflowService/onboarding/onboarding');
+
+// Add channel
+const {addChannelCode} = require('../services/dialogflowService/addChannel/addChannelCode');
+const {addChannelCodeCheckupYes} = require('../services/dialogflowService/addChannel/addChannelCodeCheckupYes');
+
+// Add list
+const {addListCode} = require('../services/dialogflowService/addList/addListCode');
+const {addListCodeCheckupYes} = require('../services/dialogflowService/addList/addListCodeCheckupYes');
+
+// Get lists
+const {getListCode} = require('../services/dialogflowService/getLists/getListsCode');
+
 
 const post = (req, res) => {
-    const agent = new WebhookClient({request: req, response: res});
+
+    const agent = new WebhookClient({
+        request: req,
+        response: res
+    });
+
     const intentMap = new Map();
 
-    // dialogflowService.question method handles the question intent
-    intentMap.set('Oefening', dialogflowService.question);
+    // dialogflowService.exercize method handles the quiz intent and what list handles what list
+    intentMap.set('exercize', exercize);
+    intentMap.set('exercize - whatList', exercizeWhatList);
+
+    intentMap.set('Oefening', question);
     // dialogflowService.answer method handles the answer intent
-    intentMap.set('Oefening - antwoord', dialogflowService.answer);
+    intentMap.set('Oefening - antwoord', answer);
+
+    // dialogflowService.onboarding method handles the onboarding intent
+    intentMap.set('onboarding', onboarding);
+
+    // addChannel method handles the add channel intent flow
+    intentMap.set('add channel', addChannelCode);
+    intentMap.set('add channel - code - checkup - yes', addChannelCodeCheckupYes);
+
+    // addList method handles the add list intent flow
+    intentMap.set('add list', addListCode);
+    intentMap.set('add list - code - checkup - yes', addListCodeCheckupYes);
+
+    // addList method handles the add list intent flow
+    intentMap.set('get lists', getListCode);
+
     agent.handleRequest(intentMap)
 };
 

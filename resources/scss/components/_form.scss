@@ -1,0 +1,100 @@
+.form {
+  display: flex;
+  flex-direction: column;
+
+  &__row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-right: 20px;
+  }
+
+  &__column--margin-left {
+    margin-left: 20px;
+  }
+
+  &__column:last-child {
+    margin-right: 0;
+  }
+
+  &__input-group {
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+
+  &__label {
+    display: flex;
+    flex: 1;
+    padding: 5px 0;
+  }
+
+  &__input {
+    padding: 6px;
+    border: 1px solid $gray;
+    border-radius: 3px;
+    color: $black;
+    font-size: 16px;
+    width: 300px;
+  }
+
+  &__button {
+    margin-right: 20px;
+  }
+
+  &__button-delete {
+    background-image: url("/images/remove.svg");
+  }
+
+  &--content-margin {
+    margin-bottom: 20px;
+  }
+
+  &--width-800 {
+    max-width: 800px;
+  }
+
+  &--width-100p {
+    max-width: 100%;
+  }
+
+  &--grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+
+  }
+
+  &__error {
+    width: 100%;
+    color: red;
+    margin-top: 5px;
+  }
+}
+
+.auth__container {
+  background-color: #f3f4f7;
+  padding: 2.5em 3em 2em;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 16px 1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 16px 1px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 16px 1px rgba(0, 0, 0, 0.75);
+
+  .logo {
+    margin-bottom: 20px;
+  }
+}
+
+.even {
+    background-color: #FFF;
+    &:nth-child(odd) {
+        background-color: #F3F5F8;
+    }
+}

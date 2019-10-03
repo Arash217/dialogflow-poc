@@ -1,0 +1,51 @@
+<form id="form_questions" class="form form--width-100p form--grid">
+    <section>
+        <div class="form__row">
+            <div class="form__input-group">
+                <label class="form__label" for="list_name">Lijstnaam</label>
+                <input id="list_name" type="text" class="form__input" name="list_name" placeholder="Bijv. Rekenlijst"
+                    {{#if this.list}} value="{{this.list.name}}" {{/if}}>
+            </div>
+        </div>
+        <div class="form__row">
+            <div class="form__input-group">
+                <label class="form__label" for="list_subject">Onderwerp</label>
+                <input id="list_subject" type="text" class="form__input" name="list_subject" placeholder="Bijv. Rekenen"
+                    {{#if this.list}} value="{{this.list.subject}}" {{/if}}>
+            </div>
+        </div>
+        <div class="form__row form__input-group">
+            <label for="" class="form__label">Kanalen</label>
+            <select id="form_channels" class="form__input" name="channels" multiple>
+                {{#each this.userChannels}}
+                    <option value="{{this._id}}" {{#if this.selected}}selected{{/if}}>
+                        {{this.name}} - {{this.subject}}
+                    </option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="form__row">
+            <button id="button_save_list" class="button button--gold form__button">Lijst opslaan</button>
+            <a class="button button--gray" href="/lijsten">Terug</a>
+        </div>
+    </section>
+    <section>
+        <div id="questions_input">
+            {{#if this.list}}
+                {{#each this.list.questions}}
+                    {{> list_form_question parent=this questionIndex=@index }}
+                {{/each}}
+            {{else}}
+                {{> list_form_question questionIndex=0 }}
+            {{/if}}
+        </div>
+        <div class="form__row">
+            <button id="form_add_question" class="button button--gold">
+                <img src="/images/plus.svg" alt="add question"
+                     class="button__image button__image--smaller button__image--margin-right">
+                Vraag toevoegen
+            </button>
+        </div>
+    </section>
+
+</form>

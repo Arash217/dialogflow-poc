@@ -1,0 +1,43 @@
+.table {
+  border: 1px solid #e9e9e9;
+  text-align: left;
+  width: 100%;
+  text-transform: capitalize;
+  background-color: #fff;
+
+  &__item {
+    padding: 10px;
+  }
+
+  &__link {
+      &:hover {
+          .cog {
+              transform: rotate(180deg)
+          }
+      }
+  }
+
+  &__heading {
+    background-color: #6f798f;
+    color: #fff;
+  }
+
+  &__icon {
+    width: 20px;
+    margin-right: 5px;
+    pointer-events: none;
+  }
+
+  &__row {
+    &--even {
+      background-color: #fff;
+    }
+    &--odd {
+      background-color: #efefef;
+    }
+  }
+}
+
+.bin-icon {
+  width: 15px;
+}

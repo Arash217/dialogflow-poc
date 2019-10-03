@@ -1,0 +1,110 @@
+svg {
+    position: relative;
+    overflow: visible;
+}
+
+.cls-10 > tspan {
+    font-family: Roboto;
+}
+
+#cloud-1 {
+    transform: translate(-20%);
+    opacity: 0;
+}
+
+#cloud-react {
+    transform: translate(20%);
+    opacity: 0;
+}
+
+#cloud-2 {
+    transform: translate(-20%);
+    opacity: 0;
+}
+
+.animationFromLeft {
+    animation: animationFromLeft;
+    animation-duration: 6.5s;
+    animation-iteration-count: infinite;
+}
+
+.animationFromRight {
+    animation: animationFromRight;
+    animation-duration: 6.5s;
+    animation-iteration-count: infinite;
+}
+
+.animationFromLeft2 {
+    animation: animationFromLeft2;
+    animation-duration: 6.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes animationFromLeft {
+    0% {
+        transform: translate(-40%);
+        opacity: 0;
+    }
+    10% {
+        transform: translate(-40%);
+        opacity: 0;
+    }
+    20% {
+        transform: translate(0%);
+        opacity: 1;
+    }
+    95% {
+        transform: translate(0%);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-20%);
+        opacity: 0;
+    }
+}
+
+@keyframes animationFromRight {
+    0% {
+        transform: translate(40%);
+        opacity: 0;
+    }
+    30% {
+        transform: translate(40%);
+        opacity: 0;
+    }
+    40% {
+        transform: translate(0%);
+        opacity: 1;
+    }
+    95% {
+        transform: translate(0%);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(20%);
+        opacity: 0;
+    }
+}
+
+@keyframes animationFromLeft2 {
+    0% {
+        transform: translate(-40%);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(-40%);
+        opacity: 0;
+    }
+    60% {
+        transform: translate(0%);
+        opacity: 1;
+    }
+    95% {
+        transform: translate(0%);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-20%);
+        opacity: 0;
+    }
+}

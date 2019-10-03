@@ -1,0 +1,22 @@
+<nav class="nav__container">
+    <ul class="nav">
+        <li class="nav__item">
+            <a class="nav__link {{#if active.lists}}nav__link--active{{/if}}" href="/lijsten">
+                <img class="nav__link-icon" src="/images/lists.svg" alt="pencil">
+                Lijsten
+            </a>
+        </li>
+        <li class="nav__item">
+            <a class="nav__link {{#if active.channels}}nav__link--active{{/if}}" href="/kanalen">
+                  <img class="nav__link-icon" src="/images/channel.svg" alt="pencil">
+                Kanalen
+            </a>
+        </li>
+    </ul>
+    <div class="nav__item">
+        <a class="nav__link nav__link--logout" href="/logout">
+            <img class="nav__link-icon nav__link-icon--logout" src="/images/logout.svg" alt="pencil">
+            Uitloggen
+        </a>
+    </div>
+</nav>

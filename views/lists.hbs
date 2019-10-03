@@ -1,0 +1,26 @@
+<article class="lists content__article">
+    <section class="content__row">
+        <header>
+            <h1>
+                Jouw overhoorlijsten
+            </h1>
+        </header>
+    </section>
+
+    <section class="content__row">
+        <a id="add_list_btn" class="button button--gold content__row" href="lijsten/toevoegen">
+            <img class="button__image button__image--margin-right" src="/images/plus.svg" alt="lijst toevoegen">
+            Lijst toevoegen
+        </a>
+
+        <section class="content__row">
+            <input type="text" id="filter_list" class="form__input" placeholder="Zoeken...">
+        </section>
+
+        <section id="table_container">
+            {{> list_table lists=this.lists}}
+        </section>
+    </section>
+</article>
+
+<script type="text/javascript" src="/js/list_delete.bundle.js"></script>
