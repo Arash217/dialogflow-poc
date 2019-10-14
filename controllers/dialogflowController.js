@@ -22,12 +22,12 @@ const {getListCode} = require('../services/dialogflowService/getLists/getListsCo
 
 const post = (req, res) => {
 
+    console.log('test');
+
     const agent = new WebhookClient({
         request: req,
         response: res
     });
-
-    console.log('test', agent);
 
     const intentMap = new Map();
 
