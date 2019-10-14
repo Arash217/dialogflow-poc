@@ -2,14 +2,12 @@ const User = require('../../../models/user');
 const uuid = require('uuid/v4');
 
 const onboarding = async agent => {
-    console.log(agent.parameters)
     let userId
     const conv = agent.conv();
 
     if (userId in conv.user.storage) {
         userId = conv.user.storage.userId;
     } else {
-        // generateUUID is your function to generate ids.
         userId = uuid();
         conv.user.storage = { userId: userId };
     }
@@ -19,7 +17,6 @@ const onboarding = async agent => {
     })
 
     const date = new Date();
-    console.log(conv.user)
     const lastLogin = conv.user && conv.user.lastSeen ? conv.user.lastSeen : date.toISOString();
 
     if(!user) {
@@ -28,7 +25,7 @@ const onboarding = async agent => {
         newUser.channelId = []
         newUser.seperateLists = []
         newUser.lastLogin = lastLogin.split("T")[0]
-        newUser.save()
+        await newUser.save()
 
         agent.add(`
             <speak>

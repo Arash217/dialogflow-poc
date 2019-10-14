@@ -3,9 +3,8 @@ const Channel = require('../../../models/channel');
 const List = require('../../../models/list');
 
 const exercize = async agent => {
-    console.log("inetent triggerd: exercise")
-    console.log(agent.parameters)
     const conv = agent.conv();
+    console.log(conv.user.storage)
     const _userId = conv.user.storage.userId;
     const user = await Users.findOne({
         userId: _userId

@@ -22,7 +22,7 @@ const httpsServer = https.createServer(certificate, app);
 const httpPort = process.env.PORT || 3000;
 const httpsPort = process.env.HTTPS_PORT || 3001;
 
-app.use(forceSsl);
+// app.use(forceSsl);
 app.use(express.urlencoded({extended: true}));
 
 // TODO: helpers in seperate file
