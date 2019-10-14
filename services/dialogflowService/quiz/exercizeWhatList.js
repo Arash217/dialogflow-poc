@@ -2,9 +2,6 @@ const List = require('../../../models/list');
 const {question} = require("./question")
 
 const exercizeWhatList = async agent => {
-    console.log("inetent triggerd: exercise what list")
-    console.log(agent.parameters)
-
     const context = agent.context.get('context-list');
     const givenListName = agent.parameters.list.toLowerCase()
     //console.log(agent.parameters)

@@ -3,25 +3,12 @@ const List = require('../../../models/list');
 
 // answer intent
 const answer = async agent => {
-    console.log("inetent triggerd: answer")
-    console.log(agent.parameters)
-    
     const vraagContext = agent.context.get("vraag-context") ? agent.context.get("vraag-context") : undefined
     let correctAnswers = vraagContext.parameters ? vraagContext.parameters.correctAnswers : 0;
-
-
     let listId = vraagContext.parameters.listId
-
     const givenAnswer = agent.parameters.antwoord
-
-    // get questions from database by subject
-
     const vragen = vraagContext.parameters.vragen
-
-
-
     !vragen[0].status && (vragen[0].status = 0)
-    
 
     // get the correct answer for the current questions
     const {answer} = vragen[0];
@@ -30,10 +17,8 @@ const answer = async agent => {
     if (answer.toLowerCase() !== givenAnswer.toLowerCase()) {
 
         agent.add(`<speak> <audio src='https://raw.githubusercontent.com/stijn-aa/sound/master/incorrect1.ogg'>incorrect</audio>" ${givenAnswer} is incorrect. Het juiste antwoord is ${answer}.</speak> `);
-        
- 
-        if(vragen[0].status === 0){
 
+        if(vragen[0].status === 0){
             vragen[0].status --             // dus min 1
             vragen.push(vragen[0])
 
@@ -42,11 +27,9 @@ const answer = async agent => {
             vragen.splice(0, 1)
         }
 
-
     } else {
         agent.add(`<speak> <audio src='https://raw.githubusercontent.com/stijn-aa/sound/master/correct2.ogg'>correct</audio>" ${answer} is correct! </speak>`);
         // if answer is correct then increment
-
         if(vragen[0].status === 0){
             vragen.splice(0, 1)
             correctAnswers ++
@@ -94,8 +77,6 @@ const answer = async agent => {
             vragen,
         }
     });
-
-    console.log(vragen)
 
     // ask the next question
     await question(agent);

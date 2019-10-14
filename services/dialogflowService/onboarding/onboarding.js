@@ -27,7 +27,7 @@ const onboarding = async agent => {
         newUser.lastLogin = lastLogin.split("T")[0]
         await newUser.save()
 
-        agent.add(`
+        conv.add(`
             <speak>
                 Welkom bij Overhoorbot.
                     <break time='0.5' />
@@ -41,13 +41,15 @@ const onboarding = async agent => {
                     <break time='0.3' />
             </speak>`)
     } else {
-        agent.add(`
+        conv.add(`
             <speak>
                Welkom terug! <break time='0.3' />
                Als je met mij wilt oefenen zeg, <break time='0.4' /> ik wil oefenen.
                Voor uitleg zeg, <break time='0.4' /> Ik wil uitleg.
             </speak>`)
     }
+
+    agent.add(conv);
 }
 
 module.exports = {

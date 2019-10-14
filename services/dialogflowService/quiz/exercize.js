@@ -4,7 +4,6 @@ const List = require('../../../models/list');
 
 const exercize = async agent => {
     const conv = agent.conv();
-    console.log(conv.user.storage)
     const _userId = conv.user.storage.userId;
     const user = await Users.findOne({
         userId: _userId

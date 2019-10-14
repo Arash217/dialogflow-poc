@@ -2,9 +2,7 @@ const List = require('../../../models/list');
 
 // question intent
 const question = async agent => {
-    console.log("inetent triggerd: question")
-    console.log(agent.parameters)
-    
+
     const listIdContext = agent.context.get('intent_oefenen');
     const vraagContext = agent.context.get("vraag-context") ? agent.context.get("vraag-context") : undefined
     const correctAnswers = vraagContext.parameters ? vraagContext.parameters.correctAnswers : 0;

@@ -2,11 +2,7 @@ const Users = require('../../../models/user');
 const Channel = require('../../../models/channel');
 
 const addChannelCodeCheckupYes = async agent => {
-    console.log("inetent triggerd: add channel code checkup")
-    console.log(agent.parameters)
-    
     const context = agent.context.get('context-channel-code');
-    console.log("context:", context)
     const channelId = context && context.parameters.channelId ? context.parameters.channelId : undefined
 
     if (channelId) {
@@ -18,8 +14,6 @@ const addChannelCodeCheckupYes = async agent => {
         })
         const listAmount = channel.lists.length
         const conv = agent.conv();
-        console.log("user", conv.user.storage.userId)
-        console.log("user2", conv.user)
         const user = await Users.findOne({
             userId: conv.user.storage.userId
         })
@@ -27,7 +21,6 @@ const addChannelCodeCheckupYes = async agent => {
         if (!user.channelIds.includes(channelId)) {
             user.channelIds.push(channelId)
             user.save()
-            //console.log(user)
             agent.add(`Oke Top. ik heb kanaal ${channelName}, vak ${subject} toegevoegd. Er zijn nu ${listAmount} nieuwe lijsten beschikbaar.`);
             agent.add(`Wat wil je nu doen?`);
             

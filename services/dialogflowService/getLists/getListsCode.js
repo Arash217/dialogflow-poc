@@ -3,7 +3,6 @@ const Channel = require('../../../models/channel');
 const List = require('../../../models/list');
 
 const getListCode = async agent => {
-	console.log("intent triggerd: get list code");
 
 	const conv = agent.conv();
 	const userId = conv.user.storage.userId
@@ -11,16 +10,10 @@ const getListCode = async agent => {
 	const user = await Users.findOne({ userId: userId });
 
 	const channels = await getChannels(user)
-	console.log(channels)
 	const listsArr = await getListsFromChannels(channels)
-	console.log(listsArr)
-	const listsArrfull = await getSeperateLists(listsArr,user)	
-	console.log(listsArrfull)
+	const listsArrfull = await getSeperateLists(listsArr,user)
 	const listNames = await getNamesFromLists(listsArrfull)
-	console.log(listNames)
 	const speaking = speakingArray(listNames)
-
-	console.log(listNames)
 
 	if(listNames.length !== 0){
 		agent.add(`<speak>Jouw lijsten zijn:${speaking.toString().replace(/,/gm, ". <break time='0.5' /> ")} </speak>`)}
