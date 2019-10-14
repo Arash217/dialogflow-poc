@@ -27,7 +27,7 @@ const post = (req, res) => {
         response: res
     });
 
-    console.log(agent);
+    console.log('test', agent);
 
     const intentMap = new Map();
 
