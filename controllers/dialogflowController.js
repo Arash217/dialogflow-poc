@@ -27,6 +27,8 @@ const post = (req, res) => {
         response: res
     });
 
+    console.log(agent);
+
     const intentMap = new Map();
 
     // dialogflowService.exercize method handles the quiz intent and what list handles what list
