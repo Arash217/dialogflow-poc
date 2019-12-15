@@ -1,26 +1,46 @@
-const serialize = require('form-serialize');
-
 const addQuestionBtn = document.getElementById('form_add_question');
 const questionsInput = document.getElementById('questions_input');
-const formQuestions = document.getElementById('form_questions');
-const saveListBtn = document.getElementById('button_save_list');
+export const formQuestions = document.getElementById('form_questions');
+export const saveListBtn = document.getElementById('button_save_list');
+
+const getTextAnswerType = (index) => {
+    return `<input id="questions[${index}][answer]" name="questions[${index}][answer]" type="text" class="form__input" placeholder="Bijv. 10">`
+};
+
+const getBinaryAnswerType = (index) => {
+    return `<select id="questions[${index}][answer]" name="questions[${index}][answer]" class="form__input">
+                <option value="Ja">Ja</option>
+                <option value="Nee">Nee</option>
+            </select>`
+};
 
 const createQuestionNode = index => {
-    return `<div id="question_${index}" class="form__row">
+    return `<div id="question_${index}">
+          <div class="form__row">
                 <div class="form__column form__input-group">
                     <label for="questions[${index}][question]" class="form__label">Vraag</label>
                     <input id="questions[${index}][question]" name="questions[${index}][question]" type="text" class="form__input" placeholder="Bijv. Wat is 5 + 5">
                 </div>
                 <div class="form__column form__input-group">
-                    <label for="questions[${index}][answer]" class="form__label">Antwoord</label>
-                    <input id="questions[${index}][answer]" name="questions[${index}][answer]" type="text" class="form__input" placeholder="Bijv. 10">
+                    <label for="questions_${index}_answer_type" class="form__label">Type antwoord</label>
+                    <select name="questions_${index}_answer_type" class="form__input form__select-answer-type">
+                        <option value="text:${index}" selected>Tekst</option>
+                        <option value="binary:${index}">Ja / nee</option>
+                    </select>
                 </div>
                 <div class="form__column form__input-group">
                     <button class="button button--no-padding-left-right form__button-delete" value="${index}">
                         <img src="/images/remove.svg" alt="remove" class="button__image">
                     </button>
                 </div>
-            </div>`
+           </div>
+           <div class="form__row">
+                <div class="form__column form__input-group">
+                    <label for="questions[${index}][answer]" class="form__label">Antwoord</label>
+                    ${getTextAnswerType(index)}
+                </div>
+            </div>
+        </div>`
 };
 
 const addQuestion = e => {
@@ -39,17 +59,32 @@ const deleteQuestion = e => {
     }
 };
 
+const handleAnswerTypeChange = e => {
+    if (e.target.classList.contains('form__select-answer-type')) {
+        const { value } = e.target;
+        const [answerType, index] = value.split(':');
+
+        const answerInput = document.getElementById(`questions[${index}][answer]`);
+        let newAnswerInput = null;
+
+        switch (answerType) {
+            case 'text':
+                newAnswerInput = getTextAnswerType(index);
+                break;
+            case 'binary':
+                newAnswerInput = getBinaryAnswerType(index);
+                break;
+        }
+
+        const div = document.createElement('div');
+        div.innerHTML = newAnswerInput;
+        answerInput.parentNode.replaceChild(div, answerInput)
+    }
+};
+
 addQuestionBtn.addEventListener('click', addQuestion);
 formQuestions.addEventListener('click', deleteQuestion);
-
-const choices = new Choices('#form_channels', {
-    removeItemButton: true,
-    placeholderValue: 'Kies een kanaal...',
-    loadingText: 'Laden...',
-    noResultsText: 'Geen resultaten gevonden',
-    noChoicesText: 'Geen kanalen',
-    itemSelectText: '',
-});
+formQuestions.addEventListener('change', handleAnswerTypeChange);
 
 const formInputsPathMap = [
     {
@@ -85,7 +120,7 @@ const getErrorElement = error => {
     return `<div class="form__error">${error}</div>`
 };
 
-const renderErrors = errors => {
+export const renderErrors = errors => {
     removeErrors();
     errors.forEach(error => {
         let {path} = error;
@@ -95,32 +130,3 @@ const renderErrors = errors => {
         element.insertAdjacentHTML('afterend', getErrorElement(error.message))
     })
 };
-
-export const request = async (url, options) => {
-    const res = await fetch(url, options);
-    const data = await res.json();
-    if (!res.ok) throw data;
-    return data;
-};
-
-const submitForm = async formData => {
-    try {
-        const listId = window.location.href.split("/").pop();
-        await request(listId, {
-            method: 'PATCH',
-            body: JSON.stringify(formData),
-            headers: {"Content-Type": "application/json"}
-        });
-        window.location.href = "/lijsten";
-    } catch (e) {
-        if (e.inner) {
-            renderErrors(e.inner)
-        }
-    }
-};
-
-saveListBtn.addEventListener('click', e => {
-    e.preventDefault();
-    const formData = serialize(formQuestions, {hash: true});
-    submitForm(formData)
-});

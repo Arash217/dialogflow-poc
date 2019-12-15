@@ -14,16 +14,6 @@
                     {{#if this.list}} value="{{this.list.subject}}" {{/if}}>
             </div>
         </div>
-        <div class="form__row form__input-group">
-            <label for="" class="form__label">Kanalen</label>
-            <select id="form_channels" class="form__input" name="channels" multiple>
-                {{#each this.userChannels}}
-                    <option value="{{this._id}}" {{#if this.selected}}selected{{/if}}>
-                        {{this.name}} - {{this.subject}}
-                    </option>
-                {{/each}}
-            </select>
-        </div>
         <div class="form__row">
             <button id="button_save_list" class="button button--gold form__button">Lijst opslaan</button>
             <a class="button button--gray" href="/lijsten">Terug</a>

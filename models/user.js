@@ -7,10 +7,6 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    channelIds: {
-        type: Array,
-        required: true
-    },
     seperateLists: {
         type: Array,
         required: true

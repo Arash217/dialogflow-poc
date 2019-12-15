@@ -1,17 +1,51 @@
-<div id="question_{{questionIndex}}" class="form__row">
-    <div class="form__column form__input-group">
-        <label for="questions[{{questionIndex}}][question]" class="form__label">Vraag</label>
-        <input id="questions[{{questionIndex}}][question]" name="questions[{{questionIndex}}][question]" type="text" class="form__input"
-               placeholder="Bijv. Wat is 5 + 5" value="{{parent.question}}">
+<div id="question_{{questionIndex}}">
+    <div class="form__row">
+        <div class="form__column form__input-group">
+            <label for="questions[{{questionIndex}}][question]" class="form__label">Vraag</label>
+            <input id="questions[{{questionIndex}}][question]" name="questions[{{questionIndex}}][question]" type="text" class="form__input"
+                   placeholder="Bijv. Wat is 5 + 5" value="{{parent.question}}">
+        </div>
+        <div class="form__column form__input-group">
+            <label for="questions_{{questionIndex}}_answer_type" class="form__label">Type antwoord</label>
+            <select name="questions_{{questionIndex}}_answer_type" class="form__input form__select-answer-type">
+                <option value="text:{{questionIndex}}"
+                    {{#unless (or (equals parent.answer 'Ja') (equals parent.answer 'Nee'))}}
+                        selected
+                    {{/unless}}
+                >Tekst</option>
+                <option value="binary:{{questionIndex}}"
+                    {{#if (or (equals parent.answer 'Ja') (equals parent.answer 'Nee'))}}
+                        selected
+                    {{/if}}
+                >Ja / nee</option>
+            </select>
+        </div>
+        <div class="form__column form__input-group">
+            <button class="button button--no-padding-left-right form__button-delete" value="{{questionIndex}}">
+                <img src="/images/remove.svg" alt="remove" class="button__image">
+            </button>
+        </div>
     </div>
-    <div class="form__column form__input-group">
-        <label for="questions[{{questionIndex}}][answer]" class="form__label">Antwoord</label>
-        <input id="questions[{{questionIndex}}][answer]" name="questions[{{questionIndex}}][answer]" type="text" class="form__input"
-               placeholder="Bijv. 10" value="{{parent.answer}}">
-    </div>
-    <div class="form__column form__input-group">
-        <button class="button button--no-padding-left-right form__button-delete" value="{{questionIndex}}">
-            <img src="/images/remove.svg" alt="remove" class="button__image">
-        </button>
+    <div class="form__row">
+        <div class="form__column form__input-group">
+            <label for="questions[{{questionIndex}}][answer]" class="form__label">Antwoord</label>
+            {{#if (or (equals parent.answer 'Ja') (equals parent.answer 'Nee'))}}
+                <select id="questions[{{questionIndex}}][answer]" name="questions[{{questionIndex}}][answer]" class="form__input">
+                    <option value="Ja"
+                        {{#if (equals parent.answer 'Ja')}}
+                            selected
+                        {{/if}}
+                    >Ja</option>
+                    <option value="Nee"
+                        {{#if (equals parent.answer 'Nee')}}
+                            selected
+                        {{/if}}
+                    >Nee</option>
+                </select>
+            {{else}}
+                <input id="questions[{{questionIndex}}][answer]" name="questions[{{questionIndex}}][answer]" type="text" class="form__input"
+                       placeholder="Bijv. 10" value="{{parent.answer}}">
+            {{/if}}
+        </div>
     </div>
 </div>

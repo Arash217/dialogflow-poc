@@ -8,8 +8,7 @@ const listSchema = yup.object().shape({
             question: yup.string().trim().required().label('vraag'),
             answer: yup.string().trim().required().label('antwoord')
         })
-    ).required().label('vragen'),
-    channels: yup.array()
+    ).required().label('vragen')
 });
 
 module.exports = listSchema;

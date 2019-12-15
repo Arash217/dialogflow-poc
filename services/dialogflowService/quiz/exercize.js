@@ -9,7 +9,6 @@ const exercize = async agent => {
         userId: _userId
     })
     const _subject = agent.parameters.subject.toLowerCase()
-    // //console.log(_subject)
     const gotList = gotLists(user)
 
     if (gotList) {
@@ -31,47 +30,20 @@ const exercize = async agent => {
             agent.add(`Wat wil je nu doen?`)
         }
     } else {
-        agent.add(`Ik zie dat je nog geen lijsten hebt. Je zult eerst een lijst moeten toevoegen`);
-        agent.add(`Wil je een losse lijst of een kanaal met lijsten toevoegen`);
+        agent.add(`Ik zie dat je nog geen lijsten hebt. Je zult eerst een lijst moeten toevoegen.`);
+        agent.add(`Wat wil je nu doen?`)
     }
 
 }
 
 function gotLists(user) {
-    ////console.log("user", user)
-    if (user.channelIds.length !== 0 || user.seperateLists.length !== 0) {
-        return true
-    } else {
-        return false
-    }
+    return user.seperateLists.length !== 0;
 }
 
 async function getSubject(user, _subject) {
-
-    const CmatchingS = await getChannels(user, _subject)
     const LmatchingS = await getSeperateLists(user, _subject)
     const _LmatchingS = await getListsFromChannels(CmatchingS, LmatchingS, _subject)
     return _LmatchingS
-
-}
-
-async function getChannels(user, _subject) {
-    const CmatchingS = []
-    if (user.channelIds.length !== 0) {
-        //console.log(user.channelIds)
-        const _channel = await Channel.find({
-            _id: {
-                $in: user.channelIds
-            },
-            subject: {$regex: new RegExp("^" + _subject, "i")}
-        }).select("_id").exec()
-        //console.log(_channel)
-        _channel.forEach(element => {
-            CmatchingS.push(element._id)
-        });
-
-    }
-    return CmatchingS
 }
 
 async function getSeperateLists(user, _subject) {

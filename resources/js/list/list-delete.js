@@ -1,4 +1,5 @@
 const tingle = require("tingle.js");
+const {request} = require('../utils');
 
 const tableContainer = document.getElementById("table_container");
 let listName = "";
@@ -30,13 +31,6 @@ const modal = new tingle.modal({
 		return false;
 	}
 });
-
-const request = async (url, options) => {
-	const res = await fetch(url, options);
-	const data = await res.json();
-	if (!res.ok) throw data;
-	return data;
-};
 
 function removeElement(id) {
 var elem = document.getElementById(id);

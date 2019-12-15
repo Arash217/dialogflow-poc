@@ -1,5 +1,4 @@
 const List = require("../models/list");
-const Channel = require("../models/channel");
 const listValidator = require("../services/validations/list");
 
 const get = async (req, res) => {
@@ -9,7 +8,7 @@ const get = async (req, res) => {
     });
     res.render("lists", {
         lists,
-        username: req.user ? req.user.username : "",
+        username,
         active: {
             lists: true
         }
@@ -18,12 +17,8 @@ const get = async (req, res) => {
 
 const add = async (req, res) => {
     const username = req.user ? req.user.username : "";
-    const userChannels = await Channel.find({
-        owner: username
-    });
-
     res.render("add_list", {
-        userChannels,
+        username,
         active: {
             lists: true
         }
@@ -47,7 +42,6 @@ const create = async (req, res) => {
         let code = null;
 
         if (!newestList) {
-
             code = 1000;
         } else {
             code = parseInt(newestList.listCode);
@@ -58,7 +52,6 @@ const create = async (req, res) => {
             list_name: name,
             list_subject: subject,
             questions,
-            channels
         } = body;
 
         const list = new List({
@@ -69,19 +62,7 @@ const create = async (req, res) => {
             listCode: `${code}`
         });
 
-        const createdList = await list.save();
-
-        await Channel.update({
-            _id: {
-                $in: channels
-            }
-        }, {
-            $push: {
-                lists: createdList._id.toString()
-            }
-        }, {
-            multi: true
-        });
+        await list.save();
 
         res.json({
             code
@@ -100,15 +81,6 @@ const remove = async (req, res) => {
     });
 
     if (removed) {
-        await Channel.update({
-            lists: listId
-        }, {
-            $pullAll: {
-                lists: [listId]
-            }
-        }, {
-            multi: true
-        });
         res.json({});
     } else {
         res.status(400).json({});
@@ -126,18 +98,10 @@ const update = async (req, res) => {
         owner: username,
         _id: id
     });
-    const userChannels = await Channel.find({
-        owner: username
-    }).lean().exec();
-
-    userChannels.forEach(userChannel => {
-        if (userChannel.lists.includes(id)) userChannel.selected = true;
-    });
 
     res.render("update_list", {
         list,
         username,
-        userChannels,
         active: {
             lists: true
         }
@@ -164,7 +128,6 @@ const save = async (req, res) => {
             list_name: name,
             list_subject: subject,
             questions,
-            channels
         } = body;
 
         await List.findOneAndUpdate({
@@ -177,26 +140,6 @@ const save = async (req, res) => {
                 questions
             }
         });
-
-        await Channel.update(
-            {lists: id},
-            {$pullAll: {lists: [id]}},
-            {multi: true}
-        );
-
-        await Channel.update(
-            {
-                _id: {$in: channels}
-            },
-            {
-                $push: {
-                    lists: id
-                }
-            },
-            {
-                multi: true
-            }
-        );
 
         res.json({});
     } catch (e) {

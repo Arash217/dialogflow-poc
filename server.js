@@ -29,7 +29,10 @@ app.use(express.urlencoded({extended: true}));
 const hbs = exphbs.create({
     extname: ".hbs",
     helpers: {
-        equals: (val1, val2) => val1 === val2
+        equals: (val1, val2) => val1 === val2,
+        or: function () {
+            return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
+        }
     }
 });
 

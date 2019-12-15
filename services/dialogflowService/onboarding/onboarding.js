@@ -22,7 +22,6 @@ const onboarding = async agent => {
     if(!user) {
         let newUser = new User()
         newUser.userId = userId
-        newUser.channelId = []
         newUser.seperateLists = []
         newUser.lastLogin = lastLogin.split("T")[0]
         await newUser.save()
