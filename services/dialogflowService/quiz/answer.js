@@ -15,20 +15,17 @@ const answer = async agent => {
 
     // check whether the answer is correct or not
     if (answer.toLowerCase() !== givenAnswer.toLowerCase()) {
-
-        agent.add(`<speak> <audio src='https://raw.githubusercontent.com/stijn-aa/sound/master/incorrect1.ogg'>incorrect</audio>" ${givenAnswer} is incorrect. Het juiste antwoord is ${answer}.</speak> `);
+        agent.add(`<speak> <audio src='https://raw.githubusercontent.com/stijn-aa/sound/master/incorrect1.ogg'></audio>${givenAnswer} is incorrect. Het juiste antwoord is ${answer}.</speak> `);
 
         if(vragen[0].status === 0){
             vragen[0].status --             // dus min 1
             vragen.push(vragen[0])
-
         }else if(vragen[0].status === -1){ 
             vragen[0].status --             // dus min 2
             vragen.splice(0, 1)
         }
-
     } else {
-        agent.add(`<speak> <audio src='https://raw.githubusercontent.com/stijn-aa/sound/master/correct2.ogg'>correct</audio>" ${answer} is correct! </speak>`);
+        agent.add(`<speak> <audio src='https://raw.githubusercontent.com/stijn-aa/sound/master/correct2.ogg'></audio>${answer} is correct!</speak>`);
         // if answer is correct then increment
         if(vragen[0].status === 0){
             vragen.splice(0, 1)
@@ -36,25 +33,22 @@ const answer = async agent => {
         }else{
             vragen.splice(0, 1)
         }
-
     }
-
 
     // if there are no questions left, then tell the user how many questions he had correct
     if (vragen[0] === undefined) {
 
-        let grade = new String
-        
+        let grade = '';
         const exercise = await List.findOne({_id: listId});     // get questions from database by listId
         totalQuestions = exercise.questions;
 
-        if(correctAnswers >= totalQuestions.length*0.65){
+        if(correctAnswers >= totalQuestions.length * 0.65){
             grade = "voldoende"
         }else{
             grade = "onvoldoende"
         }
 
-        agent.add(`Dit was de lijst. Je hebt ${correctAnswers} van de ${totalQuestions.length} vragen in een keer goed beantwoord. Je hebt een ${grade}. Wat wil je nu doen?`);
+        agent.add(`Dit was de lijst. Je hebt ${correctAnswers} van de ${totalQuestions.length} vragen in één keer goed beantwoord. Je hebt een ${grade}. Wat wil je nu doen?`);
 
         // reset the parameters of the context
         agent.context.set({

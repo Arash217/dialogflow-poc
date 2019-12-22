@@ -1,25 +1,14 @@
 const {WebhookClient} = require('dialogflow-fulfillment');
 
-const {exercize} = require('../services/dialogflowService/quiz/exercize');
-const {exercizeWhatList} = require('../services/dialogflowService/quiz/exercizeWhatList');
+const {exercizeWhatCode} = require('../services/dialogflowService/quiz/exercizeWhatCode');
 
 const {question} = require('../services/dialogflowService/quiz/question');
 const {answer} = require('../services/dialogflowService/quiz/answer');
 
 const {onboarding} = require('../services/dialogflowService/onboarding/onboarding');
 
-// Add list
-const {addListCode} = require('../services/dialogflowService/addList/addListCode');
-const {addListCodeCheckupYes} = require('../services/dialogflowService/addList/addListCodeCheckupYes');
-
-// Get lists
-const {getListCode} = require('../services/dialogflowService/getLists/getListsCode');
-
 
 const post = (req, res) => {
-
-    console.log('test');
-
     const agent = new WebhookClient({
         request: req,
         response: res
@@ -28,8 +17,7 @@ const post = (req, res) => {
     const intentMap = new Map();
 
     // dialogflowService.exercize method handles the quiz intent and what list handles what list
-    intentMap.set('exercize', exercize);
-    intentMap.set('exercize - whatList', exercizeWhatList);
+    intentMap.set('exercize - code', exercizeWhatCode);
 
     intentMap.set('Oefening', question);
     // dialogflowService.answer method handles the answer intent
@@ -37,13 +25,6 @@ const post = (req, res) => {
 
     // dialogflowService.onboarding method handles the onboarding intent
     intentMap.set('onboarding', onboarding);
-
-    // addList method handles the add list intent flow
-    intentMap.set('add list', addListCode);
-    intentMap.set('add list - code - checkup - yes', addListCodeCheckupYes);
-
-    // addList method handles the add list intent flow
-    intentMap.set('get lists', getListCode);
 
     agent.handleRequest(intentMap)
 };

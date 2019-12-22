@@ -36,7 +36,9 @@ const onboarding = async agent => {
                     <break time='0.3' />
                 Ik wil uitleg.
                     <break time='0.5' />
-                Als je wilt oefenen zeg dan: <break time='0.3' /> ik wil oefenen.
+                Als je wilt oefenen zeg dan: 
+                    <break time='0.3' /> 
+                ik wil oefenen.
                     <break time='0.3' />
             </speak>`)
     } else {
