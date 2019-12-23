@@ -15,17 +15,17 @@ const answer = async agent => {
 
     // check whether the answer is correct or not
     if (answer.toLowerCase() !== givenAnswer.toLowerCase()) {
-        agent.add(`<speak> <audio src='https://raw.githubusercontent.com/stijn-aa/sound/master/incorrect1.ogg'></audio>${givenAnswer} is incorrect. Het juiste antwoord is ${answer}.</speak> `);
+        agent.add(`<speak>${givenAnswer} is incorrect. Het juiste antwoord is ${answer}.<audio src='https://raw.githubusercontent.com/stijn-aa/sound/master/incorrect1.ogg'></audio></speak> `);
 
         if(vragen[0].status === 0){
-            vragen[0].status --             // dus min 1
+            vragen[0].status--             // dus min 1
             vragen.push(vragen[0])
         }else if(vragen[0].status === -1){ 
-            vragen[0].status --             // dus min 2
+            vragen[0].status--             // dus min 2
             vragen.splice(0, 1)
         }
     } else {
-        agent.add(`<speak> <audio src='https://raw.githubusercontent.com/stijn-aa/sound/master/correct2.ogg'></audio>${answer} is correct!</speak>`);
+        agent.add(`<speak>${answer} is correct!<audio src='https://raw.githubusercontent.com/stijn-aa/sound/master/correct2.ogg'></audio></speak>`);
         // if answer is correct then increment
         if(vragen[0].status === 0){
             vragen.splice(0, 1)
@@ -37,7 +37,6 @@ const answer = async agent => {
 
     // if there are no questions left, then tell the user how many questions he had correct
     if (vragen[0] === undefined) {
-
         let grade = '';
         const exercise = await List.findOne({_id: listId});     // get questions from database by listId
         totalQuestions = exercise.questions;

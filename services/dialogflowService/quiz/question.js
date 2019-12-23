@@ -9,7 +9,7 @@ const question = async agent => {
     let listId = listIdContext ? listIdContext.parameters.listId : vraagContext.parameters.listId;
 
     if (!vraagContext.parameters || !vraagContext.parameters.vragen) {
-        agent.add(`<speak> Oke, gaan we ${listIdContext.parameters.listName} doen </speak>`);
+        agent.add(`Oke, gaan we ${listIdContext.parameters.listName} doen.`);
 
         const exercise = await List.findOne({_id: listId});     // get questions from database by listId
         vragen = exercise.questions;
@@ -34,7 +34,7 @@ const question = async agent => {
     // get the current question from the list of questions that was returned by the database
     const {question} = vragen[0];
     // ask the user the question
-    agent.add(`<speak> ${question} <audio src="https://raw.githubusercontent.com/stijn-aa/sound/master/go1.ogg"></audio></speak>`);
+    agent.add(`<speak>${question}<audio src="https://raw.githubusercontent.com/stijn-aa/sound/master/go1.ogg"></audio></speak>`);
 };
 
 module.exports = {
