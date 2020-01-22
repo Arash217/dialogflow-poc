@@ -4,6 +4,7 @@ module.exports.autoroute = {
     get: {
         '/': publicController.homePage,
         '/over': publicController.aboutPage,
-        '/probeer': publicController.usePage
+        '/probeer': publicController.usePage,
+        '/privacy': publicController.privacyPage,
     }
 };
