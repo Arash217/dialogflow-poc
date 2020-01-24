@@ -5,9 +5,6 @@ const exercizeWhatCode = async agent => {
 
     const list = await getList(code);
 
-    console.log(code)
-    console.log(list)
-
     if (list) {
         const listId = list._id;
         const listName = list.name;
