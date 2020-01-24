@@ -11,7 +11,7 @@ const post = (req, res) => {
     });
 
     if (agent.session.indexOf('/agent/environments/') !== -1) {
-        const requestContexts = request.body.queryResult.outputContexts;
+        const requestContexts = req.body.queryResult.outputContexts;
         for (let index = 0; index < requestContexts.length; index++) {
             const context = requestContexts[index];
             const name = context.name.split('/').slice(-1)[0];
