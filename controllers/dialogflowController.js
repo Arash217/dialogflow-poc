@@ -10,6 +10,7 @@ const post = (req, res) => {
         response: res
     });
 
+    /* Bug fix */
     if (agent.session.indexOf('/agent/environments/') !== -1) {
         const requestContexts = req.body.queryResult.outputContexts;
         for (let index = 0; index < requestContexts.length; index++) {
