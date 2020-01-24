@@ -6,6 +6,8 @@ const question = async agent => {
     const vraagContext = agent.context.get("vraag-context");
     const correctAnswers = vraagContext && vraagContext.parameters ? vraagContext.parameters.correctAnswers : 0;
 
+    console.log('lisid', listIdContext)
+
     let listId = listIdContext ? listIdContext.parameters.listId : vraagContext.parameters.listId;
 
     if (!vraagContext.parameters || !vraagContext.parameters.vragen) {
