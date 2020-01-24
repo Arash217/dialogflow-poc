@@ -13,7 +13,7 @@ const post = (req, res) => {
     const intentMap = new Map();
 
     // dialogflowService.exercize method handles the quiz intent and what list handles what list
-    intentMap.set('exercize - code', exercizeWhatCode);
+    intentMap.set('exercize', exercizeWhatCode);
 
     intentMap.set('Oefening', question);
     // dialogflowService.answer method handles the answer intent
