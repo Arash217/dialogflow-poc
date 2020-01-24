@@ -10,6 +10,15 @@ const post = (req, res) => {
         response: res
     });
 
+    if (agent.session.indexOf('/agent/environments/') !== -1) {
+        const requestContexts = request.body.queryResult.outputContexts;
+        for (let index = 0; index < requestContexts.length; index++) {
+            const context = requestContexts[index];
+            const name = context.name.split('/').slice(-1)[0];
+            agent.context.set(name, context.lifespanCount, context.parameters);
+        }
+    }
+
     const intentMap = new Map();
 
     // dialogflowService.exercize method handles the quiz intent and what list handles what list
