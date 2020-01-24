@@ -3,8 +3,8 @@ const List = require('../../../models/list');
 // question intent
 const question = async agent => {
     const listIdContext = agent.context.get('intent_oefenen');
-    const vraagContext = agent.context.get("vraag-context") ? agent.context.get("vraag-context") : undefined;
-    const correctAnswers = vraagContext.parameters ? vraagContext.parameters.correctAnswers : 0;
+    const vraagContext = agent.context.get("vraag-context");
+    const correctAnswers = vraagContext && vraagContext.parameters ? vraagContext.parameters.correctAnswers : 0;
 
     let listId = listIdContext ? listIdContext.parameters.listId : vraagContext.parameters.listId;
 
