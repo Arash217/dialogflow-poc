@@ -1,5 +1,6 @@
 const {question} = require("./question")
 const List = require('../../../models/list');
+const {Text} = require('dialogflow-fulfillment');
 
 // answer intent
 const answer = async agent => {
@@ -10,12 +11,14 @@ const answer = async agent => {
     const vragen = vraagContext.parameters.vragen
     !vragen[0].status && (vragen[0].status = 0)
 
+
     // get the correct answer for the current questions
     const {answer} = vragen[0];
 
     // check whether the answer is correct or not
     if (answer.toLowerCase() !== givenAnswer.toLowerCase()) {
-        agent.add(`<speak>${givenAnswer} is incorrect. Het juiste antwoord is ${answer}.<audio src='https://raw.githubusercontent.com/stijn-aa/sound/master/incorrect1.ogg'></audio></speak> `);
+        const text = new Text('').setSsml(`<speak>${givenAnswer} is incorrect. Het juiste antwoord is ${answer}.<audio src='https://raw.githubusercontent.com/stijn-aa/sound/master/incorrect1.ogg'></audio></speak>`);
+        agent.add(text);
 
         if(vragen[0].status === 0){
             vragen[0].status--             // dus min 1
@@ -25,7 +28,9 @@ const answer = async agent => {
             vragen.splice(0, 1)
         }
     } else {
-        agent.add(`<speak>${answer} is correct!<audio src='https://raw.githubusercontent.com/stijn-aa/sound/master/correct2.ogg'></audio></speak>`);
+        const text = new Text('').setSsml(`<speak>${answer} is correct!<audio src='https://raw.githubusercontent.com/stijn-aa/sound/master/correct2.ogg'></audio></speak>`);
+        agent.add(text);
+
         // if answer is correct then increment
         if(vragen[0].status === 0){
             vragen.splice(0, 1)

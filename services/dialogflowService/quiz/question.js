@@ -1,4 +1,5 @@
 const List = require('../../../models/list');
+const {Text} = require('dialogflow-fulfillment');
 
 // question intent
 const question = async agent => {
@@ -36,7 +37,8 @@ const question = async agent => {
     // get the current question from the list of questions that was returned by the database
     const {question} = vragen[0];
     // ask the user the question
-    agent.add(`<speak>${question}<audio src="https://raw.githubusercontent.com/stijn-aa/sound/master/go1.ogg"></audio></speak>`);
+    const text = new Text('').setSsml(`<speak>${question}?<audio src="https://raw.githubusercontent.com/stijn-aa/sound/master/go1.ogg"></audio></speak>`);
+    agent.add(text);
 };
 
 module.exports = {
